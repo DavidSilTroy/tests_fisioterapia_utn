@@ -14,5 +14,9 @@
     <color name="test_box_background">#1F6878</color>
     <color name="test_name_box_background">#464BC4</color>
     <color name="test_text">#BEFFC5</color>
+    <color name="bg_vel">#2C5065</color>
+    <color name="title_vel">#C4C4C4</color>
+    <color name="title_vel1">#071919</color>
+    <color name="title_vel2">#319999</color>
 
 </resources>

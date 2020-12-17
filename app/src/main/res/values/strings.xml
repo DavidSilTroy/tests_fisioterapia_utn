@@ -10,4 +10,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="vel1">Test: Matsudo</string>
+    <string name="num_rep" />
+    <string name="dist_rec">Distancia recorrida (m)</string>
+    <string name="pam">Potencia anaeróbica máxima</string>
 </resources>
