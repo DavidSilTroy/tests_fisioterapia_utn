@@ -13,4 +13,5 @@
     <string name="num_rep" />
     <string name="dist_rec">Distancia recorrida (m)</string>
     <string name="pam">Potencia anaeróbica máxima</string>
+    <string name="out_10x5" />
 </resources>
