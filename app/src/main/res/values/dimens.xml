@@ -1,5 +1,28 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">5dp</dimen>
+    <dimen name="activity_vertical_margin">10dp</dimen>
+
+    <!-- to login activity-->
+    <dimen name="_margin_top_login">25dp</dimen>
+
+    <dimen name="btn_text_size_forgot_pass_login">11sp</dimen>
+    <dimen name="btn_text_size_powered_login">20sp</dimen>
+    <dimen name="btn_text_size_login">30sp</dimen>
+    <dimen name="btn_powered_width_login">160dp</dimen>
+
+    <dimen name="text_size_titles_login">35sp</dimen>
+    <dimen name="text_margin_start_login">30dp</dimen>
+    <dimen name="text_margin_bottom_login">40dp</dimen>
+
+    <dimen name="et_text_size_login">28sp</dimen>
+    <dimen name="et_padding_top_login">20dp</dimen>
+    <dimen name="et_padding_start_login">10dp</dimen>
+    <dimen name="et_width_login">360dp</dimen>
+    <dimen name="et_height_login">60dp</dimen>
+
+    <dimen name="iv_width_login">150dp</dimen>
+    <dimen name="iv_height_login">150dp</dimen>
+    <dimen name="iv_margin_top_login">10dp</dimen>
+    <!--END to login activity-->
 </resources>

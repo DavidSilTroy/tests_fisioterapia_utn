@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/user_activity_background"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_login_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/boton_ingresar"
+                android:text="@string/text_login_button"
+                android:textSize="@dimen/btn_text_size_login"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_index_img"
+                app:layout_constraintEnd_toEndOf="@id/iv_index_img"
+                app:layout_constraintStart_toStartOf="@+id/iv_index_img" />
+
+            <ImageView
+                android:id="@+id/iv_index_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fisio_logo_index"
+                app:srcCompat="@drawable/index_picture" />
+
+            <ImageView
+                android:id="@+id/fisio_logo_index"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/fisioterapia_logo_utn" />
+
+            <Button
+                android:id="@+id/btn_powered"
+                android:layout_width="@dimen/btn_powered_width_login"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:text="@string/powered_btn_text"
+                android:textColor="@color/powered_text"
+                android:textSize="@dimen/btn_text_size_powered_login"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                style="?android:attr/buttonBarButtonStyle"
+                app:layout_constraintStart_toStartOf="@id/fisio_logo_index"
+                app:layout_constraintEnd_toEndOf="@id/fisio_logo_index"
+                app:layout_constraintTop_toBottomOf="@id/iv_index_img" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

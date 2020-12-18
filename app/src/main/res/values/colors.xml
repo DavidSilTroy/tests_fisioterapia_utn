@@ -10,9 +10,11 @@
 
     <color name="red_utn">#F40209</color>
     <color name="user_box_background">#0C3564</color>
+    <color name="user_activity_background">#071919</color>
     <color name="patient_box_background">#1A58A1</color>
     <color name="test_box_background">#1F6878</color>
     <color name="test_name_box_background">#464BC4</color>
     <color name="test_text">#BEFFC5</color>
+    <color name="powered_text">#306DA6</color>
 
 </resources>
