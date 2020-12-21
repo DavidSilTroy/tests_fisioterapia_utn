@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_vel">
+    android:background="@color/title_vel2">
 
     <ImageView
         android:id="@+id/imageView"
@@ -14,12 +14,12 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/vel_matsudo" />
+        app:srcCompat="@drawable/fuerza_pushup" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
-        android:layout_width="251dp"
-        android:layout_height="46dp"
+        android:layout_width="292dp"
+        android:layout_height="53dp"
         android:layout_marginTop="160dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -31,9 +31,9 @@
 
     <EditText
         android:id="@+id/editTextNumber"
-        android:layout_width="257dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="302dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="96dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
