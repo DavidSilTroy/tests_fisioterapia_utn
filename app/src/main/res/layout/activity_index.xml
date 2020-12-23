@@ -24,7 +24,7 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/boton_ingresar"
                 android:text="@string/text_login_button"
-                android:textSize="@dimen/btn_text_size_login"
+                android:textSize="@dimen/btn_text_login"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_index_img"
                 app:layout_constraintEnd_toEndOf="@id/iv_index_img"
                 app:layout_constraintStart_toStartOf="@+id/iv_index_img" />
@@ -55,7 +55,7 @@
                 android:layout_marginTop="1dp"
                 android:text="@string/powered_btn_text"
                 android:textColor="@color/powered_text"
-                android:textSize="@dimen/btn_text_size_powered_login"
+                android:textSize="@dimen/btn_text_powered_login"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 style="?android:attr/buttonBarButtonStyle"

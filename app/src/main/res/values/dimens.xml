@@ -6,16 +6,16 @@
     <!-- to login activity-->
     <dimen name="_margin_top_login">25dp</dimen>
 
-    <dimen name="btn_text_size_forgot_pass_login">11sp</dimen>
-    <dimen name="btn_text_size_powered_login">20sp</dimen>
-    <dimen name="btn_text_size_login">30sp</dimen>
+    <dimen name="btn_text_forgot_pass_login">11sp</dimen>
+    <dimen name="btn_text_powered_login">20sp</dimen>
+    <dimen name="btn_text_login">30sp</dimen>
     <dimen name="btn_powered_width_login">160dp</dimen>
 
     <dimen name="text_size_titles_login">35sp</dimen>
     <dimen name="text_margin_start_login">30dp</dimen>
     <dimen name="text_margin_bottom_login">40dp</dimen>
 
-    <dimen name="et_text_size_login">28sp</dimen>
+    <dimen name="et_text_login">28sp</dimen>
     <dimen name="et_padding_top_login">20dp</dimen>
     <dimen name="et_padding_start_login">10dp</dimen>
     <dimen name="et_width_login">360dp</dimen>
