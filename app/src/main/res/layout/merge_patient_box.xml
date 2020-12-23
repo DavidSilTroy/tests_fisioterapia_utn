@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="2dp"
+        android:layout_marginVertical="2dp"
+        android:orientation="horizontal"
+        android:background="@drawable/data_patient_box_shape_background">
+        <ImageView
+            android:id="@+id/img_patient"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:contentDescription="@string/img_description_patient"
+            android:src="@drawable/login_account_picture" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_patient_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="@string/patient_name_example_text"
+                android:textColor="@color/white"
+                android:textSize="35sp" />
+            <TextView
+                android:id="@+id/txt_patient_edited"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:text="@string/edited_example_text" />
+        </LinearLayout>
+        <ImageButton
+            android:id="@+id/btn_img_arrow"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="0.6"
+            android:contentDescription="@string/arrow_btn_description"
+            android:src="@drawable/menu_arrow_down"/>
+    </LinearLayout>
+
+
+</merge>

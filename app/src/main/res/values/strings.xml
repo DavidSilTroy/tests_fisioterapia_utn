@@ -14,4 +14,7 @@
     <string name="img_description_patient">Foto de paciente</string>
     <string name="img_description_user">Foto de usuario</string>
     <string name="section_title_main">titulo de sección</string>
+    <string name="edited_example_text">Editado: 10-11-19</string>
+    <string name="patient_name_example_text">Paciente</string>
+    <string name="arrow_btn_description">boton arrow para desplegar menu</string>
 </resources>

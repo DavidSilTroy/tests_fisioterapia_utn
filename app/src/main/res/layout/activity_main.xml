@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/user_box_background">
+        android:background="@drawable/data_user_box_shape_background">
         <ImageView
             android:id="@+id/img_user"
             android:layout_width="50dp"
@@ -58,55 +58,53 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/patient_box_background">
 
-                <ImageView
-                    android:id="@+id/ima"
-                    android:layout_width="50dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:contentDescription="@string/img_description_patient"
-                    android:src="@drawable/login_account_picture" />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tex"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="5dp"
-                        android:layout_weight="1"
-                        android:textSize="35sp"
-                        android:textColor="@color/white"
-                        android:text="Paciente 1" />
-                    <TextView
-                        android:id="@+id/texs"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center|start"
-                        android:paddingStart="5dp"
-                        android:layout_weight="1"
-                        android:textSize="15sp"
-                        android:textColor="@color/white"
-                        android:text="Editado: 10-11-19" />
-                </LinearLayout>
-                <ImageButton
-                    android:id="@+id/imagtton"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="15dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="0.6"
-                    app:srcCompat="@drawable/menu_arrow_down" />
-            </LinearLayout>
+            <include
+                layout="@layout/merge_patient_box"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+            <include
+                layout="@layout/merge_patient_box"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+            <include
+                layout="@layout/merge_patient_box"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+            <include
+                layout="@layout/merge_patient_box"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+            <include
+                layout="@layout/merge_patient_box"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+            <include
+                layout="@layout/merge_patient_box"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+            <include
+                layout="@layout/merge_patient_box"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+            <include
+                layout="@layout/merge_patient_box"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+            <include
+                layout="@layout/merge_patient_box"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+
         </LinearLayout>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>
