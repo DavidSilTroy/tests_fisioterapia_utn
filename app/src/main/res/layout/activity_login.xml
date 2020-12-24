@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
+    tools:context=".UI.activities.MainActivity">
 
     <ImageView
         android:id="@+id/iv_login_account"
@@ -20,7 +20,8 @@
         android:src="@drawable/login_account_picture"
         app:layout_constraintEnd_toEndOf="@+id/et_login_username"
         app:layout_constraintStart_toStartOf="@+id/et_login_username"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/img_description_user"/>
     <TextView
         android:id="@+id/tv_login_username_title"
         android:layout_width="wrap_content"
@@ -35,7 +36,7 @@
         app:layout_constraintStart_toStartOf="@+id/et_login_username" />
     <EditText
         android:id="@+id/et_login_username"
-        tools:hint="estudiante@utn.edu.ec"
+        android:hint="@string/username_hint"
         android:layout_width="@dimen/et_width_login"
         android:layout_height="@dimen/et_height_login"
         android:layout_marginTop="@dimen/_margin_top_login"
@@ -46,10 +47,12 @@
         android:textSize="@dimen/et_text_login"
         android:paddingTop="@dimen/et_padding_top_login"
         android:paddingStart="@dimen/et_padding_start_login"
+        android:paddingEnd="@dimen/et_padding_start_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_login_account" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_login_account"
+        android:autofillHints="" />
     <TextView
         android:id="@+id/tv_login_password_title"
         android:layout_width="wrap_content"
@@ -64,7 +67,7 @@
         app:layout_constraintStart_toStartOf="@+id/et_login_password" />
     <EditText
         android:id="@+id/et_login_password"
-        android:hint="0123"
+        android:hint="@string/password_hint"
         android:layout_width="@dimen/et_width_login"
         android:layout_height="@dimen/et_height_login"
         android:layout_marginTop="@dimen/_margin_top_login"
@@ -74,17 +77,19 @@
         android:textSize="@dimen/et_text_login"
         android:paddingTop="@dimen/et_padding_top_login"
         android:paddingStart="@dimen/et_padding_start_login"
+        android:paddingEnd="@dimen/et_padding_start_login"
         app:layout_constraintEnd_toEndOf="@+id/et_login_username"
         app:layout_constraintStart_toStartOf="@+id/et_login_username"
-        app:layout_constraintTop_toBottomOf="@+id/et_login_username" />
+        app:layout_constraintTop_toBottomOf="@+id/et_login_username"
+        android:autofillHints="" />
     <Button
         android:id="@+id/btn_login_ingresar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="INGRESAR"
+        android:text="@string/text_login_button"
         android:textColor="@color/white"
         android:textSize="30sp"
-        android:background="@color/red_utn"
+        android:background="@drawable/boton_ingresar"
         android:layout_marginTop="@dimen/_margin_top_login"
         app:layout_constraintEnd_toEndOf="@+id/et_login_password"
         app:layout_constraintStart_toStartOf="@+id/et_login_password"
