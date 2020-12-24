@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
                     android:background="@drawable/boton_ingresar"
-                    android:onClick="changeAct"
+                    android:onClick="changeFrag"
                     android:text="@string/text_login_button"
                     android:textSize="@dimen/btn_text_login"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_index_img"

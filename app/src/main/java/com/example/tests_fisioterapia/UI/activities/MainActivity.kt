@@ -13,5 +13,4 @@ class MainActivity : AppCompatActivity() {
         // Esto es un comentario
     }
 
-    fun sendMessage(view: View) {}
 }

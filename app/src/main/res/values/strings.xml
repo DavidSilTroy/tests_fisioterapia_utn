@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">tests_fisioterapia</string>
+    <string name="app_name">tests de fisioterapia</string>
     <string name="title_activity_login">LoginActivity</string>
 
     <string name="username_title">Usuario</string>
