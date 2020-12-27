@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.tests_fisioterapia.R
 import com.example.tests_fisioterapia.UI.fragments.IntroFragment
 import com.example.tests_fisioterapia.UI.fragments.LoadingFragment
@@ -20,9 +22,9 @@ import kotlin.random.Random
 
 class IndexActivity : AppCompatActivity() {
     var isFragmentIntroLoaded = false
+    var theFragment = "Loading"
+    val manager = supportFragmentManager
 
-
-    private val manager = supportFragmentManager
 
     private lateinit var auth: FirebaseAuth //para la autenticación de firebase
 
@@ -39,59 +41,63 @@ class IndexActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         //updateUI(currentUser)
-        Toast.makeText(applicationContext, currentUser.toString(), Toast.LENGTH_LONG).show()
-        if (currentUser!=null)
-            loginToMain()
-        else
+        //Toast.makeText(applicationContext, currentUser.toString(), Toast.LENGTH_LONG).show()
+        if (currentUser!=null){
+            //loginToMain()
+        }else {
             ShowFragmentLoading() //ir a pantalla de carga y decidir qué hacer
-
-
+        }
 
     }
 
-    private fun ShowFragmentIntro(){
+    //para mostrar cualquier fragmento dentro del "when"
+    private fun ShowTheFragment(theFragment: String = "Loading"){
         val transaction = manager.beginTransaction()
-        val fragment = IntroFragment()
-        transaction.replace(R.id.fragment_holder,fragment)
+        when(theFragment){
+            "Intro"->{
+                val fragment = IntroFragment()
+                transaction.replace(R.id.fragment_holder,fragment)
+                isFragmentIntroLoaded = true
+            }
+            "Login"-> {
+                val fragment = LoginFragment()
+                transaction.replace(R.id.fragment_holder,fragment)
+                isFragmentIntroLoaded = false
+            }
+            else-> {
+                val fragment = LoadingFragment()
+                transaction.replace(R.id.fragment_holder,fragment)
+            }
+        }
         transaction.addToBackStack(null)
         transaction.commit()
-        isFragmentIntroLoaded = true
     }
-    private fun ShowFragmentLogin(){
-        val transaction = manager.beginTransaction()
-        val fragment = LoginFragment()
-        transaction.replace(R.id.fragment_holder,fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-        isFragmentIntroLoaded = false
-    }
+
+    //para mostrar el fragmento de carga primero y luego los otros
     private fun ShowFragmentLoading(){
-        val transaction = manager.beginTransaction()
-        val fragment = LoadingFragment()
-        transaction.replace(R.id.fragment_holder,fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-        val random = Random.nextInt(500, 2000) //para que la pantalla de carga vaya de 500 a 2000 ms de duración randomica
-        Handler().postDelayed({
-            //Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+        ShowTheFragment()
+        Handler().postDelayed({//para que la pantalla de carga vaya de 500 a 2000 ms de duración randomica
+            //Toast.makeText(applicationContext, "algo", Toast.LENGTH_LONG).show()
             if (isFragmentIntroLoaded)
-                ShowFragmentLogin()
+                ShowTheFragment("Login")
             else
-                ShowFragmentIntro()
-        }, random.toLong())
+                ShowTheFragment("Intro")
+        }, Random.nextInt(500, 2000).toLong())
     }
-    fun changeFrag(view: View) {
+
+    fun btn_intro_action(view: View) {
         ShowFragmentLoading()
     }
-    fun changeAct(view: View){
-        //Toast.makeText(applicationContext, view.toString(), Toast.LENGTH_LONG).show()
-        val message = "Carga" //editText.text.toString()
+    fun btn_login_action(view: View){
+        val message = "Iniciando sesión" //editText.text.toString()
         val intent = Intent(this, MainActivity::class.java).apply{
-        putExtra(EXTRA_MESSAGE, message)
+            putExtra(EXTRA_MESSAGE, message)
         }
         startActivity(intent)
     }
-    fun loginToMain(){}
+    fun btn_powered_action(){}
+    fun btn_forgot_password_action(){}
+
 
 
 }

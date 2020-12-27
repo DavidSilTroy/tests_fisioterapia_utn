@@ -18,11 +18,11 @@
         <ImageView
             android:id="@+id/img_user"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:contentDescription="@string/img_description_user"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/login_account_picture" />
         <TextView
             android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
             android:layout_gravity="center"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:textSize="35sp"
             android:textColor="@color/white"
             android:text="@string/name_user_example" />
@@ -40,7 +40,7 @@
             android:layout_width="15dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:contentDescription="@string/img_btn_options_description"
             app:srcCompat="@drawable/option_to_users" />
     </LinearLayout>
@@ -52,21 +52,42 @@
         android:layout_gravity="center"
         android:contentDescription="@string/section_title_main"
         app:srcCompat="@drawable/iv_text_pacientes" />
-
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        android:layout_height="match_parent">
+        <View
+            android:id="@+id/view_loading_show"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="invisible"
+            android:alpha="0.5"/>
+        <ProgressBar
+            android:id="@+id/progress_loading_show"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:visibility="invisible"
+            android:layout_centerInParent="true"/>
 
-            <include
-                layout="@layout/fragment_patients"
+        <ScrollView
+            android:id="@+id/sv_rv_show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:orientation="vertical">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_patients_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        </LinearLayout>
-    </ScrollView>
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
 </androidx.appcompat.widget.LinearLayoutCompat>
