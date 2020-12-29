@@ -1,43 +1,44 @@
 package com.example.tests_fisioterapia.controllers
 
+import android.content.Context
+import android.os.Handler
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tests_fisioterapia.R
+import com.example.tests_fisioterapia.UI.activities.MainActivity
 import com.example.tests_fisioterapia.UI.fragments.IntroFragment
+import java.sql.Time
+import kotlin.coroutines.coroutineContext
+import kotlin.random.Random
 
-class PatientsData(
-    val name:String,
-    val age:Int,
-    val gender:String,
-    val height:String,
-    val weight:String,
-    val diagnosis:String
-)
-class ShowDetailsPatients(){
-    fun ShowAndHide(view:View){
-        val msj = "mostrando detalles.."
-        //Toast.makeText(view.context, msj, Toast.LENGTH_LONG).show()
-        val Ldetails = view.findViewById<LinearLayout>(R.id.layout_patient_details)
-        val imageArrow_up = view.findViewById<ImageView>(R.id.iv_arrow_up)
-        val imageArrow_down = view.findViewById<ImageView>(R.id.iv_arrow_down)
 
-        if (Ldetails.visibility.equals(View.VISIBLE)){
-            imageArrow_down.visibility = View.VISIBLE
-            imageArrow_up.visibility = View.GONE
-            Ldetails.visibility = View.GONE
-        }else{
-            Ldetails.visibility = View.VISIBLE
-            imageArrow_down.visibility = View.GONE
-            imageArrow_up.visibility = View.VISIBLE
-        }
+//val msj = "mostrando detalles.."
+//Toast.makeText(view.context, msj, Toast.LENGTH_LONG).show()
+//Toast.makeText(applicationContext,dy.toString(),Toast.LENGTH_LONG).show()
+
+class LoadingTime(){
+    //TODO:cambiar el tiempo
+    fun IntroTime(): Long {
+        return Random.nextInt(500, 600).toLong()
+    }
+    fun DBtime(): Long {
+        return Random.nextInt(500, 4000).toLong()
     }
 
 }
-class MainControl(view: View){
+class MainControl(){
+    fun LoadingRecycler(layoutLoading:RelativeLayout,rvPatients:RecyclerView,adapter: PatientAdapter){
+        layoutLoading.visibility = View.VISIBLE
+        //layoutLoading.bringToFront()
+    }
+    fun showRecycler(layoutLoading:RelativeLayout,rvPatients:RecyclerView,adapter: PatientAdapter){
+        rvPatients.adapter = adapter
+        layoutLoading.visibility = View.GONE
 
+    }
 }
 
 
