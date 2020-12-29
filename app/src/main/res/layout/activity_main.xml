@@ -10,39 +10,112 @@
     android:paddingVertical="@dimen/activity_vertical_margin"
     android:paddingHorizontal="@dimen/activity_horizontal_margin"
      >
+    <RelativeLayout
+        android:id="@+id/layout_loading_patients"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/user_activity_background"
+            android:alpha="0.95" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cargando Pacientes.."
+            android:textSize="35sp"
+            android:layout_marginTop="40dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_mecatronica"
+            android:layout_centerInParent="true"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"/>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/data_user_box_shape_background">
-        <ImageView
-            android:id="@+id/img_user"
-            android:layout_width="50dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:contentDescription="@string/img_description_user"
-            android:src="@drawable/login_account_picture" />
-        <TextView
-            android:id="@+id/tv_user_name"
-            android:layout_width="wrap_content"
+        android:background="@drawable/data_user_box_shape_background"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
-            android:layout_weight="3"
-            android:textSize="35sp"
-            android:textColor="@color/white"
-            android:text="@string/name_user_example" />
-        <ImageButton
-            android:id="@+id/btn_img_options"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="15dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:contentDescription="@string/img_btn_options_description"
-            app:srcCompat="@drawable/option_to_users" />
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/img_user"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:contentDescription="@string/img_description_user"
+                android:src="@drawable/login_account_picture" />
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:layout_weight="3"
+                android:textSize="35sp"
+                android:textColor="@color/white"
+                android:text="@string/name_user_example" />
+            <ImageButton
+                android:id="@+id/btn_img_user_options"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:onClick="btn_OpenUserMenu"
+                android:contentDescription="@string/img_btn_options_description"
+                app:srcCompat="@drawable/option_to_users" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_user_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="30dp"
+            android:visibility="gone"
+            android:orientation="vertical">
+            <!--Aqui van los botones del menu-->
+            <TextView
+                android:id="@+id/user_menu_op1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Opción 1"
+                android:textSize="20sp"
+                android:onClick="userOptionsTouched"
+                android:layout_marginVertical="5dp"
+                android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/user_menu_op2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Opción 2"
+                android:textSize="20sp"
+                android:onClick="userOptionsTouched"
+                android:layout_marginVertical="5dp"
+                android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/user_menu_op3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Opción 3"
+                android:textSize="20sp"
+                android:onClick="userOptionsTouched"
+                android:layout_marginVertical="5dp"
+                android:textColor="@color/white"/>
+        </LinearLayout>
     </LinearLayout>
     <ImageView
         android:id="@+id/img_section_title"
@@ -55,24 +128,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <View
-            android:id="@+id/view_loading_show"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:visibility="invisible"
-            android:alpha="0.5"/>
-        <ProgressBar
-            android:id="@+id/progress_loading_show"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:layout_centerInParent="true"/>
 
         <ScrollView
             android:id="@+id/sv_rv_show"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="-2dp"
+            android:layout_marginTop="0dp"
+            android:scrollbars="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,9 +151,37 @@
 
                 </androidx.recyclerview.widget.RecyclerView>
 
+                <RelativeLayout
+                    android:id="@+id/layout_loading_more_patients"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/patient_box_background"
+                    android:visibility="gone">
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
+
+
+
             </LinearLayout>
         </ScrollView>
+        <ImageView
+            android:id="@+id/btn_img_add_new_patient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:onClick="btn_addNewPatient"
+            android:src="@drawable/add_new_patient_botton"/>
 
     </RelativeLayout>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

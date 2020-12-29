@@ -9,6 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tests_fisioterapia.R
 
 
+
+class PatientsData(
+        val name:String,
+        val age:Int,
+        val gender:String,
+        val height:String,
+        val weight:String,
+        val diagnosis:String,
+        val edited:String
+)
+
 class PatientAdapter(val patient:List<PatientsData>): RecyclerView.Adapter<PatientAdapter.PatientHolder>(){
     //cuantos elementos tenemos
     override fun getItemCount(): Int = patient.size //función en línea
@@ -29,24 +40,45 @@ class PatientAdapter(val patient:List<PatientsData>): RecyclerView.Adapter<Patie
         fun render(patient:PatientsData){
             val txtPatientName = view.findViewById<TextView>(R.id.txt_patient_name_item)
             txtPatientName.text = patient.name
-            view.findViewById<TextView>(R.id.txt_patient_age_item).text = "Edad: ${patient.age.toString()}"
-            view.findViewById<TextView>(R.id.txt_patient_gender_item).text ="Sexo: ${patient.gender }"
-            view.findViewById<TextView>(R.id.txt_patient_weight_item).text ="Peso ${patient.weight }"
-            view.findViewById<TextView>(R.id.txt_patient_height_item).text = "Altura ${ patient.height }"
-            view.findViewById<TextView>(R.id.txt_patient_diagnosis_item).text ="Diagnostico: ${patient.diagnosis }"
+            view.findViewById<TextView>(R.id.txt_patient_age_item).text = patient.age.toString()
+            view.findViewById<TextView>(R.id.txt_patient_gender_item).text =patient.gender
+            view.findViewById<TextView>(R.id.txt_patient_weight_item).text =patient.weight
+            view.findViewById<TextView>(R.id.txt_patient_height_item).text = patient.height
+            view.findViewById<TextView>(R.id.txt_patient_diagnosis_item).text = patient.diagnosis
 
-            view.setOnClickListener{
-                ShowDetailsPatients().ShowAndHide(view)
+            txtPatientName.setOnClickListener {
+                Toast.makeText(view.context, "Al perfil! nararara", Toast.LENGTH_LONG).show()
             }
-
             view.findViewById<ImageView>(R.id.iv_arrow_down).setOnClickListener{
                 ShowDetailsPatients().ShowAndHide(view)
             }
             view.findViewById<ImageView>(R.id.iv_arrow_up).setOnClickListener{
                 ShowDetailsPatients().ShowAndHide(view)
             }
-            view.findViewById<Button>(R.id.iv_arrow_up).setOnClickListener{}
+            view.findViewById<ImageButton>(R.id.btn_agregar_item).setOnClickListener{
+                Toast.makeText(view.context, "Agregando test..", Toast.LENGTH_LONG).show()
+            }
+            view.findViewById<ImageButton>(R.id.btn_ver_todo_item).setOnClickListener{
+                Toast.makeText(view.context, "Viendo todo..", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
+}
+
+class ShowDetailsPatients(){
+    fun ShowAndHide(view:View){
+        val LLdetails = view.findViewById<LinearLayout>(R.id.layout_patient_details)
+        val imageArrow_up = view.findViewById<ImageView>(R.id.iv_arrow_up)
+        val imageArrow_down = view.findViewById<ImageView>(R.id.iv_arrow_down)
+        if (LLdetails.visibility.equals(View.VISIBLE)){
+            imageArrow_down.visibility = View.VISIBLE
+            imageArrow_up.visibility = View.GONE
+            LLdetails.visibility = View.GONE
+        }else{
+            LLdetails.visibility = View.VISIBLE
+            imageArrow_down.visibility = View.GONE
+            imageArrow_up.visibility = View.VISIBLE
+        }
+    }
 }

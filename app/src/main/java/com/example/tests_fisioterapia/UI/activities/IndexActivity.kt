@@ -14,6 +14,7 @@ import com.example.tests_fisioterapia.R
 import com.example.tests_fisioterapia.UI.fragments.IntroFragment
 import com.example.tests_fisioterapia.UI.fragments.LoadingFragment
 import com.example.tests_fisioterapia.UI.fragments.LoginFragment
+import com.example.tests_fisioterapia.controllers.LoadingTime
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -82,7 +83,7 @@ class IndexActivity : AppCompatActivity() {
                 ShowTheFragment("Login")
             else
                 ShowTheFragment("Intro")
-        }, Random.nextInt(500, 2000).toLong())
+        }, LoadingTime().IntroTime())
     }
 
     fun btn_intro_action(view: View) {
