@@ -1,6 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/user_activity_background"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:id="@+id/iv_edit_picture_patient"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/login_account_picture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="50dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/btn_img_edit_patient_picture"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/add_picture_patient_botton"
+            app:layout_constraintEnd_toEndOf="@+id/iv_edit_picture_patient"
+            app:layout_constraintBottom_toBottomOf="@id/iv_edit_picture_patient"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:id="@+id/et_edit_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/figure_background_etxt"
+            android:layout_marginTop="@dimen/et_marging_top_add_patient"
+            android:textColor="@color/white"
+            android:textSize="@dimen/et_text_login"
+            android:paddingTop="@dimen/et_padding_top_login"
+            android:paddingStart="@dimen/et_padding_start_login"
+            android:paddingEnd="@dimen/et_padding_start_login"
+            app:layout_constraintEnd_toEndOf="@+id/iv_edit_picture_patient"
+            app:layout_constraintStart_toStartOf="@+id/iv_edit_picture_patient"
+            app:layout_constraintTop_toBottomOf="@+id/iv_edit_picture_patient" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:fontFamily="monospace"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tv_text_size_add_patient"
+            android:layout_marginBottom="@dimen/tv_marging_bottom_add_patient"
+            android:layout_marginStart="@dimen/tv_marging_start_add_patient"
+            app:layout_constraintBottom_toBottomOf="@+id/et_edit_name"
+            app:layout_constraintStart_toStartOf="@+id/et_edit_name" />
+
+        <EditText
+            android:id="@+id/et_edit_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/et_marging_top_add_patient"
+            android:textColor="@color/white"
+            android:textSize="@dimen/et_text_login"
+            android:paddingTop="@dimen/et_padding_top_login"
+            android:paddingStart="@dimen/et_padding_start_login"
+            android:paddingEnd="@dimen/et_padding_start_login"
+            android:background="@drawable/figure_background_etxt"
+            app:layout_constraintEnd_toEndOf="@+id/iv_edit_picture_patient"
+            app:layout_constraintStart_toStartOf="@+id/iv_edit_picture_patient"
+            app:layout_constraintTop_toBottomOf="@+id/et_edit_name" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edad"
+            android:fontFamily="monospace"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tv_text_size_add_patient"
+            android:layout_marginBottom="@dimen/tv_marging_bottom_add_patient"
+            android:layout_marginStart="@dimen/tv_marging_start_add_patient"
+            app:layout_constraintBottom_toBottomOf="@+id/et_edit_age"
+            app:layout_constraintStart_toStartOf="@+id/et_edit_age" />
+
+        <EditText
+            android:id="@+id/et_edit_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/et_marging_top_add_patient"
+            android:textColor="@color/white"
+            android:textSize="@dimen/et_text_login"
+            android:paddingTop="@dimen/et_padding_top_login"
+            android:paddingStart="@dimen/et_padding_start_login"
+            android:paddingEnd="@dimen/et_padding_start_login"
+            android:background="@drawable/figure_background_etxt"
+            app:layout_constraintEnd_toEndOf="@+id/iv_edit_picture_patient"
+            app:layout_constraintStart_toStartOf="@+id/iv_edit_picture_patient"
+            app:layout_constraintTop_toBottomOf="@+id/et_edit_age" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sexo"
+            android:fontFamily="monospace"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tv_text_size_add_patient"
+            android:layout_marginBottom="@dimen/tv_marging_bottom_add_patient"
+            android:layout_marginStart="@dimen/tv_marging_start_add_patient"
+            app:layout_constraintBottom_toBottomOf="@+id/et_edit_gender"
+            app:layout_constraintStart_toStartOf="@+id/et_edit_gender" />
+
+        <EditText
+            android:id="@+id/et_edit_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/et_marging_top_add_patient"
+            android:textColor="@color/white"
+            android:textSize="@dimen/et_text_login"
+            android:paddingTop="@dimen/et_padding_top_login"
+            android:paddingStart="@dimen/et_padding_start_login"
+            android:paddingEnd="@dimen/et_padding_start_login"
+            android:background="@drawable/figure_background_etxt"
+            app:layout_constraintEnd_toEndOf="@+id/iv_edit_picture_patient"
+            app:layout_constraintStart_toStartOf="@+id/iv_edit_picture_patient"
+            app:layout_constraintTop_toBottomOf="@+id/et_edit_gender" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Peso"
+            android:fontFamily="monospace"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tv_text_size_add_patient"
+            android:layout_marginBottom="@dimen/tv_marging_bottom_add_patient"
+            android:layout_marginStart="@dimen/tv_marging_start_add_patient"
+            app:layout_constraintBottom_toBottomOf="@+id/et_edit_weight"
+            app:layout_constraintStart_toStartOf="@+id/et_edit_weight" />
+
+        <EditText
+            android:id="@+id/et_edit_ss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/et_marging_top_add_patient"
+            android:textColor="@color/white"
+            android:textSize="@dimen/et_text_login"
+            android:paddingTop="@dimen/et_padding_top_login"
+            android:paddingStart="@dimen/et_padding_start_login"
+            android:paddingEnd="@dimen/et_padding_start_login"
+            android:background="@drawable/figure_background_etxt"
+            app:layout_constraintEnd_toEndOf="@+id/iv_edit_picture_patient"
+            app:layout_constraintStart_toStartOf="@+id/iv_edit_picture_patient"
+            app:layout_constraintTop_toBottomOf="@+id/et_edit_weight" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SS"
+            android:fontFamily="monospace"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tv_text_size_add_patient"
+            android:layout_marginBottom="@dimen/tv_marging_bottom_add_patient"
+            android:layout_marginStart="@dimen/tv_marging_start_add_patient"
+            app:layout_constraintBottom_toBottomOf="@+id/et_edit_ss"
+            app:layout_constraintStart_toStartOf="@+id/et_edit_ss" />
+
+        <ImageButton
+            android:id="@+id/btn_img_edit_patient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/et_marging_top_add_patient"
+            android:background="@drawable/guardar_boton_txt"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/iv_edit_picture_patient"
+            app:layout_constraintStart_toStartOf="@+id/iv_edit_picture_patient"
+            app:layout_constraintTop_toBottomOf="@id/et_edit_ss" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

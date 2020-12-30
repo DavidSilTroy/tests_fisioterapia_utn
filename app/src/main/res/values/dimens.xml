@@ -3,6 +3,11 @@
     <dimen name="activity_horizontal_margin">5dp</dimen>
     <dimen name="activity_vertical_margin">10dp</dimen>
 
+    <!-- to every activity-->
+
+    <!-- END to login activity-->
+
+
     <!-- to login activity-->
     <dimen name="_margin_top_login">25dp</dimen>
 
@@ -24,5 +29,21 @@
     <dimen name="iv_width_login">150dp</dimen>
     <dimen name="iv_height_login">150dp</dimen>
     <dimen name="iv_margin_top_login">10dp</dimen>
-    <!--END to login activity-->
+    <!--END of login activity-->
+
+    <!--add/edit patient activity-->
+    <dimen name="tv_text_size_add_patient">25sp</dimen>
+    <dimen name="tv_marging_start_add_patient">10dp</dimen>
+    <dimen name="tv_marging_bottom_add_patient">65dp</dimen>
+    <dimen name="et_marging_top_add_patient">35dp</dimen>
+    <!--END of add/edit patient activity-->
+
+    <!--information patient activity-->
+    <dimen name="tv_text_size_name_info_patient">35sp</dimen>
+    <dimen name="tv_text_size_titles_info_patient">30sp</dimen>
+    <dimen name="tv_text_size_important_comments_info_patient">20sp</dimen>
+    <dimen name="layout_titles_vertical_margin_info_patient">3dp</dimen>
+    <!--END information patient activity-->
+
+
 </resources>

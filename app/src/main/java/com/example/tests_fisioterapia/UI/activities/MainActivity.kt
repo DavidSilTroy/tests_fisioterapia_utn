@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity() {
     }
     fun createAList(){
         patients = listOf()
+        val fecha = Random.nextInt(500, 600)
         val patiData = patients.toMutableList()
         for (i in 0..limit){
             patiData.add(PatientsData("Paciente ${i}",31,"M","1.79","78","Tenditis Rotuliana","19-10-19"))

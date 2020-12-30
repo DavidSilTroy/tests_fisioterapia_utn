@@ -2,6 +2,8 @@
     <string name="app_name">tests de fisioterapia</string>
     <string name="title_activity_login">LoginActivity</string>
 
+    <string name="waiting_for_text">...</string>
+
     <string name="username_title">Usuario</string>
     <string name="password_title">Contraseña</string>
     <string name="forgot_pass_btn_text">Olvidé mi contraseña</string>
@@ -20,4 +22,5 @@
     <string name="name_user_example">usuario123</string>
     <string name="img_btn_options_description">icono para opciones del usuario</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imporntarnt_comments_info_patients_text">Agregar comentarios importantes sobre este paciente</string>
 </resources>

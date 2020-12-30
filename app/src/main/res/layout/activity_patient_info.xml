@@ -1,6 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/user_activity_background">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:id="@+id/tv_name_patient_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_patient_name_presentation_info"
+            android:text="Nombre Apellido"
+            android:textStyle="italic|bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tv_text_size_name_info_patient"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/iv_patient_photo_info"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/login_account_picture"
+            app:layout_constraintStart_toStartOf="@+id/tv_name_patient_info"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_patient_info" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_patient_info_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_patient_photo_info"
+            app:layout_constraintEnd_toEndOf="@+id/iv_patient_photo_info" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_patient_photo_info"
+            app:layout_constraintEnd_toEndOf="@+id/tv_name_patient_info"
+            app:layout_constraintStart_toEndOf="@+id/iv_patient_photo_info"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_patient_info"
+            app:layout_goneMarginStart="5dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/layout_titles_vertical_margin_info_patient"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Edad:"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/tv_text_size_titles_info_patient"
+                    android:textStyle="italic|bold" />
+                <TextView
+                    android:id="@+id/tv_age_info_patient"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp"
+                    android:text="@string/waiting_for_text"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/tv_text_size_titles_info_patient" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/layout_titles_vertical_margin_info_patient"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Sexo:"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/tv_text_size_titles_info_patient"
+                    android:textStyle="italic|bold" />
+                <TextView
+                    android:id="@+id/tv_gender_info_patient"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp"
+                    android:text="@string/waiting_for_text"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/tv_text_size_titles_info_patient" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/layout_titles_vertical_margin_info_patient"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Peso:"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/tv_text_size_titles_info_patient"
+                    android:textStyle="italic|bold" />
+                <TextView
+                    android:id="@+id/tv_weight_info_patient"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp"
+                    android:text="@string/waiting_for_text"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/tv_text_size_titles_info_patient" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginVertical="@dimen/layout_titles_vertical_margin_info_patient"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_patient_photo_info">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Diagnostico: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/tv_text_size_titles_info_patient"
+                android:textStyle="italic|bold" />
+
+            <TextView
+                android:id="@+id/tv_diagnosis_info_patient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/waiting_for_text"
+                android:textColor="@color/white"
+                android:textSize="@dimen/tv_text_size_titles_info_patient" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/important_commets_info_patient"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:paddingHorizontal="15dp"
+            android:text="@string/imporntarnt_comments_info_patients_text"
+            android:textColor="@color/coments"
+            android:textSize="@dimen/tv_text_size_important_comments_info_patient"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_tests_patient_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:background="@color/tests_background_info_patient"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/important_commets_info_patient">
+        </androidx.recyclerview.widget.RecyclerView>
+        <ImageButton
+            android:id="@+id/btn_img_new_test_patient_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/nuevo_test_boton_text"
+            app:layout_constraintEnd_toEndOf="@+id/rv_tests_patient_info"
+            app:layout_constraintStart_toStartOf="@+id/rv_tests_patient_info"
+            app:layout_constraintTop_toBottomOf="@+id/rv_tests_patient_info" />
+        <Button
+            android:id="@+id/btn_powered"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="@dimen/btn_powered_width_login"
+            android:layout_height="wrap_content"
+            android:onClick="btn_powered_action"
+            android:layout_marginTop="20dp"
+            android:text="@string/powered_btn_text"
+            android:textAlignment="center"
+            android:textColor="@color/powered_text"
+            android:textSize="@dimen/btn_text_powered_login"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/btn_img_new_test_patient_info"
+            app:layout_constraintStart_toStartOf="@+id/btn_img_new_test_patient_info"
+            app:layout_constraintTop_toBottomOf="@+id/btn_img_new_test_patient_info" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+
