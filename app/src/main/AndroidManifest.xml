@@ -12,6 +12,9 @@
 
 
         <activity android:name=".UI.activities.MainActivity"/>
+        <activity android:name=".UI.activities.AddPatientActivity"/>
+        <activity android:name=".UI.activities.EditPatientActivity"/>
+        <activity android:name=".UI.activities.PatientInfoActivity"/>
         <activity android:name=".UI.activities.IndexActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

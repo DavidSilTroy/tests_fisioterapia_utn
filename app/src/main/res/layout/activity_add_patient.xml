@@ -19,13 +19,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="20dp"/>
 
         <ImageButton
             android:id="@+id/btn_img_add_patient_picture"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/add_picture_patient_botton"
+            android:onClick="btn_addPatientPhoto"
             app:layout_constraintEnd_toEndOf="@+id/iv_add_picture_patient"
             app:layout_constraintBottom_toBottomOf="@id/iv_add_picture_patient"
             android:layout_marginEnd="10dp"
@@ -136,7 +137,7 @@
             app:layout_constraintStart_toStartOf="@+id/et_add_weight" />
 
         <EditText
-            android:id="@+id/et_add_ss"
+            android:id="@+id/et_add_height"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/et_marging_top_add_patient"
@@ -152,25 +153,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SS"
+            android:text="Altura"
             android:fontFamily="monospace"
             android:textColor="@color/white"
             android:textSize="@dimen/tv_text_size_add_patient"
             android:layout_marginBottom="@dimen/tv_marging_bottom_add_patient"
             android:layout_marginStart="@dimen/tv_marging_start_add_patient"
-            app:layout_constraintBottom_toBottomOf="@+id/et_add_ss"
-            app:layout_constraintStart_toStartOf="@+id/et_add_ss" />
+            app:layout_constraintBottom_toBottomOf="@+id/et_add_height"
+            app:layout_constraintStart_toStartOf="@+id/et_add_height" />
 
         <ImageButton
             android:id="@+id/btn_img_add_patient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/et_marging_top_add_patient"
+            android:onClick="btn_addPatient"
             android:background="@drawable/agregar_boton_text"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/iv_add_picture_patient"
             app:layout_constraintStart_toStartOf="@+id/iv_add_picture_patient"
-            app:layout_constraintTop_toBottomOf="@id/et_add_ss" />
+            app:layout_constraintTop_toBottomOf="@id/et_add_height" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_img_add_patient"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
