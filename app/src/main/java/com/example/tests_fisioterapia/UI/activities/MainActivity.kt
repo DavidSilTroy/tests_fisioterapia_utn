@@ -10,10 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tests_fisioterapia.R
-import com.example.tests_fisioterapia.controllers.LoadingTime
-import com.example.tests_fisioterapia.controllers.MainControl
-import com.example.tests_fisioterapia.controllers.PatientAdapter
-import com.example.tests_fisioterapia.controllers.PatientsData
+import com.example.tests_fisioterapia.controllers.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.random.Random
@@ -21,6 +18,7 @@ import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
+    var unidad = 1
     var limit = 20
     var itemsShowed = 10
     var isLoading = true
@@ -129,11 +127,13 @@ class MainActivity : AppCompatActivity() {
     }
     fun btn_addNewPatient(view: View){
         //Toast.makeText(applicationContext, "agregandooooo" , Toast.LENGTH_LONG).show()
-        val message = "Agregando Paciente" //editText.text.toString()
-        val intent = Intent(this, AddPatientActivity::class.java).apply{
-            putExtra(AlarmClock.EXTRA_MESSAGE, message)
-        }
-        startActivity(intent)
+        //FirestoreService().setDocument("Holitas","Prueba","la_id_$unidad")
+        //unidad++
+//        val message = "Agregando Paciente" //editText.text.toString()
+//        val intent = Intent(this, AddPatientActivity::class.java).apply{
+//            putExtra(AlarmClock.EXTRA_MESSAGE, message)
+//        }
+//        startActivity(intent)
     }
 
 }
