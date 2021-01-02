@@ -94,7 +94,7 @@ class IndexActivity : AppCompatActivity() {
         }
         startActivity(intent)
     }
-    fun registeredUser(email:String,password:String){
+    fun registeredUser(email:String,password:String, view: View){
         auth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) { // Sign in success, update UI with the signed-in user's information
@@ -104,9 +104,20 @@ class IndexActivity : AppCompatActivity() {
                     }
                     else { // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.exception)
-                        Toast.makeText(baseContext,
-                                "No te encontramos.. revisa tu usuario o contraseña por favor",
-                                Toast.LENGTH_SHORT).show()
+                        val taskMsg = "${task.exception?.message}"
+                        val msg1 = "Este usuario no existe"
+                        val msg2 = "Usuario encontrado, contraseña incorrecta"
+                        val msg3 = "Has intentado muchas veces con una contraseña incorrecta.. espera un momento"
+                        val msg4 = "Revisa tu conección a internet"
+                        val msg5 = "Algo ha salido mal.. no deberías estar viendo este mensaje, comunícate con nosotros"
+                        when{
+                            taskMsg.contains("There is no user record")->Toast.makeText(baseContext,msg1,Toast.LENGTH_SHORT).show()
+                            taskMsg.contains("The password is invalid") ->Toast.makeText(baseContext,msg2,Toast.LENGTH_SHORT).show()
+                            taskMsg.contains("We have blocked all requests") ->Toast.makeText(baseContext,msg3,Toast.LENGTH_LONG).show()
+                            taskMsg.contains("Unable to resolve host") ->Toast.makeText(baseContext,msg4,Toast.LENGTH_SHORT).show()
+                            else -> Toast.makeText(baseContext,msg5,Toast.LENGTH_LONG).show()
+                        }
+                        view.isEnabled = true
                     }
                     // ...
                 }
@@ -114,37 +125,44 @@ class IndexActivity : AppCompatActivity() {
 
     /* BOTONES */
     fun btn_intro_action(view: View) {
+        view.isEnabled = false
+        Handler().postDelayed({
         ShowFragmentLoading()
+        }, 1000)
     }
     fun btn_login_action(view: View){
 
-        val email = findViewById<EditText>(R.id.et_login_username).text?.toString()
-        val password = findViewById<EditText>(R.id.et_login_password).text?.toString()
+        val email = findViewById<EditText>(R.id.et_login_username).text.toString()
+        val password = findViewById<EditText>(R.id.et_login_password).text.toString()
+        view.isEnabled = false
 
-        if (email!!.isNotEmpty() and password!!.isNotEmpty()){//comprobando que hay datos
+        if (email.isNotEmpty() and password.isNotEmpty()){//comprobando que hay datos
             if (email.contains("@")){//comprobando que tenga @
                 if (email.contains("@utn.edu.ec")){//iniciando sesion con email
                     //TODO: entrar escribiendo los datos directamente
-                    registeredUser(email,password)
+                    registeredUser(email,password,view)
                 }else{//diciendo que necesita ser de la UTN xd
                     Toast.makeText(baseContext,
                             "Necesitas usar tu correo institucional UTN",
                             Toast.LENGTH_LONG).show()
+                    view.isEnabled = true
                 }
             }else{//iniciando sesion con usuario
-                if (email.length<5){
+                if (email.length>5){
                     val user = "$email@utn.edu.ec"
-                    registeredUser(user,password)
+                    registeredUser(user,password,view)
                 }else{
                     Toast.makeText(baseContext,
-                            "Eso no es un usuario..",
+                            "Eso no es un usuario..${email.length}",
                             Toast.LENGTH_LONG).show()
+                    view.isEnabled = true
                 }
             }
         }else{
             Toast.makeText(applicationContext,
                     "Necesita llenar todos los campos para iniciar sesión",
                     Toast.LENGTH_LONG).show()
+            view.isEnabled = true
         }
     }
     fun btn_powered_action(){
