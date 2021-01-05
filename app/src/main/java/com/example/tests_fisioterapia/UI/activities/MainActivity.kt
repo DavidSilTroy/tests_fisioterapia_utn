@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     /** Aquí están las variables globales del programa**/
     var user : String = ""                              //para guardar el usuario y mostrarlo
-    var dbDataSize = 0                                  //para obtener el tamaño de la base de datos de pacientes
+    var dbDataSize : Int= 0                                  //para obtener el tamaño de la base de datos de pacientes
     var patients = listOf<PatientsData>()               //para guardar los datos a mostrar de cada paciente
     var patientsId = listOf<String>()                   //para guardar todas las ids de los pacientes
     private lateinit var auth: FirebaseAuth             //para la autenticación de firebase
@@ -220,5 +220,6 @@ class MainActivity : AppCompatActivity() {
         }
         startActivity(intent)
     }
+
 
 }

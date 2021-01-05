@@ -41,6 +41,7 @@ class MainControl(){
     }
 }
 
+fun String.capitalizeFirstLetter() = this.split(" ").joinToString(" ") { it.capitalize() }.trimEnd()
 
 fun GoToPatientView(view: View){
 

@@ -1,5 +1,6 @@
 package com.example.tests_fisioterapia.UI.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -12,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class PatientInfoActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()    //para la base de datos
+    private var idPatient : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +34,9 @@ class PatientInfoActivity : AppCompatActivity() {
     }
 
     /**Función para obtener los datos de la base de datos de los pacientes**/
-    fun getDataDB(){
-        val id = intent.getStringExtra("patientId")
-        db.collection("pacientes").document(id)
+    fun getDataDB() {
+        idPatient = intent.getStringExtra("patientId")
+        db.collection("pacientes").document(idPatient)
                 .get()
                 .addOnCompleteListener{
                     val name = "${it.result?.data!!.get("name")} ${it.result?.data!!.get("last_name")}"
@@ -67,7 +69,11 @@ class PatientInfoActivity : AppCompatActivity() {
     }
 
     fun btn_editPatient(view: View) {
-        Toast.makeText(applicationContext, "Editar los datos del paciente", Toast.LENGTH_LONG).show()
+        view.visibility = View.INVISIBLE
+        val intent = Intent(this, EditPatientActivity::class.java).apply{
+            putExtra("patientId", idPatient)
+        }
+        startActivity(intent)
     }
 
 }

@@ -223,7 +223,6 @@
 
         <EditText
             android:id="@+id/et_edit_diagnosis"
-            android:hint="Opcional@algo.com"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/et_marging_top_add_patient"
@@ -251,7 +250,6 @@
 
         <EditText
             android:id="@+id/et_edit_important_comments"
-            android:hint="Opcional@algo.com"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/et_marging_top_add_patient"
@@ -282,8 +280,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/et_marging_top_add_patient"
-            android:onClick="btn_addPatient"
-            android:background="@drawable/agregar_boton_text"
+            android:onClick="btn_save_editPatient"
+            android:background="@drawable/guardar_boton_txt"
             app:layout_constraintEnd_toEndOf="@+id/iv_edit_picture_patient"
             app:layout_constraintStart_toStartOf="@+id/iv_edit_picture_patient"
             app:layout_constraintTop_toBottomOf="@id/et_edit_important_comments" />

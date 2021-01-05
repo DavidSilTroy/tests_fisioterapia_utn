@@ -11,8 +11,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.tests_fisioterapia.R
+import com.example.tests_fisioterapia.controllers.capitalizeFirstLetter
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
+import java.util.*
 
 class AddPatientActivity : AppCompatActivity() {
     var user = ""
@@ -57,7 +59,9 @@ class AddPatientActivity : AppCompatActivity() {
                 "height" to newPatient[5],
                 "email" to newPatient[6],
                 "created" to dateString,
-                "diagnosis" to "...")
+                "diagnosis" to "...",
+                "created_by" to user
+        )
         ).addOnCompleteListener{
             goToMain()
         }
@@ -80,7 +84,7 @@ class AddPatientActivity : AppCompatActivity() {
             }
         }
     }
-    fun btn_addPatient(view: View) {
+    fun btn_addPatient(view: View){
         view.visibility = View.INVISIBLE
         val name =      findViewById<EditText>(R.id.et_add_name)?.text.toString()
         val lastname =  findViewById<EditText>(R.id.et_add_last_name)?.text.toString()
@@ -98,7 +102,14 @@ class AddPatientActivity : AppCompatActivity() {
             height.isNullOrEmpty()  -> Toast.makeText(applicationContext, "Falta la altura" , Toast.LENGTH_LONG).show()
 
                 else ->{
-                val newPatient = arrayOf(name,lastname,age,gender,weight,height,email)
+                val newPatient = arrayOf(
+                        name.capitalizeFirstLetter(),
+                        lastname.capitalizeFirstLetter(),
+                        age,
+                        gender.capitalizeFirstLetter(),
+                        weight,
+                        height,
+                        email)
                 //es importante el orden en el que se envia el array
 
                 lookToDataBase(newPatient)
@@ -106,6 +117,7 @@ class AddPatientActivity : AppCompatActivity() {
         }
         Handler().postDelayed({
             view.visibility = View.VISIBLE
+            goToMain()
         }, 3000)
     }
     fun btn_addPatientPhoto(view: View) {
