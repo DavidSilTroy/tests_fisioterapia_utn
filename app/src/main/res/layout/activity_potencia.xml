@@ -19,20 +19,6 @@
         app:srcCompat="@drawable/potencia" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
-        android:layout_width="335dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="168dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/out_10x5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber2"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
         android:id="@+id/editTextNumber2"
         android:layout_width="337dp"
         android:layout_height="62dp"
@@ -58,5 +44,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNumber2"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="313dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="80dp"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
