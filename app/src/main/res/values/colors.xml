@@ -7,9 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="coments">#C0C0C0</color>
 
     <color name="red_utn">#F40209</color>
     <color name="user_box_background">#0C3564</color>
+    <color name="user_activity_background">#071919</color>
     <color name="patient_box_background">#1A58A1</color>
     <color name="test_box_background">#1F6878</color>
     <color name="test_name_box_background">#464BC4</color>
@@ -21,5 +23,7 @@
     <color name="potencia">#82A865</color>
 
 
+    <color name="powered_text">#306DA6</color>
+    <color name="tests_background_info_patient">#162725</color>
 
 </resources>

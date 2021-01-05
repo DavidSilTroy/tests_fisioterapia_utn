@@ -1,5 +1,49 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">5dp</dimen>
+    <dimen name="activity_vertical_margin">10dp</dimen>
+
+    <!-- to every activity-->
+
+    <!-- END to login activity-->
+
+
+    <!-- to login activity-->
+    <dimen name="_margin_top_login">25dp</dimen>
+
+    <dimen name="btn_text_forgot_pass_login">11sp</dimen>
+    <dimen name="btn_text_powered_login">20sp</dimen>
+    <dimen name="btn_text_login">30sp</dimen>
+    <dimen name="btn_powered_width_login">160dp</dimen>
+
+    <dimen name="text_size_titles_login">35sp</dimen>
+    <dimen name="text_margin_start_login">30dp</dimen>
+    <dimen name="text_margin_bottom_login">40dp</dimen>
+
+    <dimen name="et_text_login">28sp</dimen>
+    <dimen name="et_padding_top_login">20dp</dimen>
+    <dimen name="et_padding_start_login">10dp</dimen>
+    <dimen name="et_width_login">360dp</dimen>
+    <dimen name="et_height_login">60dp</dimen>
+
+    <dimen name="iv_width_login">150dp</dimen>
+    <dimen name="iv_height_login">150dp</dimen>
+    <dimen name="iv_margin_top_login">10dp</dimen>
+    <!--END of login activity-->
+
+    <!--add/edit patient activity-->
+    <dimen name="tv_text_size_add_patient">25sp</dimen>
+    <dimen name="tv_marging_start_add_patient">10dp</dimen>
+    <dimen name="tv_marging_bottom_add_patient">65dp</dimen>
+    <dimen name="et_marging_top_add_patient">35dp</dimen>
+    <!--END of add/edit patient activity-->
+
+    <!--information patient activity-->
+    <dimen name="tv_text_size_name_info_patient">35sp</dimen>
+    <dimen name="tv_text_size_titles_info_patient">30sp</dimen>
+    <dimen name="tv_text_size_important_comments_info_patient">20sp</dimen>
+    <dimen name="layout_titles_vertical_margin_info_patient">3dp</dimen>
+    <!--END information patient activity-->
+
+
 </resources>

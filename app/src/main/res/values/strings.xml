@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">tests_fisioterapia</string>
+    <string name="app_name">tests de fisioterapia</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -14,4 +14,28 @@
     <string name="dist_rec">Distancia recorrida (m)</string>
     <string name="pam">Potencia anaeróbica máxima</string>
     <string name="out_10x5" />
+
+    <string name="waiting_for_text">...</string>
+
+    <string name="username_title">Usuario</string>
+    <string name="password_title">Contraseña</string>
+    <string name="forgot_pass_btn_text">Olvidé mi contraseña</string>
+    <string name="powered_btn_text">powered by CIME-FICA</string>
+    <string name="description_imagen_login">Account icon</string>
+    <string name="description_imagen_fisio_logo">Fisioterapia UTN</string>
+    <string name="text_login_button">INGRESAR</string>
+    <string name="username_hint">estudiante@utn.edu.ec</string>
+    <string name="password_hint">********</string>
+    <string name="img_description_patient">Foto de paciente</string>
+    <string name="img_description_user">Foto de usuario</string>
+    <string name="section_title_main">titulo de sección</string>
+    <string name="edited_example_text">10-11-19</string>
+    <string name="patient_name_example_text">Paciente</string>
+    <string name="arrow_btn_description">boton arrow para desplegar menu</string>
+    <string name="name_user_example">usuario</string>
+    <string name="img_btn_options_description">icono para opciones del usuario</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imporntarnt_comments_info_patients_text">Agregar comentarios importantes sobre este paciente</string>
+
+    <string name="user_option_logout">Cerrar Sesión</string>
 </resources>
