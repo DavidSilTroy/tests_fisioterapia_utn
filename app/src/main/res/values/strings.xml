@@ -16,11 +16,13 @@
     <string name="img_description_patient">Foto de paciente</string>
     <string name="img_description_user">Foto de usuario</string>
     <string name="section_title_main">titulo de sección</string>
-    <string name="edited_example_text">Editado: 10-11-19</string>
+    <string name="edited_example_text">10-11-19</string>
     <string name="patient_name_example_text">Paciente</string>
     <string name="arrow_btn_description">boton arrow para desplegar menu</string>
-    <string name="name_user_example">usuario123</string>
+    <string name="name_user_example">usuario</string>
     <string name="img_btn_options_description">icono para opciones del usuario</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="imporntarnt_comments_info_patients_text">Agregar comentarios importantes sobre este paciente</string>
+
+    <string name="user_option_logout">Cerrar Sesión</string>
 </resources>

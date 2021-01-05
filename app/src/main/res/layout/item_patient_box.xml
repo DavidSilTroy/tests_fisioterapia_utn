@@ -40,16 +40,32 @@
                 android:textColor="@color/white"
                 android:textStyle="italic"
                 android:textSize="35sp" />
-            <TextView
-                android:id="@+id/txt_patient_edited_item"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:textSize="15sp"
-                android:textColor="@color/white"
-                android:text="@string/edited_example_text" />
+                android:orientation="horizontal"
+                android:paddingHorizontal="3dp"
+                android:textAlignment="textStart">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textEnd"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:text="Editado:"/>
+                <TextView
+                    android:layout_weight="5"
+                    android:id="@+id/txt_patient_edited_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingHorizontal="4dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:text="@string/edited_example_text" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <ImageView

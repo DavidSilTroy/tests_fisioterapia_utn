@@ -3,6 +3,7 @@ package com.example.tests_fisioterapia.UI.activities
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.provider.AlarmClock
 import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.util.Log
 import android.view.View
@@ -28,6 +29,7 @@ class IndexActivity : AppCompatActivity() {
     var isFragmentIntroLoaded = false
     var theFragment = "Loading"
     val manager = supportFragmentManager
+    var user : String = ""
 
 
     private lateinit var auth: FirebaseAuth //para la autenticación de firebase
@@ -44,6 +46,8 @@ class IndexActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser // Check if user is signed in (non-null) and update UI accordingly.
         if (currentUser!=null){
+            val end = currentUser.email!!.indexOf("@")
+            user = currentUser.email!!.substring(0,end)
             loginToMain()
         }else {
             ShowFragmentLoading() //ir a pantalla de carga
@@ -88,9 +92,8 @@ class IndexActivity : AppCompatActivity() {
 
 
     fun loginToMain(){
-        val message = "Iniciando sesión" //editText.text.toString()
         val intent = Intent(this, MainActivity::class.java).apply{
-            putExtra(EXTRA_MESSAGE, message)
+            putExtra("userloged", user)
         }
         startActivity(intent)
     }
@@ -128,7 +131,7 @@ class IndexActivity : AppCompatActivity() {
         view.isEnabled = false
         Handler().postDelayed({
         ShowFragmentLoading()
-        }, 1000)
+        }, 500)
     }
     fun btn_login_action(view: View){
 
@@ -139,7 +142,8 @@ class IndexActivity : AppCompatActivity() {
         if (email.isNotEmpty() and password.isNotEmpty()){//comprobando que hay datos
             if (email.contains("@")){//comprobando que tenga @
                 if (email.contains("@utn.edu.ec")){//iniciando sesion con email
-                    //TODO: entrar escribiendo los datos directamente
+                    val end = email.indexOf("@")
+                    user = email.substring(0,end)
                     registeredUser(email,password,view)
                 }else{//diciendo que necesita ser de la UTN xd
                     Toast.makeText(baseContext,
@@ -149,8 +153,9 @@ class IndexActivity : AppCompatActivity() {
                 }
             }else{//iniciando sesion con usuario
                 if (email.length>5){
-                    val user = "$email@utn.edu.ec"
-                    registeredUser(user,password,view)
+                    user = email
+                    val emailfromuser = "$email@utn.edu.ec"
+                    registeredUser(emailfromuser,password,view)
                 }else{
                     Toast.makeText(baseContext,
                             "Eso no es un usuario..${email.length}",

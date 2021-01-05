@@ -34,6 +34,7 @@
 
         <EditText
             android:id="@+id/et_add_name"
+            android:inputType="textCapSentences"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/figure_background_etxt"
@@ -49,7 +50,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre"
+            android:text="Nombres"
             android:fontFamily="monospace"
             android:textColor="@color/white"
             android:textSize="@dimen/tv_text_size_add_patient"
@@ -57,6 +58,32 @@
             android:layout_marginStart="@dimen/tv_marging_start_add_patient"
             app:layout_constraintBottom_toBottomOf="@+id/et_add_name"
             app:layout_constraintStart_toStartOf="@+id/et_add_name" />
+        <EditText
+            android:id="@+id/et_add_last_name"
+            android:inputType="textCapSentences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/figure_background_etxt"
+            android:layout_marginTop="@dimen/et_marging_top_add_patient"
+            android:textColor="@color/white"
+            android:textSize="@dimen/et_text_login"
+            android:paddingTop="@dimen/et_padding_top_login"
+            android:paddingStart="@dimen/et_padding_start_login"
+            android:paddingEnd="@dimen/et_padding_start_login"
+            app:layout_constraintEnd_toEndOf="@+id/iv_add_picture_patient"
+            app:layout_constraintStart_toStartOf="@+id/iv_add_picture_patient"
+            app:layout_constraintTop_toBottomOf="@+id/et_add_name" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apellidos"
+            android:fontFamily="monospace"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tv_text_size_add_patient"
+            android:layout_marginBottom="@dimen/tv_marging_bottom_add_patient"
+            android:layout_marginStart="@dimen/tv_marging_start_add_patient"
+            app:layout_constraintBottom_toBottomOf="@+id/et_add_last_name"
+            app:layout_constraintStart_toStartOf="@+id/et_add_last_name" />
 
         <EditText
             android:id="@+id/et_add_age"
@@ -64,6 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/et_marging_top_add_patient"
             android:textColor="@color/white"
+            android:inputType="number"
             android:textSize="@dimen/et_text_login"
             android:paddingTop="@dimen/et_padding_top_login"
             android:paddingStart="@dimen/et_padding_start_login"
@@ -71,7 +99,7 @@
             android:background="@drawable/figure_background_etxt"
             app:layout_constraintEnd_toEndOf="@+id/iv_add_picture_patient"
             app:layout_constraintStart_toStartOf="@+id/iv_add_picture_patient"
-            app:layout_constraintTop_toBottomOf="@+id/et_add_name" />
+            app:layout_constraintTop_toBottomOf="@+id/et_add_last_name" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,6 +114,7 @@
 
         <EditText
             android:id="@+id/et_add_gender"
+            android:inputType="textCapSentences"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/et_marging_top_add_patient"
@@ -117,6 +146,7 @@
             android:layout_marginTop="@dimen/et_marging_top_add_patient"
             android:textColor="@color/white"
             android:textSize="@dimen/et_text_login"
+            android:inputType="numberDecimal"
             android:paddingTop="@dimen/et_padding_top_login"
             android:paddingStart="@dimen/et_padding_start_login"
             android:paddingEnd="@dimen/et_padding_start_login"
@@ -127,7 +157,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Peso"
+            android:text="Peso(kg)"
             android:fontFamily="monospace"
             android:textColor="@color/white"
             android:textSize="@dimen/tv_text_size_add_patient"
@@ -142,6 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/et_marging_top_add_patient"
             android:textColor="@color/white"
+            android:inputType="numberDecimal"
             android:textSize="@dimen/et_text_login"
             android:paddingTop="@dimen/et_padding_top_login"
             android:paddingStart="@dimen/et_padding_start_login"
@@ -153,7 +184,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Altura"
+            android:text="Altura(m)"
             android:fontFamily="monospace"
             android:textColor="@color/white"
             android:textSize="@dimen/tv_text_size_add_patient"
@@ -161,6 +192,33 @@
             android:layout_marginStart="@dimen/tv_marging_start_add_patient"
             app:layout_constraintBottom_toBottomOf="@+id/et_add_height"
             app:layout_constraintStart_toStartOf="@+id/et_add_height" />
+        <EditText
+            android:id="@+id/et_add_email"
+            android:hint="Opcional@algo.com"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/et_marging_top_add_patient"
+            android:textColor="@color/white"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/et_text_login"
+            android:paddingTop="@dimen/et_padding_top_login"
+            android:paddingStart="@dimen/et_padding_start_login"
+            android:paddingEnd="@dimen/et_padding_start_login"
+            android:background="@drawable/figure_background_etxt"
+            app:layout_constraintEnd_toEndOf="@+id/iv_add_picture_patient"
+            app:layout_constraintStart_toStartOf="@+id/iv_add_picture_patient"
+            app:layout_constraintTop_toBottomOf="@+id/et_add_height" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:fontFamily="monospace"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tv_text_size_add_patient"
+            android:layout_marginBottom="@dimen/tv_marging_bottom_add_patient"
+            android:layout_marginStart="@dimen/tv_marging_start_add_patient"
+            app:layout_constraintBottom_toBottomOf="@+id/et_add_email"
+            app:layout_constraintStart_toStartOf="@+id/et_add_email" />
 
         <ImageButton
             android:id="@+id/btn_img_add_patient"
@@ -171,7 +229,7 @@
             android:background="@drawable/agregar_boton_text"
             app:layout_constraintEnd_toEndOf="@+id/iv_add_picture_patient"
             app:layout_constraintStart_toStartOf="@+id/iv_add_picture_patient"
-            app:layout_constraintTop_toBottomOf="@id/et_add_height" />
+            app:layout_constraintTop_toBottomOf="@id/et_add_email" />
         <View
             android:layout_width="match_parent"
             android:layout_height="30dp"
