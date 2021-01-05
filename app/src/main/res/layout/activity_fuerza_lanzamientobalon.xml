@@ -17,12 +17,12 @@
         app:srcCompat="@drawable/fuerza_lanzamientobalon" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/et_dist_testBalonTerap"
         android:layout_width="292dp"
         android:layout_height="53dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="164dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:text="@string/num_rep"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintHorizontal_bias="0.493"
@@ -30,16 +30,16 @@
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tv_result_testBalonTerap"
         android:layout_width="305dp"
         android:layout_height="35dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="308dp"
         android:text=""
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

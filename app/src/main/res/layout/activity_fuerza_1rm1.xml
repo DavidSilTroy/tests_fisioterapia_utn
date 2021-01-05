@@ -7,68 +7,65 @@
     android:background="@color/title_vel2">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_test_1RM"
         android:layout_width="380dp"
         android:layout_height="855dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/fuerza_1rm1" />
 
     <EditText
-        android:id="@+id/editTextNumber2"
-        android:layout_width="337dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="180dp"
+        android:id="@+id/et_select_eje_test1RM"
+        android:layout_width="329dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="188dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <TextView
+        android:id="@+id/tv_result_test1RM_porcent"
+        android:layout_width="331dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="508dp"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_test_1RM"
+        app:layout_constraintStart_toStartOf="@+id/iv_test_1RM"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_result_test1RM"
+        android:layout_width="331dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="404dp"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_test_1RM"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@+id/iv_test_1RM"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
-        android:id="@+id/editTextTextPersonName3"
-        android:layout_width="335dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="48dp"
+        android:id="@+id/et_numRep_test1RM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/out_10x5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber2"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="331dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="48dp"
-        android:text=""
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="331dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="160dp"
-        android:text=""
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/iv_test_1RM"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/iv_test_1RM"
+        app:layout_constraintTop_toTopOf="@+id/iv_test_1RM" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
