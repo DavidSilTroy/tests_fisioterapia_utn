@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth             //para la autenticación de firebase
     private val db = FirebaseFirestore.getInstance()    //para la base de datos
 
+
+
     /**Estas son variables que ya no se están usando por ahora, las borraremos al final**/
     //val timeLoading = LoadingTime().DBtime()
     //var progressbarStatus = 0
@@ -80,6 +82,7 @@ class MainActivity : AppCompatActivity() {
 
         super.onResume()
     }
+
 
     /**###### FUNCIONES CREADAS ######**/
     /**Función para mostrar los datos de los pacientes**/
@@ -220,5 +223,4 @@ class MainActivity : AppCompatActivity() {
         }
         startActivity(intent)
     }
-
 }
