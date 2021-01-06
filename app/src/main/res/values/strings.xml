@@ -37,14 +37,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="imporntarnt_comments_info_patients_text">Agregar comentarios importantes sobre este paciente</string>
 
-    <string-array name="opt_saltos_pot">
-        <item>Salto de longitud con carrera de impulso</item>
-        <item>Salto longitudinal sin carrera de impulso</item>
-        <item>Salto vertical</item>
-        <item>Salto horizontal</item>
-    </string-array>
     <string name="selec_salto">Seleccione un salto:</string>
-
+    <string name="selec_ejeF">Seleccione un ejercicio</string>
 
     <string name="user_option_logout">Cerrar Sesión</string>
 </resources>

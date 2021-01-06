@@ -14,7 +14,7 @@
         <activity android:name=".UI.activities.AddPatientActivity" />
         <activity android:name=".UI.activities.EditPatientActivity" />
         <activity android:name=".UI.activities.PatientInfoActivity" />
-        <activity android:name=".UI.activities.IndexActivity">
+        <activity android:name=".UI.activities.Fuerza1RMActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

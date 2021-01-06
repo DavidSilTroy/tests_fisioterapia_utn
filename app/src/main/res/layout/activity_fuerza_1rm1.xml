@@ -18,19 +18,6 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/fuerza_1rm1" />
 
-    <EditText
-        android:id="@+id/et_select_eje_test1RM"
-        android:layout_width="329dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="188dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
     <TextView
         android:id="@+id/tv_result_test1RM_porcent"
         android:layout_width="331dp"
@@ -67,5 +54,15 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="@+id/iv_test_1RM"
         app:layout_constraintTop_toTopOf="@+id/iv_test_1RM" />
+
+    <Spinner
+        android:id="@+id/sp_select_ejercicio1RM"
+        android:layout_width="293dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="188dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import android.support.v7.app.AppCompatActivity
+
 
 
 
@@ -42,4 +42,4 @@ class PotenciaActivity : AppCompatActivity() {
 
 
 
-}
+}}}}
