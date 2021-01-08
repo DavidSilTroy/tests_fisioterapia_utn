@@ -178,6 +178,10 @@ class IndexActivity : AppCompatActivity() {
         //TODO:Enviar a recuperar la contraseña
         Toast.makeText(applicationContext, "Estamos trabajando en ello..", Toast.LENGTH_LONG).show()
     }
+    fun btn_new_user_action(view: View) {
+        val intent = Intent(this, RegisterUserActivity::class.java)
+        startActivity(intent)
+    }
 
 
 }

@@ -29,10 +29,10 @@
             android:id="@+id/tv_login_username_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/text_margin_start_login"
+            android:layout_marginStart="40dp"
             android:layout_marginBottom="@dimen/text_margin_bottom_login"
             android:fontFamily="monospace"
-            android:text="@string/username_title"
+            android:text="Correo"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_titles_login"
             app:layout_constraintBottom_toBottomOf="@+id/et_login_username"
@@ -86,10 +86,10 @@
             app:layout_constraintTop_toBottomOf="@+id/et_login_username"
             android:autofillHints="" />
         <Button
-            android:id="@+id/btn_login_ingresar"
+            android:id="@+id/btn_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_login_button"
+            android:text="@string/btn_register_txt"
             android:textColor="@color/white"
             android:onClick="btn_login_action"
             android:textSize="30sp"
@@ -98,32 +98,19 @@
             app:layout_constraintEnd_toEndOf="@+id/et_login_password"
             app:layout_constraintStart_toStartOf="@+id/et_login_password"
             app:layout_constraintTop_toBottomOf="@+id/et_login_password" />
-        <Button
+        <TextView
             android:id="@+id/btn_login_forgot_password"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/forgot_pass_btn_text"
-            android:onClick="btn_forgot_password_action"
+            android:layout_marginTop="15dp"
+            android:textAlignment="center"
+            android:text="@string/tv_register_info"
             android:textColor="@color/white"
-            android:textSize="@dimen/btn_text_forgot_pass_login"
-            style="?android:attr/buttonBarButtonStyle"
-            app:layout_constraintEnd_toEndOf="@+id/btn_login_ingresar"
-            app:layout_constraintStart_toStartOf="@+id/btn_login_ingresar"
-            app:layout_constraintTop_toBottomOf="@+id/btn_login_ingresar" />
-        <Button
-            android:id="@+id/btn_login_new_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/btn_new_user_login"
-            android:onClick="btn_new_user_action"
-            android:textColor="@color/white"
-            android:textSize="@dimen/btn_text_forgot_pass_login"
-            style="?android:attr/buttonBarButtonStyle"
-            app:layout_constraintEnd_toEndOf="@+id/btn_login_forgot_password"
-            app:layout_constraintStart_toStartOf="@+id/btn_login_forgot_password"
-            app:layout_constraintTop_toBottomOf="@+id/btn_login_forgot_password" />
+            android:textSize="20sp"
+            android:layout_marginHorizontal="30dp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_register"
+            app:layout_constraintStart_toStartOf="@+id/btn_register"
+            app:layout_constraintTop_toBottomOf="@+id/btn_register" />
         <Button
             android:id="@+id/btn_login_powered"
             android:layout_width="@dimen/btn_powered_width_login"
@@ -132,12 +119,12 @@
             android:text="@string/powered_btn_text"
             android:textColor="@color/powered_text"
             android:textSize="@dimen/btn_text_powered_login"
-            android:onClick="btn_powered_action"
+            android:onClick="btn_powered_action_r"
             android:textAlignment="center"
             style="?android:attr/buttonBarButtonStyle"
-            app:layout_constraintEnd_toEndOf="@+id/btn_login_ingresar"
-            app:layout_constraintStart_toStartOf="@+id/btn_login_ingresar"
-            app:layout_constraintTop_toBottomOf="@+id/btn_login_new_user" />
+            app:layout_constraintEnd_toEndOf="@+id/btn_register"
+            app:layout_constraintStart_toStartOf="@+id/btn_register"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login_forgot_password" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

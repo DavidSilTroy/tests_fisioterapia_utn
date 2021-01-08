@@ -25,4 +25,7 @@
     <string name="imporntarnt_comments_info_patients_text">Agregar comentarios importantes sobre este paciente</string>
 
     <string name="user_option_logout">Cerrar Sesión</string>
+    <string name="tv_register_info">Registrate usando tu correo institucional de la Universidad Técnica del Norte. Pero si no tienes correo puedes probar la app con el correo: invitado@utn.edu.ec y la contraseña: UTNcimeFICA</string>
+    <string name="btn_register_txt">REGISTRARME</string>
+    <string name="btn_new_user_login">Soy nuevo aquí</string>
 </resources>
