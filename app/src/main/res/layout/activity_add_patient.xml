@@ -100,15 +100,17 @@
             app:layout_constraintEnd_toEndOf="@+id/iv_add_picture_patient"
             app:layout_constraintStart_toStartOf="@+id/iv_add_picture_patient"
             app:layout_constraintTop_toBottomOf="@+id/et_add_last_name" />
+
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edad"
+            android:layout_marginStart="@dimen/tv_marging_start_add_patient"
+            android:layout_marginBottom="@dimen/tv_marging_bottom_add_patient"
             android:fontFamily="monospace"
+            android:text="Edad"
             android:textColor="@color/white"
             android:textSize="@dimen/tv_text_size_add_patient"
-            android:layout_marginBottom="@dimen/tv_marging_bottom_add_patient"
-            android:layout_marginStart="@dimen/tv_marging_start_add_patient"
             app:layout_constraintBottom_toBottomOf="@+id/et_add_age"
             app:layout_constraintStart_toStartOf="@+id/et_add_age" />
 
@@ -181,15 +183,17 @@
             app:layout_constraintEnd_toEndOf="@+id/iv_add_picture_patient"
             app:layout_constraintStart_toStartOf="@+id/iv_add_picture_patient"
             app:layout_constraintTop_toBottomOf="@+id/et_add_weight" />
+
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Altura(m)"
+            android:layout_marginStart="@dimen/tv_marging_start_add_patient"
+            android:layout_marginBottom="@dimen/tv_marging_bottom_add_patient"
             android:fontFamily="monospace"
+            android:text="Altura(m)"
             android:textColor="@color/white"
             android:textSize="@dimen/tv_text_size_add_patient"
-            android:layout_marginBottom="@dimen/tv_marging_bottom_add_patient"
-            android:layout_marginStart="@dimen/tv_marging_start_add_patient"
             app:layout_constraintBottom_toBottomOf="@+id/et_add_height"
             app:layout_constraintStart_toStartOf="@+id/et_add_height" />
         <EditText
@@ -220,6 +224,16 @@
             app:layout_constraintBottom_toBottomOf="@+id/et_add_email"
             app:layout_constraintStart_toStartOf="@+id/et_add_email" />
 
+
+        <ProgressBar
+            android:id="@+id/pb_adding_patient"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/et_marging_top_add_patient"
+            app:layout_constraintEnd_toEndOf="@+id/iv_add_picture_patient"
+            app:layout_constraintStart_toStartOf="@+id/iv_add_picture_patient"
+            app:layout_constraintTop_toBottomOf="@id/et_add_email"/>
         <ImageButton
             android:id="@+id/btn_img_add_patient"
             android:layout_width="wrap_content"
@@ -230,11 +244,13 @@
             app:layout_constraintEnd_toEndOf="@+id/iv_add_picture_patient"
             app:layout_constraintStart_toStartOf="@+id/iv_add_picture_patient"
             app:layout_constraintTop_toBottomOf="@id/et_add_email" />
+
         <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_img_add_patient"/>
+            app:layout_constraintTop_toBottomOf="@id/btn_img_add_patient" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

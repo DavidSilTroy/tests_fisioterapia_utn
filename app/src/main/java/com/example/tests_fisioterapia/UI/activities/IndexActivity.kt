@@ -31,7 +31,6 @@ class IndexActivity : AppCompatActivity() {
     val manager = supportFragmentManager
     var user : String = ""
 
-
     private lateinit var auth: FirebaseAuth //para la autenticación de firebase
 
 
@@ -152,13 +151,13 @@ class IndexActivity : AppCompatActivity() {
                     view.isEnabled = true
                 }
             }else{//iniciando sesion con usuario
-                if (email.length>5){
+                if (email.length>3){
                     user = email
                     val emailfromuser = "$email@utn.edu.ec"
                     registeredUser(emailfromuser,password,view)
                 }else{
                     Toast.makeText(baseContext,
-                            "Eso no es un usuario..${email.length}",
+                            "Eso no es un usuario..",
                             Toast.LENGTH_LONG).show()
                     view.isEnabled = true
                 }
@@ -170,13 +169,15 @@ class IndexActivity : AppCompatActivity() {
             view.isEnabled = true
         }
     }
-    fun btn_powered_action(){
-        //TODO: go to the activity
-    }
-    fun btn_forgot_password_action(){
-        //TODO: go to the activity
+    fun btn_powered_action(view: View) {
+        //TODO:Mostrar a los creadores de la app
+        Toast.makeText(applicationContext, "Estamos trabajando en ello..", Toast.LENGTH_LONG).show()
     }
 
+    fun btn_forgot_password_action(view: View) {
+        //TODO:Enviar a recuperar la contraseña
+        Toast.makeText(applicationContext, "Estamos trabajando en ello..", Toast.LENGTH_LONG).show()
+    }
 
 
 }

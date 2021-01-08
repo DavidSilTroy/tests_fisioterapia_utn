@@ -34,8 +34,13 @@ class MainControl(){
         layoutLoading.visibility = View.VISIBLE
         //layoutLoading.bringToFront()
     }
-    fun showRecycler(layoutLoading:RelativeLayout,rvPatients:RecyclerView,adapter: PatientAdapter){
+    fun showRecyclerPatients(layoutLoading:RelativeLayout,rvPatients:RecyclerView,adapter: PatientAdapter){
         rvPatients.adapter = adapter
+        layoutLoading.visibility = View.GONE
+
+    }
+    fun showRecyclerTests(layoutLoading:RelativeLayout,rvTests:RecyclerView,adapter: TestAdapter){
+        rvTests.adapter = adapter
         layoutLoading.visibility = View.GONE
 
     }

@@ -15,11 +15,12 @@
             android:layout_weight="1"
             android:gravity="start|center_vertical"
             android:paddingStart="5dp"
+
             android:paddingEnd="5dp"
             android:text="Test de algo"
             android:textColor="@color/white"
             android:textStyle="italic"
-            android:textSize="35sp" />
+            android:textSize="28sp" />
         <ImageView
             android:id="@+id/iv_arrow_right"
             android:layout_width="100dp"

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tests_fisioterapia.R
 import com.example.tests_fisioterapia.controllers.*
+import com.example.tests_fisioterapia.network.M_C_P
+import com.example.tests_fisioterapia.network.M_C_UP
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,11 +21,12 @@ class MainActivity : AppCompatActivity() {
 
     /** Aquí están las variables globales del programa**/
     var user : String = ""                              //para guardar el usuario y mostrarlo
-    var dbDataSize : Int= 0                                  //para obtener el tamaño de la base de datos de pacientes
+    var dbDataSize : Int= 0                             //para obtener el tamaño de la base de datos de pacientes
     var patients = listOf<PatientsData>()               //para guardar los datos a mostrar de cada paciente
     var patientsId = listOf<String>()                   //para guardar todas las ids de los pacientes
     private lateinit var auth: FirebaseAuth             //para la autenticación de firebase
     private val db = FirebaseFirestore.getInstance()    //para la base de datos
+    var isAdding = false                                //al pasar a la activity de agregar se vuelve true
 
     /**Estas son variables que ya no se están usando por ahora, las borraremos al final**/
     //val timeLoading = LoadingTime().DBtime()
@@ -39,6 +42,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         /**Recuerden que el layout debe estar en el AndroidManifest para que pueda ser abierto,
         así <activity android:name=".UI.activities.MainActivity"/> **/
+    }
+    /**Función por defecto en  de Android**/
+    override fun onResume() {
 
         /** Obteniendo datos del activity de login o de la autenticación si ya inició sesión antes **/
         auth = Firebase.auth
@@ -59,31 +65,12 @@ class MainActivity : AppCompatActivity() {
         findViewById<RelativeLayout>(R.id.layout_loading_patients).visibility = View.VISIBLE
         /** Obtenemos las ids de los pacientes del usuario y los datos para mostrar**/
         getPatientsId()
-
-    }
-    /**Función por defecto en  de Android**/
-    override fun onResume() {
-        /**Cada vez que la app se muestra empezará a cargar los datos**/
-        if((patientsId.size and patients.size)>0){
-            initRecycler()
-        }else{
-            /**Vaciamos la lista en caso de que hayan quedado datos guardados**/
-            patients= listOf()
-            /** Desplegamos que está cargando**/
-            findViewById<RelativeLayout>(R.id.layout_loading_patients).visibility = View.VISIBLE
-            /** Obtenemos las ids de los pacientes del usuario y los datos para mostrar**/
-            getPatientsId()
-        }
-        /** Mostramos el botón de agregar nuevo paciente si es que fue tocado antes**/
-        val btnNewPatient = findViewById<ImageView>(R.id.btn_img_add_new_patient)
-        if(btnNewPatient.visibility == View.INVISIBLE) btnNewPatient.visibility = View.VISIBLE
-
         super.onResume()
     }
 
     /**###### FUNCIONES CREADAS ######**/
     /**Función para mostrar los datos de los pacientes**/
-    fun initRecycler(){
+    fun initRecyclerPatients(){
         /**Guardamos la id de los Views para ubicar los datos**/
         val rvPatients = findViewById<RecyclerView>(R.id.rv_patients_show)
         val layoutLoading = findViewById<RelativeLayout>(R.id.layout_loading_more_patients)
@@ -94,37 +81,51 @@ class MainActivity : AppCompatActivity() {
         /****/
         rvPatients.layoutManager =layoutManager
         /****/
-        MainControl().showRecycler(layoutLoading, rvPatients, adapter)
+        MainControl().showRecyclerPatients(layoutLoading, rvPatients, adapter)
 
     }
     /**Función para obtener los datos de la base de datos de los pacientes**/
-    fun getDataDB(startId : Int, endId : Int = patientsId.size-1){
+    fun getDataDBtoList(startId : Int =0){
+        val endId = patientsId.size-1
         val lista = patients.toMutableList()
-        db.collection("pacientes").document(patientsId[startId])
-                .get()
+
+        db.collection(M_C_P).document(patientsId[startId]).get()
                 .addOnCompleteListener{
-                    val name = it.result?.data!!.get("name").toString()
-                    val lastname = it.result?.data!!.get("last_name").toString()
-                    val gender = it.result?.data!!.get("gender").toString().substring(0,1)
-                    lista.add(
-                            PatientsData(
-                                    nametoShow(name,lastname),
-                                    it.result?.data!!.get("age").toString(),
-                                    gender,
-                                    it.result?.data!!.get("height").toString(),
-                                    it.result?.data!!.get("weight").toString(),
-                                    it.result?.data!!.get("diagnosis").toString(),
-                                    it.result?.data!!.get("created").toString(),
-                                    patientsId[startId]
-                            )
-                    )
-                    patients = lista.toList()
-                    if(startId>=endId){
+                    if (it.result?.data.isNullOrEmpty()){
+                        Toast.makeText(applicationContext,
+                                "No se encontraron los datos ${patientsId[startId]}"
+                                , Toast.LENGTH_LONG).show()
                         findViewById<RelativeLayout>(R.id.layout_loading_patients).visibility = View.GONE
-                        initRecycler()
                     }else{
-                        findViewById<ProgressBar>(R.id.pb_h_loading_patients).progress +=(100/patientsId.size)
-                        getDataDB(startId+1)
+
+                        val name = it.result?.data!!.get("name").toString()
+                        val lastname = it.result?.data!!.get("last_name").toString()
+                        val gender = it.result?.data!!.get("gender").toString().substring(0,1)
+                        val age = it.result?.data!!.get("age").toString()
+                        val height = it.result?.data!!.get("height").toString()
+                        val weight = it.result?.data!!.get("weight").toString()
+                        val diagnosis = it.result?.data!!.get("diagnosis").toString()
+                        val edited = it.result?.data!!.get("edited").toString()
+                        lista.add(
+                                PatientsData(
+                                        nametoShow(name,lastname),
+                                        age,
+                                        gender,
+                                        height,
+                                        weight,
+                                        diagnosis,
+                                        edited,
+                                        patientsId[startId]
+                                )
+                        )
+                        patients = lista.toList()
+                        if(startId>=endId){
+                            findViewById<RelativeLayout>(R.id.layout_loading_patients).visibility = View.GONE
+                            initRecyclerPatients()
+                        }else{
+                            findViewById<ProgressBar>(R.id.pb_h_loading_patients).progress +=(100/patientsId.size)
+                            getDataDBtoList(startId+1)
+                        }
                     }
 
                 }
@@ -137,35 +138,35 @@ class MainActivity : AppCompatActivity() {
     }
     /**Función para obtener las ids de los pacientes en la base de datos**/
     fun getPatientsId(){
-        db.collection("usuarios_pacientes").document(user)
-                .get()
+        db.collection(M_C_UP).document(user).get()
                 .addOnCompleteListener {
                     if(it.result?.data.isNullOrEmpty()){
                         findViewById<TextView>(R.id.tv_add_your_first_patient).visibility = View.VISIBLE
                         findViewById<RelativeLayout>(R.id.layout_loading_patients).visibility = View.GONE
                     }else{
-                        dbDataSize = it.result?.data?.size!!
-                        if(dbDataSize>0){
+                        val documents = it.result?.data
+                        val idPatientsList = documents?.keys?.toList()!!
+                        dbDataSize = idPatientsList.size
+                        if(idPatientsList.isNotEmpty()){
                             patientsId = listOf()
                             val pIdColector = patientsId.toMutableList()
-                            for(i in 1..dbDataSize){
-                                val data = it.result?.data?.get("paciente_$i")!!.toString()
+                            for(i in 0..dbDataSize-1){
+                                val data = it.result?.data?.get(idPatientsList[i])!!.toString()
                                 pIdColector.add(data)
                             }
                             patientsId = pIdColector.toList()
-                            getDataDB(0)
+                            getDataDBtoList()
                         }else{
                             findViewById<TextView>(R.id.tv_add_your_first_patient).visibility = View.VISIBLE
                         }
                     }
-
-
                 }
                 .addOnFailureListener {
                     Toast.makeText(applicationContext,
                             "Algo salió mal, revisa tu internet y vuelve a intentarlo" ,
                             Toast.LENGTH_LONG).show()
                 }
+
     }
     /**Función para unir pirmer nombre y primer apellido si existen 2 de cada uno**/
     fun nametoShow(name: String, lastname: String): String {
@@ -204,6 +205,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Cerrando sesión..", Toast.LENGTH_LONG).show()
                 auth.signOut()
                 startActivity(Intent(this, IndexActivity::class.java))
+                this.finish()
             }
             else ->Toast.makeText(
                 applicationContext,
@@ -214,6 +216,8 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun btn_addNewPatient(view: View){
+        isAdding = true
+        this.finishAfterTransition()
         view.visibility = View.INVISIBLE
         val intent = Intent(this, AddPatientActivity::class.java).apply{
             putExtra("userloged", user)
