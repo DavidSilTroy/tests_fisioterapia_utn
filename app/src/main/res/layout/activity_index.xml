@@ -6,7 +6,76 @@
     android:layout_height="match_parent"
     android:background="@color/user_activity_background"
     >
+    <androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:paddingHorizontal="0dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/user_activity_background"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/btn_login_intro"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:background="@drawable/boton_ingresar"
+                        android:onClick="btn_intro_action"
+                        android:text="@string/text_login_button"
+                        android:textSize="@dimen/btn_text_login"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_index_img"
+                        app:layout_constraintEnd_toEndOf="@id/iv_index_img"
+                        app:layout_constraintStart_toStartOf="@+id/iv_index_img" />
+
+                    <Button
+                        android:id="@+id/btn_powered"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="@dimen/btn_powered_width_login"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:text="@string/powered_btn_text"
+                        android:textAlignment="center"
+                        android:textColor="@color/powered_text"
+                        android:onClick="btn_powered_action"
+                        android:textSize="@dimen/btn_text_powered_login"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@id/fisio_logo_index"
+                        app:layout_constraintStart_toStartOf="@id/fisio_logo_index"
+                        app:layout_constraintTop_toBottomOf="@id/fisio_logo_index" />
+
+                    <ImageView
+                        android:id="@+id/fisio_logo_index"
+                        android:layout_width="match_parent"
+                        android:layout_height="94dp"
+                        android:layout_marginTop="35dp"
+                        android:src="@drawable/fisioterapia_logo_utn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/btn_login_intro" />
+
+                    <ImageView
+                        android:id="@+id/iv_index_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="840dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/index_picture_2" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
     <FrameLayout
         android:id="@+id/fragment_holder"
         android:layout_width="match_parent"
@@ -14,4 +83,50 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_index_loading"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/user_activity_background"
+        android:alpha="1">
+
+        <ProgressBar
+            android:id="@+id/progress_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_mecatronica_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_loading"
+            app:srcCompat="@drawable/logo_mecatronica" />
+
+        <ImageView
+            android:id="@+id/iv_powered_cime_fica"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/iv_utn_mecatronica_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_mecatronica_logo"
+            app:srcCompat="@drawable/powered_by_cimefica" />
+
+        <ImageView
+            android:id="@+id/iv_utn_mecatronica_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/utn_mecatronica_logo" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

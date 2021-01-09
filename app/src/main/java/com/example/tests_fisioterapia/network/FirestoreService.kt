@@ -4,8 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.ViewAnimator
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import com.example.tests_fisioterapia.R
@@ -49,9 +52,17 @@ class  AddPatientDB(val user:String, val context: Context){
     private var date :Long = 0
     var number = 1
     var newPatient:Array<String> = arrayOf()
+    lateinit var btn : View
+    lateinit var pb : ProgressBar
     fun goToMain(){
+        btn.visibility = View.VISIBLE
+        pb.visibility = View.GONE
         val intent = Intent(context.applicationContext , MainActivity::class.java)
         startActivity(context, intent, Bundle())
+    }
+    fun addviews( btn: View, pb : ProgressBar) {
+        this.btn = btn
+        this.pb = pb
     }
     fun getNumberToPatient(){
         db.collection(M_C_UP).document(user).get()
@@ -119,6 +130,8 @@ class  AddPatientDB(val user:String, val context: Context){
                     }
         }
     }
+
+
 }
 class EditPatientDB(val idP:String , val user:String, val context: Context){
     private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos

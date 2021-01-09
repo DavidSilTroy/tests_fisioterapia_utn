@@ -13,6 +13,8 @@ import com.example.tests_fisioterapia.network.AddPatientDB
 
 class AddPatientActivity : AppCompatActivity() {
     var user = ""
+    lateinit var btn_add_view : View
+    lateinit var pb_add : ProgressBar
     lateinit var databaseAdd : AddPatientDB
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,11 @@ class AddPatientActivity : AppCompatActivity() {
             databaseAdd.getNumberToPatient()
         }
         super.onResume()
+    }
+
+    override fun onPause() {
+        this.finish()
+        super.onPause()
     }
     private fun getETdata(){
         val name =      findViewById<EditText>(R.id.et_add_name)?.text.toString()
@@ -61,19 +68,31 @@ class AddPatientActivity : AppCompatActivity() {
                         height,
                         email)
                 //es importante el orden en el que se envia el array
+                databaseAdd.addviews(btn_add_view,pb_add)
                 databaseAdd.addPatient(newPatient)
             }
         }
         Toast.makeText(applicationContext, msj , Toast.LENGTH_LONG).show()
+        if (msj != "Agregando Paciente..."){
+            Handler().postDelayed({
+                btn_add_view.visibility = View.VISIBLE
+                pb_add.visibility = View.GONE
+                findViewById<ProgressBar>(R.id.pb_adding_patient).visibility = View.GONE
+            }, 200)
+        }
+
     }
     fun btn_addPatient(view: View){
+        btn_add_view = view
+        pb_add =findViewById<ProgressBar>(R.id.pb_adding_patient)
         view.visibility = View.INVISIBLE
-        findViewById<ProgressBar>(R.id.pb_adding_patient).visibility = View.VISIBLE
+        pb_add.visibility = View.VISIBLE
         getETdata()
+        /*
         Handler().postDelayed({
             view.visibility = View.VISIBLE
             findViewById<ProgressBar>(R.id.pb_adding_patient).visibility = View.GONE
-        }, 3000)
+        }, 3000)*/
     }
     fun btn_addPatientPhoto(view: View) {
         Toast.makeText(applicationContext, "Esta opción estará lista en una próxima versión" , Toast.LENGTH_LONG).show()

@@ -1,6 +1,9 @@
 package com.example.tests_fisioterapia.UI.activities
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -11,10 +14,24 @@ import com.example.tests_fisioterapia.controllers.ShowDetailsPatients
 import com.example.tests_fisioterapia.network.M_C_P
 import com.google.firebase.firestore.FirebaseFirestore
 
+import android.os.Environment
+import android.os.Handler
+import android.widget.Toast
+import com.itextpdf.text.Document
+import com.itextpdf.text.Paragraph
+import com.itextpdf.text.pdf.PdfWriter
+import java.io.FileOutputStream
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
+
+
 class PatientInfoActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()    //para la base de datos
     private var idPatient : String = ""
+    private val STORAGE_CODE: Int = 100;
+    lateinit var dataList : MutableMap<String,String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +41,6 @@ class PatientInfoActivity : AppCompatActivity() {
 
     override fun onResume() {
         getDataDB()
-
         findViewById<TextView>(R.id.tv_diagnosis_title_info_patient).setOnClickListener{
             //Toast.makeText(applicationContext, "titulo de diagnostico", Toast.LENGTH_LONG).show()
         }
@@ -37,7 +53,7 @@ class PatientInfoActivity : AppCompatActivity() {
         super.onResume()
     }
 
-    /**Función para obtener los datos de la base de datos de los pacientes**/
+    /**Función para obtener los datos de la base de datos de los pacientes y mostrarla**/
     fun getDataDB() {
         if(intent.hasExtra("patientId")){
             idPatient = intent.getStringExtra("patientId")
@@ -50,6 +66,7 @@ class PatientInfoActivity : AppCompatActivity() {
                             val name = "${it.result?.data!!.get("name")} ${it.result?.data!!.get("last_name")}"
                             val age = it.result?.data!!.get("age").toString()
                             val weight = it.result?.data!!.get("weight").toString()
+                            val height = it.result?.data!!.get("height").toString()
                             val diagnosis = it.result?.data!!.get("diagnosis").toString()
                             var importantComments = it.result?.data!!.get("important_comments").toString()
                             var gender = it.result?.data!!.get("gender").toString()
@@ -66,6 +83,15 @@ class PatientInfoActivity : AppCompatActivity() {
                             findViewById<TextView>(R.id.tv_weight_info_patient).text ="$weight kg"
                             findViewById<TextView>(R.id.tv_diagnosis_info_patient).text =diagnosis
                             findViewById<TextView>(R.id.tv_important_commets_info).text =importantComments
+
+                            dataList = hashMapOf()
+                            dataList["name"]=name
+                            dataList["age"]=age
+                            dataList["gender"]=gender
+                            dataList["weight"]=weight
+                            dataList["height"]=height
+                            dataList["diagnosis"]=diagnosis
+                            dataList["importantComments"]=importantComments
                         }
 
                     }
@@ -79,6 +105,87 @@ class PatientInfoActivity : AppCompatActivity() {
         }
 
     }
+    fun createPatientReport(){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            //system OS >= Marshmallow(6.0), check permission is enabled or not
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_DENIED){
+                //permission was not granted, request it
+                val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                requestPermissions(permissions, STORAGE_CODE)
+            }
+            else{
+                //permission already granted, call savePdf() method
+                savePdf()
+            }
+        }
+        else{
+            //system OS < marshmallow, call savePdf() method
+            savePdf()
+        }
+    }
+
+    private fun savePdf() {
+
+        //get text from EditText i.e. textEt
+        val name = dataList["name"]
+        val age = dataList["age"]
+        val weight =dataList["weight"]
+        val height =dataList["height"]
+        val diagnosis =dataList["diagnosis"]
+        val importantComments = dataList["importantComments"]
+        //var gender = dataList["gender"]
+
+        //create object of Document class
+        val mDoc = Document()
+        //pdf file name
+        val mFileName = "Información Básica de $name"
+        //pdf file path
+        val mFilePath = Environment.getExternalStorageDirectory().toString() + "/" + mFileName +".pdf"
+        try {
+            //create instance of PdfWriter class
+            PdfWriter.getInstance(mDoc, FileOutputStream(mFilePath))
+
+            //open the document for writing
+            mDoc.open()
+
+            //add author of the document (metadata)
+            mDoc.addAuthor("Fisioterapia App")
+
+            //add paragraph to the document
+            mDoc.add(Paragraph("El nombre del paciente es: $name"))
+            mDoc.add(Paragraph("La edad es: $age años"))
+            mDoc.add(Paragraph("El peso es: $weight [kg]"))
+            mDoc.add(Paragraph("La altura es: $height [m]"))
+            mDoc.add(Paragraph("Diagnostico: $diagnosis"))
+            mDoc.add(Paragraph("Comentarios importantes: $importantComments"))
+
+            //close document
+            mDoc.close()
+            //show file saved message with file name and path
+            Toast.makeText(this, "$mFileName.pdf\n se ha guardado en \n tu dispositivo", Toast.LENGTH_LONG).show()
+        }
+        catch (e: Exception){
+            //if anything goes wrong causing exception, get and show exception message
+            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            STORAGE_CODE -> {
+                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    //permission from popup was granted, call savePdf() method
+                    savePdf()
+                }
+                else{
+                    //permission from popup was denied, show error message
+                    Toast.makeText(this, "Permission denied...!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
 
     fun btn_powered_action(view: View) {
         //TODO:Mostrar a los creadores de la app
@@ -95,6 +202,7 @@ class PatientInfoActivity : AppCompatActivity() {
     }
     fun btn_editPatient(view: View) {
         view.visibility = View.INVISIBLE
+
         val intent = Intent(this, EditPatientActivity::class.java).apply{
             putExtra("patientId", idPatient)
         }
@@ -102,6 +210,14 @@ class PatientInfoActivity : AppCompatActivity() {
         view.visibility = View.VISIBLE
         this.finishAfterTransition()
 
+    }
+
+    fun btn_pdf_info_action(view: View) {
+        view.isEnabled = false
+        Handler().postDelayed({
+            createPatientReport()
+            view.isEnabled = true
+        },1000)
     }
 
 }

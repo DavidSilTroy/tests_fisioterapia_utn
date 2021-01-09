@@ -80,6 +80,7 @@ class PatientAdapter(val patient:List<PatientsData>, val context: Context): Recy
                 val intent = Intent(context.applicationContext , AddTestActivity::class.java).apply{
                     putExtra("patientId", patient.id)
                 }
+                startActivity(context,intent, Bundle())
                 view.visibility = View.VISIBLE
             }
             view.findViewById<ImageButton>(R.id.btn_ver_todo_item).setOnClickListener{

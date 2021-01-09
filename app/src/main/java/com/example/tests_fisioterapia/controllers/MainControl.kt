@@ -1,17 +1,8 @@
 package com.example.tests_fisioterapia.controllers
 
-import android.content.Context
-import android.os.Handler
 import android.view.View
 import android.widget.*
-import androidx.fragment.app.FragmentManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tests_fisioterapia.R
-import com.example.tests_fisioterapia.UI.activities.MainActivity
-import com.example.tests_fisioterapia.UI.fragments.IntroFragment
-import java.sql.Time
-import kotlin.coroutines.coroutineContext
 import kotlin.random.Random
 
 
@@ -51,3 +42,4 @@ fun String.capitalizeFirstLetter() = this.split(" ").joinToString(" ") { it.capi
 fun GoToPatientView(view: View){
 
 }
+

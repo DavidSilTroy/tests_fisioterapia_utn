@@ -204,12 +204,14 @@ class MainActivity : AppCompatActivity() {
             "Cerrar Sesión" -> {
                 Toast.makeText(applicationContext, "Cerrando sesión..", Toast.LENGTH_LONG).show()
                 auth.signOut()
-                startActivity(Intent(this, IndexActivity::class.java))
-                this.finish()
+                this.finishAfterTransition()
+                this.onBackPressed()
+                //startActivity(Intent(this, IndexActivity::class.java))
+
             }
             else ->Toast.makeText(
                 applicationContext,
-                "ejecutando ${txt_option.text}... ah cierto, aún no está programado xdddd",
+                "ejecutando ${txt_option.text}... aún no programado",
                 Toast.LENGTH_LONG
             ).show()
         }
