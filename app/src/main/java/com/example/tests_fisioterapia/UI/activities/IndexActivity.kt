@@ -185,8 +185,8 @@ class IndexActivity : AppCompatActivity() {
     }
 
     fun btn_forgot_password_action(view: View) {
-        //TODO:Enviar a recuperar la contraseña
-        Toast.makeText(applicationContext, "Estamos trabajando en ello..", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, ForgotPasswordActivity::class.java)
+        startActivity(intent)
     }
     fun btn_new_user_action(view: View) {
         val intent = Intent(this, RegisterUserActivity::class.java)
