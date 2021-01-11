@@ -2,6 +2,7 @@ package com.example.tests_fisioterapia.UI.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -42,12 +43,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         /**Recuerden que el layout debe estar en el AndroidManifest para que pueda ser abierto,
         así <activity android:name=".UI.activities.MainActivity"/> **/
+
+        /** Obteniendo datos del activity de login o de la autenticación si ya inició sesión antes **/
+        auth = Firebase.auth
+
     }
     /**Función por defecto en  de Android**/
     override fun onResume() {
 
-        /** Obteniendo datos del activity de login o de la autenticación si ya inició sesión antes **/
-        auth = Firebase.auth
         /** Obtenemos el usuario de la autenticación si es que no viene de la activity de login**/
         user = if(intent.hasExtra("userloged")){
             intent.getStringExtra("userloged")
@@ -65,6 +68,18 @@ class MainActivity : AppCompatActivity() {
         findViewById<RelativeLayout>(R.id.layout_loading_patients).visibility = View.VISIBLE
         /** Obtenemos las ids de los pacientes del usuario y los datos para mostrar**/
         getPatientsId()
+
+        val email = auth.currentUser?.isEmailVerified!!
+        if(email){
+            findViewById<RelativeLayout>(R.id.layout_verified_user).visibility = View.GONE
+        }
+        else{
+            Toast.makeText(baseContext,
+                    "Debes verificar tu correo, revisa en el area de Spam o Junk Email $email y ${auth.currentUser?.email}",
+                    Toast.LENGTH_LONG).show()
+            auth.signOut()
+        }
+
         super.onResume()
     }
 
@@ -208,6 +223,11 @@ class MainActivity : AppCompatActivity() {
                 this.onBackPressed()
                 //startActivity(Intent(this, IndexActivity::class.java))
 
+            }
+            "Editar Usuario"->{
+                val intent = Intent(this, AddUserDataActivity::class.java)
+                startActivity(intent)
+                this.finishAfterTransition()
             }
             else ->Toast.makeText(
                 applicationContext,

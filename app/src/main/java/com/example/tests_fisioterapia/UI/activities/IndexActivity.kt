@@ -19,8 +19,6 @@ import com.google.firebase.ktx.Firebase
 
 class IndexActivity : AppCompatActivity() {
     val TAG = "IndexActivity"
-    var isFragmentIntroLoaded = false
-    var theFragment = "Loading"
     val manager = supportFragmentManager
     var user : String = ""
 
@@ -39,22 +37,19 @@ class IndexActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser // Check if user is signed in (non-null) and update UI accordingly.
         if (currentUser != null){
-            if (currentUser.isEmailVerified){
-                val end = currentUser.email!!.indexOf("@")
-                user = currentUser.email!!.substring(0,end)
-                loginToMain()
-            }
+            val end = currentUser.email!!.indexOf("@")
+            user = currentUser.email!!.substring(0,end)
+            loginToMain()
+
         }
     }
 
     override fun onResume() {
         val currentUser = auth.currentUser // Check if user is signed in (non-null) and update UI accordingly.
         if (currentUser != null){
-            if (currentUser.isEmailVerified){
-                val end = currentUser.email!!.indexOf("@")
-                user = currentUser.email!!.substring(0,end)
-                loginToMain()
-            }
+            val end = currentUser.email!!.indexOf("@")
+            user = currentUser.email!!.substring(0,end)
+            loginToMain()
         }
         super.onResume()
     }
@@ -92,17 +87,9 @@ class IndexActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) { // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success")
-                        val email = auth.currentUser?.isEmailVerified!!
-                        if(email){
-                            loginToMain()
-                            view.isEnabled = true
-                        }
-                        else{
-                            Toast.makeText(baseContext,
-                                    "Debes verificar tu correo, revisa en el area de Spam o Junk Email",
-                                    Toast.LENGTH_LONG).show()
-                            view.isEnabled = true
-                        }
+
+                        loginToMain()
+                        view.isEnabled = true
                     }
                     else { // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -131,11 +118,9 @@ class IndexActivity : AppCompatActivity() {
         Handler().postDelayed({
             val currentUser = auth.currentUser // Check if user is signed in (non-null) and update UI accordingly.
             if (currentUser != null){
-                if (currentUser.isEmailVerified){
-                    val end = currentUser.email!!.indexOf("@")
-                    user = currentUser.email!!.substring(0,end)
-                    loginToMain()
-                }
+                val end = currentUser.email!!.indexOf("@")
+                user = currentUser.email!!.substring(0,end)
+                loginToMain()
             }else{
                 showFragments() //ir a pantalla de carga
             }

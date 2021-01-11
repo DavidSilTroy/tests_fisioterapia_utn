@@ -71,8 +71,10 @@ class RegisterUserActivity: AppCompatActivity() {
                                         Toast.makeText(applicationContext,
                                                 msj,
                                                 Toast.LENGTH_LONG).show()
-                                        auth.signOut()
+                                        val intent = Intent(this, AddUserDataActivity::class.java)
+                                        startActivity(intent)
                                         btn_register.isEnabled = true
+                                        this.finishAfterTransition()
                                     }
                                 }
                     } else {
