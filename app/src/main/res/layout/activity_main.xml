@@ -222,7 +222,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp"
             android:paddingHorizontal="15dp"
-            android:text="Busca nuestro correo en tu sección de Junk Email o en Spam"
+            android:text="Busca nuestro correo en tu sección de Correos no deseados o en Spam"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="35sp" />

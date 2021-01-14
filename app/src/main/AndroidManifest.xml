@@ -23,6 +23,7 @@
         <activity android:name=".UI.activities.RegisterUserActivity"/>
         <activity android:name=".UI.activities.ForgotPasswordActivity"/>
         <activity android:name=".UI.activities.AddUserDataActivity"/>
+        <activity android:name=".UI.activities.TestIntroActivity"/>
         <activity android:name=".UI.activities.IndexActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -90,4 +90,8 @@ class AddUserDataActivity: AppCompatActivity() {
             view.visibility = View.VISIBLE
         }
     }
+
+    fun btn_editUserPhoto(view: View) {
+        Toast.makeText(applicationContext, "Esta opción estará lista en una próxima versión" , Toast.LENGTH_LONG).show()
+    }
 }

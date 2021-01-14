@@ -191,7 +191,7 @@
             android:text="Generar PDF"
             android:textColor="@color/white"
             android:onClick="btn_pdf_info_action"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:background="@drawable/boton_ingresar"
             android:layout_marginTop="@dimen/_margin_top_login"
             app:layout_constraintEnd_toEndOf="@+id/btn_img_new_test_patient_info"

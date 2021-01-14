@@ -18,5 +18,6 @@
     <color name="test_text">#BEFFC5</color>
     <color name="powered_text">#306DA6</color>
     <color name="tests_background_info_patient">#162725</color>
+    <color name="background_index">#020F4A</color>
 
 </resources>

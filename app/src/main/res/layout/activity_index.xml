@@ -2,18 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/user_activity_background"
     >
     <androidx.appcompat.widget.LinearLayoutCompat
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent" android:layout_height="match_parent"
         android:paddingHorizontal="0dp">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/user_activity_background"
+            android:background="@color/background_index"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -28,15 +28,14 @@
                         android:id="@+id/btn_login_intro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="25dp"
+                        android:layout_marginVertical="25dp"
                         android:background="@drawable/boton_ingresar"
                         android:onClick="btn_intro_action"
                         android:text="@string/text_login_button"
                         android:textSize="@dimen/btn_text_login"
-                        app:layout_constraintBottom_toBottomOf="@+id/iv_index_img"
-                        app:layout_constraintEnd_toEndOf="@id/iv_index_img"
-                        app:layout_constraintStart_toStartOf="@+id/iv_index_img" />
-
+                        app:layout_constraintTop_toBottomOf="@+id/iv_app_name_index"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
                     <Button
                         android:id="@+id/btn_powered"
                         style="?android:attr/buttonBarButtonStyle"
@@ -52,7 +51,6 @@
                         app:layout_constraintEnd_toEndOf="@id/fisio_logo_index"
                         app:layout_constraintStart_toStartOf="@id/fisio_logo_index"
                         app:layout_constraintTop_toBottomOf="@id/fisio_logo_index" />
-
                     <ImageView
                         android:id="@+id/fisio_logo_index"
                         android:layout_width="match_parent"
@@ -64,13 +62,32 @@
                         app:layout_constraintTop_toBottomOf="@id/btn_login_intro" />
 
                     <ImageView
-                        android:id="@+id/iv_index_img"
-                        android:layout_width="match_parent"
-                        android:layout_height="840dp"
+                        android:id="@+id/iv_utn_text_index"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/utn_text_logo"
+                        android:layout_marginTop="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/index_picture_2" />
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <ImageView
+                        android:id="@+id/iv_app_logo_index"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/body_app_logo"
+                        android:layout_marginTop="30dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_utn_text_index"/>
+                    <ImageView
+                        android:id="@+id/iv_app_name_index"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/name_app_text"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_app_logo_index"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>

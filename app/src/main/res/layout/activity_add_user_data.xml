@@ -29,7 +29,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/add_picture_patient_botton"
-                android:onClick="btn_editPatientPhoto"
+                android:onClick="btn_editUserPhoto"
                 app:layout_constraintEnd_toEndOf="@+id/iv_user_picture"
                 app:layout_constraintBottom_toBottomOf="@id/iv_user_picture"
                 android:layout_marginEnd="10dp"

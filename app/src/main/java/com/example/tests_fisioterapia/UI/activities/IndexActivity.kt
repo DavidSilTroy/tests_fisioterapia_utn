@@ -44,16 +44,6 @@ class IndexActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        val currentUser = auth.currentUser // Check if user is signed in (non-null) and update UI accordingly.
-        if (currentUser != null){
-            val end = currentUser.email!!.indexOf("@")
-            user = currentUser.email!!.substring(0,end)
-            loginToMain()
-        }
-        super.onResume()
-    }
-
     /* FUNCIONES PARA LA ACTIVITY */
 
     //para mostrar el fragmento de carga primero y luego los otros

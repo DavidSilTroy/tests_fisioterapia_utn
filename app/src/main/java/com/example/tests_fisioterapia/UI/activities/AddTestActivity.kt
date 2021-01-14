@@ -2,6 +2,7 @@ package com.example.tests_fisioterapia.UI.activities
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -16,10 +17,16 @@ import com.google.firebase.firestore.FirebaseFirestore
 class AddTestActivity:AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()    //para la base de datos
+    private var idP = ""
+    private var testType = ""
     var testslist = listOf<testData>()               //para guardar los datos a mostrar de cada test
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_test)
+        idP =  intent.getStringExtra("patientId")
+        if(intent.hasExtra("testType")){
+            testType =  intent.getStringExtra("testType")
+        }
         getDataDB()
     }
 
@@ -52,7 +59,7 @@ class AddTestActivity:AppCompatActivity() {
                             val thelist = testslist.toMutableList()
                             for (i in 1..end){
                                 thelist.add(
-                                        testData(documents["tipo_$i"].toString(),true)
+                                        testData(documents["tipo_$i"].toString(),testType,idP,true)
                                 )
                             }
                             testslist = thelist.toList()
@@ -78,7 +85,7 @@ class AddTestActivity:AppCompatActivity() {
                             val thelist = testslist.toMutableList()
                             for (i in 0..end){
                                 thelist.add(
-                                        testData(documents.get(i).id,false)
+                                        testData(documents.get(i).id,testType,idP,false)
                                 )
                             }
                             testslist = thelist.toList()
@@ -94,4 +101,6 @@ class AddTestActivity:AppCompatActivity() {
         //val idPatient =  intent.getStringExtra("patientId")
 
     }
+
+    fun btn_powered_action(view: View) {}
 }

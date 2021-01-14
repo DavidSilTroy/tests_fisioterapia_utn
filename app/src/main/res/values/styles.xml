@@ -3,7 +3,7 @@
     <style name="Theme.Tests_fisioterapia" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/red_utn</item>
-        <item name="colorPrimaryVariant">@color/powered_text</item>
+        <item name="colorPrimaryVariant">@color/background_index</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

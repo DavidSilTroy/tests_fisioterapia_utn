@@ -268,7 +268,9 @@ class EditPatientActivity : AppCompatActivity() {
 
 
 
-    fun btn_editPatientPhoto(view: View) {}
+    fun btn_editPatientPhoto(view: View) {
+        Toast.makeText(applicationContext, "Esta opción estará lista en una próxima versión" , Toast.LENGTH_LONG).show()
+    }
     fun btn_save_editPatient(view: View) {
         Toast.makeText(applicationContext, "Guardando" , Toast.LENGTH_LONG).show()
         view.visibility = View.INVISIBLE
@@ -288,7 +290,6 @@ class EditPatientActivity : AppCompatActivity() {
             delet_patient()
         }
         builder.setNeutralButton("Cancelar") { dialogInterface: DialogInterface, i: Int ->
-
         }
         builder.show()
         view.visibility = View.VISIBLE

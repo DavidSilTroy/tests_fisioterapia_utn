@@ -48,9 +48,8 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
 
     }
-    /**Función por defecto en  de Android**/
-    override fun onResume() {
 
+    override fun onStart(){
         /** Obtenemos el usuario de la autenticación si es que no viene de la activity de login**/
         user = if(intent.hasExtra("userloged")){
             intent.getStringExtra("userloged")
@@ -68,6 +67,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<RelativeLayout>(R.id.layout_loading_patients).visibility = View.VISIBLE
         /** Obtenemos las ids de los pacientes del usuario y los datos para mostrar**/
         getPatientsId()
+        super.onStart()
+    }
+    override fun onResume() {
 
         val email = auth.currentUser?.isEmailVerified!!
         if(email){
@@ -239,7 +241,7 @@ class MainActivity : AppCompatActivity() {
     }
     fun btn_addNewPatient(view: View){
         isAdding = true
-        this.finishAfterTransition()
+        //this.finishAfterTransition()
         view.visibility = View.INVISIBLE
         val intent = Intent(this, AddPatientActivity::class.java).apply{
             putExtra("userloged", user)
