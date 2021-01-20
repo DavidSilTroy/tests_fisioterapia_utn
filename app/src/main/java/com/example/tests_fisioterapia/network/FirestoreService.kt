@@ -16,12 +16,15 @@ import java.text.SimpleDateFormat
 /**M_C_ == Main_Collection_ == Colección Principal **/
 const val M_C_P = "pacientes"
 const val M_C_U = "usuarios"
+const val M_C_T = "tests"
 const val M_C_TT = "tipos_de_tests"
-const val M_C_PT = "pacientes_test"
+const val M_C_PT = "pacientes_tests"
 const val M_C_UP = "usuarios_pacientes"
 
 /**S_C_ == Secondary_Collection_ == Colección Secundaria **/
-const val S_C_R = "Register"
+const val S_C_R = "register"
+const val S_C_I = "information"
+const val S_C_S = "steps"
 
 /**D_ == Document_ == Documento **/
 const val D_M = "main"
@@ -153,12 +156,10 @@ class EditPatientDB(val idP:String , val user:String, val context: Context){
 
 
 }
-
 class GetPatientDB(val idP:String ){
     private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
     val patientWithId = db.collection(M_C_P).document(idP)
 }
-
 class UserDBData(val user:String ){
     private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
     val userData = db.collection(M_C_U).document(user)
@@ -175,10 +176,6 @@ class UserDBData(val user:String ){
 
     }
 }
-
-
-
-
 class  AddUserDB(val user:String, val context: Context){
     private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
     private var date :Long = 0
@@ -241,5 +238,38 @@ class  AddUserDB(val user:String, val context: Context){
         }
     }
 
+
+}
+
+class GetTestData(val testType:String,val testName:String){
+    private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
+    val testSteps = db.collection(M_C_TT).document(testType).collection(S_C_I).document(testName).collection(S_C_S)
+
+}
+class SetTestData(val testType:String,val testName:String,val idPatient: String,val date:String){
+    private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
+    val testId = "t${date}"
+    val toTestData = db.collection(M_C_T).document(testId)
+    val toPatientsTests = db.collection(M_C_PT).document(idPatient)
+
+    fun relateData(){
+        val data = mapOf(
+                "test_1" to testId
+        )
+        toPatientsTests.get().addOnCompleteListener{
+            if(it.result?.data.isNullOrEmpty()){
+                toPatientsTests.set(data)
+            }else{
+                val items = it.result?.data?.size!!
+                for (i in 1..items+1){
+                    val dbdata = it.result?.data!!.get("test_$i").toString()
+                    if (dbdata == "null"){
+                        toPatientsTests.update("test_$i",testId)
+                        break
+                    }
+                }
+            }
+        }
+    }
 
 }

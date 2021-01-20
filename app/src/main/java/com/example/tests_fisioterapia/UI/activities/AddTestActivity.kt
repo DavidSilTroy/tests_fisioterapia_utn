@@ -30,6 +30,11 @@ class AddTestActivity:AppCompatActivity() {
         getDataDB()
     }
 
+    override fun onStop() {
+        this.finish()
+        super.onStop()
+    }
+
     fun initRecyclerTests(){
         /**Guardamos la id de los Views para ubicar los datos**/
         val rvTests = findViewById<RecyclerView>(R.id.rv_select_test)

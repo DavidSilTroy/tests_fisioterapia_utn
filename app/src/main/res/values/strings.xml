@@ -30,4 +30,12 @@
     <string name="btn_new_user_login">Soy nuevo aquí</string>
     <string name="btn_recover_password">recuperar</string>
     <string name="forgot_password_text">Te enviaremos un correo a este email para que escribas una nueva contraseña</string>
+    <string name="test_result_ruffier_dickson_others_text">RESULTADO 0: Corazón de atleta.
+        <br>RESULTADO 0,1 a 5: Corazón suficientemente apto para actividades físicas. </br>
+        <br>RESULTADO 5,1 a 10: Corazón medio, debería realizar un plan para recuperar el estado físico adecuado.</br>
+        <br>RESULTADO 10,1 a 15: Corazón medio, hacer una visita a un profesional de la salud. </br>
+        <br>RESULTADO más de 15: es un índice que revela mal estado o un corazón débil</br>
+        </string>
+    <string name="test_indications">Te indicaremos qué debes hacer a continuación al empezar el test.</string>
+    <string name="btn_text_empezar">EMPEZAR</string>
 </resources>
