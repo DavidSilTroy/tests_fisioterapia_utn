@@ -47,7 +47,6 @@
                 android:paddingHorizontal="3dp"
                 android:textAlignment="textStart">
                 <TextView
-                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
@@ -55,7 +54,6 @@
                     android:textColor="@color/white"
                     android:text="Editado:"/>
                 <TextView
-                    android:layout_weight="5"
                     android:id="@+id/txt_patient_edited_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

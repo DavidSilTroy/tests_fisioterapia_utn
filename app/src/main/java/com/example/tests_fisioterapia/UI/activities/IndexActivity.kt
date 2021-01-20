@@ -155,8 +155,8 @@ class IndexActivity : AppCompatActivity() {
         }
     }
     fun btn_powered_action(view: View) {
-        //TODO:Mostrar a los creadores de la app
-        Toast.makeText(applicationContext, "Estamos trabajando en ello..", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, PoweredByActivity::class.java)
+        startActivity(intent)
     }
 
     fun btn_forgot_password_action(view: View) {

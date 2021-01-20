@@ -11,8 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tests_fisioterapia.R
 import com.example.tests_fisioterapia.UI.activities.AddTestActivity
-import com.example.tests_fisioterapia.UI.activities.PatientInfoActivity
-import com.example.tests_fisioterapia.UI.activities.SelectingTestActivity
 import com.example.tests_fisioterapia.UI.activities.TestIntroActivity
 
 
@@ -21,6 +19,10 @@ class testData(
         val type:String,
         val idPatient:String,
         val pass:Boolean = false
+)
+class testInfoData(
+    val name:String,
+    val type:String
 )
 
 class TestAdapter(val tests:List<testData>, val context: Context): RecyclerView.Adapter<TestAdapter.TestHolder>(){
@@ -60,6 +62,29 @@ class TestAdapter(val tests:List<testData>, val context: Context): RecyclerView.
                     ContextCompat.startActivity(context, intent, Bundle())
                 }
             }
+
+        }
+    }
+
+}
+
+class TestInfoAdapter(val tests:List<testInfoData>, val context: Context): RecyclerView.Adapter<TestInfoAdapter.TestInfoHolder>(){
+
+    //cuantos elementos tenemos
+    override fun getItemCount(): Int = tests.size
+    //cuales son los datos que vamos a cargar
+    override fun onBindViewHolder(holder: TestInfoHolder, position: Int) {
+        holder.render(tests[position])
+    }
+    //cual es el diseño que se va a usar para la vista
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestInfoHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        return TestInfoHolder(layoutInflater.inflate(R.layout.item_test_info , parent,false),context)
+    }
+    //como se enlazan los elementos visuales
+    class TestInfoHolder(val view: View, val context: Context): RecyclerView.ViewHolder(view){
+        fun render(tests: testInfoData){
+            view.findViewById<TextView>(R.id.tv_test_name_info_item).text = tests.name
 
         }
     }

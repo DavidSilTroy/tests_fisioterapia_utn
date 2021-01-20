@@ -1,5 +1,6 @@
 package com.example.tests_fisioterapia.UI.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
@@ -107,5 +108,8 @@ class AddTestActivity:AppCompatActivity() {
 
     }
 
-    fun btn_powered_action(view: View) {}
+    fun btn_powered_action(view: View) {
+        val intent = Intent(this, PoweredByActivity::class.java)
+        startActivity(intent)
+    }
 }

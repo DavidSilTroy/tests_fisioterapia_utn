@@ -25,6 +25,7 @@
         <activity android:name=".UI.activities.AddUserDataActivity"/>
         <activity android:name=".UI.activities.TestIntroActivity"/>
         <activity android:name=".UI.activities.TestResultActivity"/>
+        <activity android:name=".UI.activities.PoweredByActivity"/>
         <activity android:name=".UI.activities.IndexActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

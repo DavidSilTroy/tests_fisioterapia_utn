@@ -188,8 +188,8 @@ class PatientInfoActivity : AppCompatActivity() {
 
 
     fun btn_powered_action(view: View) {
-        //TODO:Mostrar a los creadores de la app
-        Toast.makeText(applicationContext, "Estamos trabajando en ello..", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, PoweredByActivity::class.java)
+        startActivity(intent)
     }
     fun btn_addNewTest(view: View) {
         Toast.makeText(applicationContext, "Agregar un nuevo test", Toast.LENGTH_LONG).show()
