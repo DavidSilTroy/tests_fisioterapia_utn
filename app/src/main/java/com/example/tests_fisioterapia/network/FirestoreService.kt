@@ -9,6 +9,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.example.tests_fisioterapia.UI.activities.MainActivity
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import java.text.SimpleDateFormat
@@ -269,6 +270,25 @@ class SetTestData(val testType:String,val testName:String,val idPatient: String,
                     }
                 }
             }
+        }
+    }
+
+}
+
+class GetTestsPatientInfo(val idPatient: String){
+    private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
+    val testsCollection = db.collection(M_C_PT).document(idPatient)
+    val testInfo = db.collection(M_C_T)
+
+}
+class DeleteTestsPatientInfo(val idPatient: String,val testId: String,val testField:String){
+    private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
+    val testsField = db.collection(M_C_PT).document(idPatient)
+    val testDocument = db.collection(M_C_T).document(testId)
+
+    fun deteTest(){
+        testDocument.delete().addOnCompleteListener {
+            testsField.update(hashMapOf(testField to FieldValue.delete()) as Map<String,Any>)
         }
     }
 

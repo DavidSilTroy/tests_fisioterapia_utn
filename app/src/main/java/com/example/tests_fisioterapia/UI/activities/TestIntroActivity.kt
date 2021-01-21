@@ -1,28 +1,19 @@
 package com.example.tests_fisioterapia.UI.activities
 
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.os.Handler
-import android.os.PersistableBundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import com.example.tests_fisioterapia.R
-import com.example.tests_fisioterapia.UI.fragments.LoginFragment
-import com.example.tests_fisioterapia.UI.fragments.RuffierDicksonFragment
-import com.example.tests_fisioterapia.controllers.RuffierDicksonTest
 import com.example.tests_fisioterapia.controllers.TestsWorking
-import com.example.tests_fisioterapia.controllers.testData
 import com.example.tests_fisioterapia.network.GetTestData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import org.w3c.dom.Text
-import kotlin.reflect.KProperty
 
 
 

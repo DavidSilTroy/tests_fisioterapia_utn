@@ -9,14 +9,17 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tests_fisioterapia.R
-import com.example.tests_fisioterapia.controllers.PatientsData
-import com.example.tests_fisioterapia.controllers.ShowDetailsPatients
 import com.example.tests_fisioterapia.network.M_C_P
 import com.google.firebase.firestore.FirebaseFirestore
 
 import android.os.Environment
 import android.os.Handler
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.tests_fisioterapia.controllers.*
+import com.example.tests_fisioterapia.network.GetPatientDB
+import com.example.tests_fisioterapia.network.GetTestsPatientInfo
 import com.itextpdf.text.Document
 import com.itextpdf.text.Paragraph
 import com.itextpdf.text.pdf.PdfWriter
@@ -28,19 +31,21 @@ import java.util.*
 
 class PatientInfoActivity : AppCompatActivity() {
 
-    private val db = FirebaseFirestore.getInstance()    //para la base de datos
+    //private val db = FirebaseFirestore.getInstance()    //para la base de datos
+    lateinit var databaseTests : GetTestsPatientInfo
+    lateinit var databasePatient : GetPatientDB
     private var idPatient : String = ""
     private val STORAGE_CODE: Int = 100;
     lateinit var dataList : MutableMap<String,String>
+    var testsInfolist = listOf<testInfoData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient_info)
         //Toast.makeText(applicationContext, patients.size.toString(), Toast.LENGTH_LONG).show()
-    }
 
+    }
     override fun onResume() {
-        getDataDB()
         findViewById<TextView>(R.id.tv_diagnosis_title_info_patient).setOnClickListener{
             //Toast.makeText(applicationContext, "titulo de diagnostico", Toast.LENGTH_LONG).show()
         }
@@ -50,60 +55,68 @@ class PatientInfoActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tv_important_commets_info).setOnClickListener{
             //Toast.makeText(applicationContext, "los comentarios", Toast.LENGTH_LONG).show()
         }
+        if(intent.hasExtra("patientId")){
+            idPatient = intent.getStringExtra("patientId")
+            databasePatient = GetPatientDB(idPatient)
+            databaseTests = GetTestsPatientInfo(idPatient)
+            getDataDB()
+        }else{
+            this.onBackPressed()
+        }
         super.onResume()
+    }
+
+    fun showMsg(message:String){
+        Toast.makeText(applicationContext,
+            message
+            , Toast.LENGTH_LONG).show()
     }
 
     /**Función para obtener los datos de la base de datos de los pacientes y mostrarla**/
     fun getDataDB() {
-        if(intent.hasExtra("patientId")){
-            idPatient = intent.getStringExtra("patientId")
-            db.collection(M_C_P).document(idPatient)
-                    .get()
-                    .addOnCompleteListener{
-                        if (it.result?.data.isNullOrEmpty()){
-                            this.onBackPressed()
-                        }else{
-                            val name = "${it.result?.data!!.get("name")} ${it.result?.data!!.get("last_name")}"
-                            val age = it.result?.data!!.get("age").toString()
-                            val weight = it.result?.data!!.get("weight").toString()
-                            val height = it.result?.data!!.get("height").toString()
-                            val diagnosis = it.result?.data!!.get("diagnosis").toString()
-                            var importantComments = it.result?.data!!.get("important_comments").toString()
-                            var gender = it.result?.data!!.get("gender").toString()
-                            if(importantComments == "null" || importantComments.isBlank()){
-                                importantComments = "Agrega un comentario importante sobre este paciente"
-                            }
-                            if(gender.length>3){
-                                gender = gender.substring(0,4)
-                            }
-
-                            findViewById<TextView>(R.id.tv_name_patient_info).text =name
-                            findViewById<TextView>(R.id.tv_age_info_patient).text ="$age años"
-                            findViewById<TextView>(R.id.tv_gender_info_patient).text =gender
-                            findViewById<TextView>(R.id.tv_weight_info_patient).text ="$weight kg"
-                            findViewById<TextView>(R.id.tv_diagnosis_info_patient).text =diagnosis
-                            findViewById<TextView>(R.id.tv_important_commets_info).text =importantComments
-
-                            dataList = hashMapOf()
-                            dataList["name"]=name
-                            dataList["age"]=age
-                            dataList["gender"]=gender
-                            dataList["weight"]=weight
-                            dataList["height"]=height
-                            dataList["diagnosis"]=diagnosis
-                            dataList["importantComments"]=importantComments
-                        }
-
+        databasePatient.patientWithId.get()
+            .addOnCompleteListener{
+                if (it.result?.data.isNullOrEmpty()){
+                    this.onBackPressed()
+                }else{
+                    val name = "${it.result?.data!!.get("name")} ${it.result?.data!!.get("last_name")}"
+                    val age = it.result?.data!!.get("age").toString()
+                    val weight = it.result?.data!!.get("weight").toString()
+                    val height = it.result?.data!!.get("height").toString()
+                    val diagnosis = it.result?.data!!.get("diagnosis").toString()
+                    var importantComments = it.result?.data!!.get("important_comments").toString()
+                    var gender = it.result?.data!!.get("gender").toString()
+                    if(importantComments == "null" || importantComments.isBlank()){
+                        importantComments = "Agrega un comentario importante sobre este paciente"
                     }
-                    .addOnCanceledListener {
-                        Toast.makeText(applicationContext,
-                                "algo salió mal"
-                                , Toast.LENGTH_LONG).show()
+                    if(gender.length>3){
+                        gender = gender.substring(0,4)
                     }
-        }else{
-            this.onBackPressed()
-        }
 
+                    findViewById<TextView>(R.id.tv_name_patient_info).text =name
+                    findViewById<TextView>(R.id.tv_age_info_patient).text ="$age años"
+                    findViewById<TextView>(R.id.tv_gender_info_patient).text =gender
+                    findViewById<TextView>(R.id.tv_weight_info_patient).text ="$weight kg"
+                    findViewById<TextView>(R.id.tv_diagnosis_info_patient).text =diagnosis
+                    findViewById<TextView>(R.id.tv_important_commets_info).text =importantComments
+
+                    dataList = hashMapOf()
+                    dataList["name"]=name
+                    dataList["age"]=age
+                    dataList["gender"]=gender
+                    dataList["weight"]=weight
+                    dataList["height"]=height
+                    dataList["diagnosis"]=diagnosis
+                    dataList["importantComments"]=importantComments
+                    GetTestDataDB()
+                }
+
+            }
+            .addOnCanceledListener {
+                Toast.makeText(applicationContext,
+                    "algo salió mal"
+                    , Toast.LENGTH_LONG).show()
+            }
     }
     fun createPatientReport(){
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
@@ -124,7 +137,6 @@ class PatientInfoActivity : AppCompatActivity() {
             savePdf()
         }
     }
-
     private fun savePdf() {
 
         //get text from EditText i.e. textEt
@@ -171,6 +183,63 @@ class PatientInfoActivity : AppCompatActivity() {
         }
     }
 
+    fun GetTestDataDB(){
+        databaseTests.testsCollection.get().addOnCompleteListener {
+
+            if(it.result?.data.isNullOrEmpty()){
+                initRecyclerTests()
+                findViewById<TextView>(R.id.tv_no_test_exist_patient_info).visibility = View.VISIBLE
+            }else{
+
+                val testsList = testsInfolist.toMutableList()
+                val data = it.result!!.data!!
+                val listSize = it.result!!.data!!.size
+                val datakeyList = data.keys
+                var count = 1
+
+                for(i in datakeyList){
+                    val testPosition = i
+                    val testId = data.get(testPosition).toString()
+
+                    databaseTests.testInfo.document(testId).get().addOnCompleteListener {
+                        if(it.result?.data.isNullOrEmpty()){
+                            showMsg("Algo salió mal..")
+                        }else{
+                            val testData = it.result?.data!!
+                            val created = testData.get("created").toString()
+                            val result = testData.get("total_result").toString()
+                            val testName = testData.get("test_name").toString()
+                            testsList.add(testInfoData(testName,result,created,testId,testPosition,idPatient))
+                            if(count==listSize){
+                                testsInfolist = testsList.toList()
+                                initRecyclerTests()
+                            }
+                            count+=1
+                        }
+
+                    }
+                }
+
+
+            }
+        }
+
+    }
+
+    fun initRecyclerTests(){
+        /**Guardamos la id de los Views para ubicar los datos**/
+        val rvTestsInfo = findViewById<RecyclerView>(R.id.rv_tests_patient_info)
+        val pbLoading = findViewById<ProgressBar>(R.id.pb_loading_tests_patient_info)
+        /****/
+        val adapter = TestInfoAdapter(testsInfolist,this)
+        /****/
+        val layoutManager = LinearLayoutManager(this)
+        /****/
+        rvTestsInfo.layoutManager =layoutManager
+        /****/
+        MainControl().showRecyclerTestsInfo(pbLoading, rvTestsInfo, adapter)
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when(requestCode){
             STORAGE_CODE -> {
@@ -199,6 +268,7 @@ class PatientInfoActivity : AppCompatActivity() {
         }
         startActivity(intent)
         view.visibility = View.VISIBLE
+        testsInfolist = listOf()
     }
     fun btn_editPatient(view: View) {
         view.visibility = View.INVISIBLE
@@ -210,14 +280,6 @@ class PatientInfoActivity : AppCompatActivity() {
         view.visibility = View.VISIBLE
         this.finishAfterTransition()
 
-    }
-
-    fun btn_pdf_info_action(view: View) {
-        view.isEnabled = false
-        Handler().postDelayed({
-            createPatientReport()
-            view.isEnabled = true
-        },1000)
     }
 
 }

@@ -187,7 +187,6 @@ class EditPatientActivity : AppCompatActivity() {
 
     fun delet_patient(){
         findViewById<RelativeLayout>(R.id.layout_ereasing_patient_edit).visibility = View.VISIBLE
-
         val currentUser = auth.currentUser
         val end = currentUser!!.email!!.indexOf("@")
         val user = currentUser.email!!.substring(0,end)

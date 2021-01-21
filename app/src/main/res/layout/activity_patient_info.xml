@@ -164,16 +164,45 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_tests_patient_info"
+        <LinearLayout
+            android:id="@+id/ll_recyclear_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:background="@color/tests_background_info_patient"
+            android:orientation="vertical"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_important_commets_info">
-        </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TESTS"
+                android:textColor="@color/white"
+                android:textSize="@dimen/tv_text_size_titles_info_patient"
+                android:textStyle="italic|bold" />
+            <TextView
+                android:id="@+id/tv_no_test_exist_patient_info"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No se ha encontrado ninguno.."
+                android:textColor="@color/coments"
+                android:textSize="20sp"
+                android:textStyle="italic|bold" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_tests_patient_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:background="@color/tests_background_info_patient"
+                >
+            </androidx.recyclerview.widget.RecyclerView>
+            <ProgressBar
+                android:id="@+id/pb_loading_tests_patient_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
         <ImageButton
             android:id="@+id/btn_img_new_test_patient_info"
             android:layout_width="wrap_content"
@@ -181,23 +210,9 @@
             android:onClick="btn_addNewTest"
             android:layout_marginTop="15dp"
             android:background="@drawable/nuevo_test_boton_text"
-            app:layout_constraintEnd_toEndOf="@+id/rv_tests_patient_info"
-            app:layout_constraintStart_toStartOf="@+id/rv_tests_patient_info"
-            app:layout_constraintTop_toBottomOf="@+id/rv_tests_patient_info" />
-        <Button
-            android:id="@+id/btn_pdf_basic_patient_info"
-            android:layout_width="170dp"
-            android:layout_height="40dp"
-            android:text="Generar PDF"
-            android:textColor="@color/white"
-            android:onClick="btn_pdf_info_action"
-            android:textSize="15sp"
-            android:background="@drawable/boton_ingresar"
-            android:layout_marginTop="@dimen/_margin_top_login"
-            app:layout_constraintEnd_toEndOf="@+id/btn_img_new_test_patient_info"
-            app:layout_constraintStart_toStartOf="@+id/btn_img_new_test_patient_info"
-            app:layout_constraintTop_toBottomOf="@+id/btn_img_new_test_patient_info"
-            />
+            app:layout_constraintEnd_toEndOf="@+id/ll_recyclear_view"
+            app:layout_constraintStart_toStartOf="@+id/ll_recyclear_view"
+            app:layout_constraintTop_toBottomOf="@+id/ll_recyclear_view" />
         <Button
             android:id="@+id/btn_powered"
             style="?android:attr/buttonBarButtonStyle"
@@ -212,7 +227,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/btn_img_new_test_patient_info"
             app:layout_constraintStart_toStartOf="@+id/btn_img_new_test_patient_info"
-            app:layout_constraintTop_toBottomOf="@+id/btn_pdf_basic_patient_info" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_img_new_test_patient_info" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

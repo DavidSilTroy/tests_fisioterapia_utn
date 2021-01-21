@@ -165,23 +165,24 @@ class RuffierDicksonFragment: Fragment(){
                         (result_rd>=10.0)and(result_rd<15.00)-> "Corazón medio, debería hacer una visita a un profesional de la salud."
                         else -> "Un índice que revela mal estado o un corazón débil."
                     }
+                    val resultTestString = "RD es $result_rd, paciente con $result_txt"
                     val data = mapOf<String,Any>(
-                            "test_name" to "Ruffier Dickson",
-                            "created" to dateString,
-                            "created_by" to user,
-                            "P0" to pulses[0],
-                            "P1" to pulses[1],
-                            "P2" to pulses[2],
-                            "RD" to result_rd,
-                            "result_txt" to result_txt
+                        "test_name" to "Ruffier Dickson",
+                        "created" to dateString,
+                        "created_by" to user,
+                        "P0" to pulses[0],
+                        "P1" to pulses[1],
+                        "P2" to pulses[2],
+                        "RD" to result_rd,
+                        "result_txt" to result_txt,
+                        "total_result" to resultTestString
                     )
                     saveDataDB.toTestData.set(data).addOnSuccessListener {
                         saveDataDB.relateData()
                         Handler().postDelayed({
                             //cambiando de activity al guardar el dato
                             val intent = Intent(this.context, TestResultActivity::class.java).apply{
-                                val result_test_string = "RD es $result_rd, paciente con $result_txt"
-                                putExtra("result_test", result_test_string)
+                                putExtra("result_test", resultTestString)
                                 putExtra("test_name", "Test de Ruffier Dickson")
                                 putExtra("result_info_extra", result_info_extra)
                             }

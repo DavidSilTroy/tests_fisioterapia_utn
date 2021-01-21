@@ -5,13 +5,14 @@
     android:layout_height="match_parent"
     android:background="@color/background_index"
     >
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="50dp"
-        android:paddingHorizontal="10dp"
         android:background="@drawable/background_powered_by"
-        >
+        android:paddingHorizontal="10dp"
+        android:paddingTop="50dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,74 +24,127 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/background_creators_info"
                 android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/david_siltroy"
-                    android:layout_gravity="center"/>
+                    android:background="@drawable/david_siltroy" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_name_creator"
+                    android:gravity="center"
                     android:text="David Silva Troya"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:textColor="@color/white"
-                    android:textSize="30sp"
-                    android:background="@drawable/background_name_creator"
-                    android:layout_marginTop="10dp"/>
+                    android:textSize="30sp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="10dp"
                     android:text="Estudiante de Ingeniería en Mecatrónica"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:layout_marginVertical="10dp"/>
+                    android:textSize="20sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="5dp"
-                    android:paddingHorizontal="20dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_email"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
-                        />
+                        android:background="@drawable/email_ico" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="9"
-                        android:text="dasilvat@utn.edu.ec"
                         android:paddingHorizontal="10dp"
+                        android:text="dasilvat@utn.edu.ec"
                         android:textColor="@color/white"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:layout_marginVertical="5dp"
-                    android:paddingHorizontal="20dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/web_page_ico"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
-                        />
+                        android:background="@drawable/web_ico" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="9"
-                        android:text="wwww.davidsiltroy.com"
                         android:paddingHorizontal="10dp"
+                        android:text="www.davidsiltroy.com"
                         android:textColor="@color/white"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+
+                    <ImageView
+                        android:layout_width="33dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/github_ico" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="9"
+                        android:paddingHorizontal="10dp"
+                        android:text="github.com/DavidSilTroy"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/insta_ico" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="9"
+                        android:paddingHorizontal="10dp"
+                        android:text="instagram.com/davidsiltroy"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -99,153 +153,112 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/background_creators_info"
                 android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/david_siltroy"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="David Silva Troya"
-                    android:textAlignment="center"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="30sp"
-                    android:background="@drawable/background_name_creator"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/jimmy_yzyzz" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_name_creator"
+                    android:gravity="center"
+                    android:text="Jimmy Baez"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="10dp"
                     android:text="Estudiante de Ingeniería en Mecatrónica"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:layout_marginVertical="10dp"/>
+                    android:textSize="20sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="5dp"
-                    android:paddingHorizontal="20dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_email"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
-                        />
+                        android:background="@drawable/email_ico" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="9"
-                        android:text="dasilvat@utn.edu.ec"
                         android:paddingHorizontal="10dp"
+                        android:text="jjbaez@utn.edu.ec"
                         android:textColor="@color/white"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:layout_marginVertical="5dp"
-                    android:paddingHorizontal="20dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/web_page_ico"
+                        android:layout_width="33dp"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
-                        />
+                        android:background="@drawable/github_ico" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="9"
-                        android:text="wwww.davidsiltroy.com"
                         android:paddingHorizontal="10dp"
+                        android:text="github.com/JimmyZyzz"
                         android:textColor="@color/white"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/insta_ico" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="9"
+                        android:paddingHorizontal="10dp"
+                        android:text="instagram.com/jimmyzyzz"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout
+
+
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/background_creators_info"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/david_siltroy"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="David Silva Troya"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="30sp"
-                    android:background="@drawable/background_name_creator"
-                    android:layout_marginTop="10dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Estudiante de Ingeniería en Mecatrónica"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:layout_marginVertical="10dp"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="5dp"
-                    android:paddingHorizontal="20dp"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_email"
-                        android:layout_weight="1"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="9"
-                        android:text="dasilvat@utn.edu.ec"
-                        android:paddingHorizontal="10dp"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginVertical="5dp"
-                    android:paddingHorizontal="20dp"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/web_page_ico"
-                        android:layout_weight="1"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="9"
-                        android:text="wwww.davidsiltroy.com"
-                        android:paddingHorizontal="10dp"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"/>
-                </LinearLayout>
-            </LinearLayout>
-
+                android:layout_height="50dp"/>
         </LinearLayout>
     </ScrollView>
 

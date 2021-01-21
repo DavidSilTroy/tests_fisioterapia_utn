@@ -19,7 +19,6 @@
         <activity android:name=".UI.activities.EditPatientActivity"/>
         <activity android:name=".UI.activities.PatientInfoActivity"/>
         <activity android:name=".UI.activities.AddTestActivity"/>
-        <activity android:name=".UI.activities.SelectingTestActivity"/>
         <activity android:name=".UI.activities.RegisterUserActivity"/>
         <activity android:name=".UI.activities.ForgotPasswordActivity"/>
         <activity android:name=".UI.activities.AddUserDataActivity"/>

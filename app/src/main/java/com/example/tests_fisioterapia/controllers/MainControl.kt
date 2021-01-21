@@ -35,6 +35,11 @@ class MainControl(){
         layoutLoading.visibility = View.GONE
 
     }
+    fun showRecyclerTestsInfo(layoutLoading:ProgressBar,rvTestsInfo:RecyclerView,adapter: TestInfoAdapter){
+        rvTestsInfo.adapter = adapter
+        layoutLoading.visibility = View.GONE
+
+    }
 }
 
 fun String.capitalizeFirstLetter() = this.split(" ").joinToString(" ") { it.capitalize() }.trimEnd()

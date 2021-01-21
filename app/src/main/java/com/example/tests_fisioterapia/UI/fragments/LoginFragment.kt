@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.tests_fisioterapia.R
 import com.example.tests_fisioterapia.UI.activities.IndexActivity
@@ -17,6 +18,8 @@ import com.example.tests_fisioterapia.controllers.LoadingTime
 class LoginFragment:Fragment(){
     val TAG = "fragmentLoading"
     var isChanged = false
+
+
     override fun onAttach(context: Context) {
         Log.d(TAG,"onAttach")
         super.onAttach(context)
@@ -29,6 +32,7 @@ class LoginFragment:Fragment(){
         }
         super.onCreate(savedInstanceState)
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG,"onCreateView")
         return inflater.inflate(R.layout.fragment_login,container,false)
@@ -74,4 +78,5 @@ class LoginFragment:Fragment(){
         Log.d(TAG,"onDetach")
         super.onDetach()
     }
+
 }
