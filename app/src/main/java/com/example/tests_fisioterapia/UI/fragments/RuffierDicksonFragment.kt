@@ -26,6 +26,9 @@ import java.text.SimpleDateFormat
 class RuffierDicksonFragment: Fragment(){
     lateinit var dbTest : GetTestData
     val TAG = "fragmentRuffierDickson"
+    private var result_info_extra = ""
+    private var user = ""
+    private var idP = ""
     private lateinit var btn_ruffier_d : ImageButton
     private lateinit var rl_loading_test : RelativeLayout
     private lateinit var tv_title : TextView
@@ -33,9 +36,6 @@ class RuffierDicksonFragment: Fragment(){
     private lateinit var tv_timer :TextView
     private lateinit var et_pulse :EditText
     private lateinit var iv_ruffierD :ImageView
-    private var result_info_extra = ""
-    private var user = ""
-    private var idP = ""
     private var timerIsReady = false
     private var timerIsRunning = false
     private var pulses = mutableListOf(0,0,0)
@@ -46,10 +46,6 @@ class RuffierDicksonFragment: Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG,"onCreate")
-        /*if(isChanged) {
-            val intent = Intent(this.context, IndexActivity::class.java)
-            startActivity(intent)
-        }*/
         dbTest = GetTestData("Cardio","Ruffier Dickson")
         super.onCreate(savedInstanceState)
     }
@@ -103,7 +99,7 @@ class RuffierDicksonFragment: Fragment(){
         val timer = object: CountDownTimer((timeDB*1000).toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val secondsToShow = timeDB-seconds
-                if(timeDB-seconds<10){
+                if(secondsToShow<10){
                     val to_tv = "00:0$secondsToShow"
                     tv_timer.text = to_tv
                 }else{

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/user_activity_background"
+    android:alpha="0.9"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context=".UI.activities.MainActivity">
+
+        <TextView
+            android:id="@+id/tv_title_burpee_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/waiting_for_text"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_text_burpee_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/waiting_for_text"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_burpee_fragment" />
+
+        <ImageView
+            android:id="@+id/iv_burpee_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/burpee_img"
+            android:layout_marginTop="40dp"
+            android:layout_marginHorizontal="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_text_burpee_fragment" />
+
+        <TextView
+            android:id="@+id/tv_timer_burpee_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="01:00"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_burpee_fragment" />
+        <EditText
+            android:id="@+id/et_repetition_burpee_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/figure_background_etxt"
+            android:layout_marginTop="100dp"
+            android:textColor="@color/white"
+            android:inputType="number"
+            android:textSize="@dimen/et_text_login"
+            android:paddingTop="@dimen/et_padding_top_login"
+            android:paddingStart="@dimen/et_padding_start_login"
+            android:paddingEnd="@dimen/et_padding_start_login"
+            app:layout_constraintEnd_toEndOf="@+id/iv_burpee_fragment"
+            app:layout_constraintStart_toStartOf="@+id/iv_burpee_fragment"
+            app:layout_constraintTop_toBottomOf="@+id/tv_timer_burpee_fragment" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Número de Repeticiones"
+            android:fontFamily="monospace"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tv_text_size_add_patient"
+            android:layout_marginBottom="@dimen/tv_marging_bottom_add_patient"
+            android:layout_marginStart="@dimen/tv_marging_start_add_patient"
+            app:layout_constraintBottom_toBottomOf="@+id/et_repetition_burpee_fragment"
+            app:layout_constraintStart_toStartOf="@+id/et_repetition_burpee_fragment" />
+
+        <ImageButton
+            android:id="@+id/btn_burpee_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boton_siguiente_text"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_repetition_burpee_fragment"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_burpee_fragment"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/rl_loading_burpee"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:alpha="0.3">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+</FrameLayout>
