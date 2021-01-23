@@ -1,9 +1,13 @@
 package com.example.tests_fisioterapia.UI.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
@@ -14,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-
 
 
 class TestIntroActivity: AppCompatActivity() {
@@ -28,9 +31,8 @@ class TestIntroActivity: AppCompatActivity() {
     lateinit var dbTest : GetTestData
     private lateinit var auth: FirebaseAuth             //para la autenticación de firebase
     val testList = TestsWorking().testsOnWork
-    lateinit var dataList : MutableMap<String,String>
+    lateinit var dataList : MutableMap<String, String>
     val manager = supportFragmentManager
-    lateinit var btn_next : ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,26 +42,20 @@ class TestIntroActivity: AppCompatActivity() {
         idP =  intent.getStringExtra("patientId")
         testName =  intent.getStringExtra("testName")
         testType =  intent.getStringExtra("testType")
-        dbTest = GetTestData(testType,testName)
-    }
-
-    override fun onStop() {
-        //this.finishAfterTransition()
-        super.onStop()
+        dbTest = GetTestData(testType, testName)
     }
 
     override fun onStart(){
         getDBdata()
         val currentUser = auth.currentUser
         val end = currentUser!!.email!!.indexOf("@")
-        user = currentUser.email!!.substring(0,end)
+        user = currentUser.email!!.substring(0, end)
         super.onStart()
     }
 
-    fun showMsg(message:String){
+    fun showMsg(message: String){
         Toast.makeText(applicationContext,
-                message
-                , Toast.LENGTH_LONG).show()
+                message, Toast.LENGTH_LONG).show()
     }
     fun getDBdata(){
         db.collection("tipos_de_tests")
@@ -70,8 +66,7 @@ class TestIntroActivity: AppCompatActivity() {
                 .addOnCompleteListener {
                     if(it.result?.data.isNullOrEmpty()){
                         Toast.makeText(applicationContext,
-                                "No hay datos"
-                                , Toast.LENGTH_LONG).show()
+                                "No hay datos", Toast.LENGTH_LONG).show()
                     }else{
                         val documents = it.result?.data!!
                         dataList["method"] = documents["method"].toString()
@@ -94,9 +89,9 @@ class TestIntroActivity: AppCompatActivity() {
         //Para decidir el fragment que se va a enseñar
         val transaction = manager.beginTransaction()
         val fragment = TestsWorking().testFragment(testName)
-        val bundle = bundleOf("patientId" to idP,"user" to user)
+        val bundle = bundleOf("patientId" to idP, "user" to user)
         fragment.arguments = bundle
-        transaction.replace(R.id.fragment_test_holder,fragment)
+        transaction.replace(R.id.fragment_test_holder, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
         isFragmentLoaded = true

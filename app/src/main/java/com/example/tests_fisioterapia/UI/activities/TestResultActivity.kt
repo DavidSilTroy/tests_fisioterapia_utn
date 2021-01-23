@@ -26,6 +26,7 @@ class TestResultActivity:AppCompatActivity() {
     fun btn_test_start(view: View) {
         view.visibility = View.INVISIBLE
         val intent = Intent(this, MainActivity::class.java)
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         this.finishAfterTransition()
         startActivity(intent)
     }

@@ -32,7 +32,7 @@ class AddTestActivity:AppCompatActivity() {
     }
 
     override fun onStop() {
-        this.finish()
+        //this.finish()
         super.onStop()
     }
 

@@ -37,13 +37,6 @@ class MainActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()    //para la base de datos
     var isAdding = false                                //al pasar a la activity de agregar se vuelve true
 
-    /**Estas son variables que ya no se están usando por ahora, las borraremos al final**/
-    //val timeLoading = LoadingTime().DBtime()
-    //var progressbarStatus = 0
-    //var patientsCount = 1
-    //var unidad = 0
-    //var itemsShowed = 10
-    //var isLoading = true
 
     /**Función por defecto en  de Android**/
     override fun onCreate(savedInstanceState: Bundle?) {
