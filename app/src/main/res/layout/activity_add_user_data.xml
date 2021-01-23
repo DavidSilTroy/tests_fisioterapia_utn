@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/user_activity_background"
@@ -14,15 +13,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-            <ImageView
-                android:id="@+id/iv_user_picture"
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_user_picture_add"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:src="@drawable/login_account_picture"
+                android:background="@drawable/login_account_picture"
                 android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:civ_border_width="0dp"
+                app:civ_border_color="#FF000000"/>
+
+            <ProgressBar
+                android:id="@+id/pb_user_picture_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_user_picture_add"
+                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture_add"
+                app:layout_constraintStart_toStartOf="@+id/iv_user_picture_add"
+                app:layout_constraintTop_toTopOf="@+id/iv_user_picture_add" />
 
             <ImageButton
                 android:id="@+id/btn_img_edit_patient_picture"
@@ -30,8 +41,8 @@
                 android:layout_height="50dp"
                 android:background="@drawable/add_picture_patient_botton"
                 android:onClick="btn_editUserPhoto"
-                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture"
-                app:layout_constraintBottom_toBottomOf="@id/iv_user_picture"
+                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture_add"
+                app:layout_constraintBottom_toBottomOf="@id/iv_user_picture_add"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="20dp"/>
 
@@ -47,9 +58,9 @@
                 android:paddingTop="@dimen/et_padding_top_login"
                 android:paddingStart="@dimen/et_padding_start_login"
                 android:paddingEnd="@dimen/et_padding_start_login"
-                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture"
-                app:layout_constraintStart_toStartOf="@+id/iv_user_picture"
-                app:layout_constraintTop_toBottomOf="@+id/iv_user_picture" />
+                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture_add"
+                app:layout_constraintStart_toStartOf="@+id/iv_user_picture_add"
+                app:layout_constraintTop_toBottomOf="@+id/iv_user_picture_add" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,8 +84,8 @@
                 android:paddingTop="@dimen/et_padding_top_login"
                 android:paddingStart="@dimen/et_padding_start_login"
                 android:paddingEnd="@dimen/et_padding_start_login"
-                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture"
-                app:layout_constraintStart_toStartOf="@+id/iv_user_picture"
+                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture_add"
+                app:layout_constraintStart_toStartOf="@+id/iv_user_picture_add"
                 app:layout_constraintTop_toBottomOf="@+id/et_name_user" />
             <TextView
                 android:layout_width="wrap_content"
@@ -99,8 +110,8 @@
                 android:paddingStart="@dimen/et_padding_start_login"
                 android:paddingEnd="@dimen/et_padding_start_login"
                 android:background="@drawable/figure_background_etxt"
-                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture"
-                app:layout_constraintStart_toStartOf="@+id/iv_user_picture"
+                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture_add"
+                app:layout_constraintStart_toStartOf="@+id/iv_user_picture_add"
                 app:layout_constraintTop_toBottomOf="@+id/et_last_name_user" />
             <TextView
                 android:layout_width="wrap_content"
@@ -127,8 +138,8 @@
                 android:paddingEnd="@dimen/et_padding_start_login"
                 android:alpha="0.5"
                 android:background="@drawable/figure_background_etxt"
-                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture"
-                app:layout_constraintStart_toStartOf="@+id/iv_user_picture"
+                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture_add"
+                app:layout_constraintStart_toStartOf="@+id/iv_user_picture_add"
                 app:layout_constraintTop_toBottomOf="@+id/et_user_semester" />
             <TextView
                 android:layout_width="wrap_content"
@@ -157,8 +168,8 @@
                 android:paddingStart="@dimen/et_padding_start_login"
                 android:paddingEnd="@dimen/et_padding_start_login"
                 android:background="@drawable/figure_background_etxt"
-                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture"
-                app:layout_constraintStart_toStartOf="@+id/iv_user_picture"
+                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture_add"
+                app:layout_constraintStart_toStartOf="@+id/iv_user_picture_add"
                 app:layout_constraintTop_toBottomOf="@+id/et_user_user" />
             <TextView
                 android:layout_width="wrap_content"
@@ -179,8 +190,8 @@
                 android:layout_marginTop="@dimen/et_marging_top_add_patient"
                 android:onClick="btn_save_user_data"
                 android:background="@drawable/guardar_boton_txt"
-                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture"
-                app:layout_constraintStart_toStartOf="@+id/iv_user_picture"
+                app:layout_constraintEnd_toEndOf="@+id/iv_user_picture_add"
+                app:layout_constraintStart_toStartOf="@+id/iv_user_picture_add"
                 app:layout_constraintTop_toBottomOf="@id/et_user_email" />
             <View
                 android:layout_width="match_parent"

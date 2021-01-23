@@ -39,7 +39,7 @@ class RuffierDicksonFragment: Fragment(){
     private var timerIsReady = false
     private var timerIsRunning = false
     private var pulses = mutableListOf(0,0,0)
-    private  var timeDB = 0
+    private var timeDB = 0
     private var totalSteps = 10
     private var currentStep = 0
 
@@ -80,7 +80,6 @@ class RuffierDicksonFragment: Fragment(){
         }
         return view
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //todo: borrar ese comentario al acabar
@@ -88,7 +87,6 @@ class RuffierDicksonFragment: Fragment(){
         idP = requireArguments().getString("patientId").toString()
         user = requireArguments().getString("user").toString()
     }
-
     override fun onDestroy() {
         this.activity!!.finish()
         super.onDestroy()
@@ -135,7 +133,6 @@ class RuffierDicksonFragment: Fragment(){
             2-> iv_ruffierD.setBackgroundResource(R.drawable.ruffier_dickson_img)
         }
     }
-
     fun ruffier_dickson(){
         if (!timerIsRunning){
             if(timerIsReady){
@@ -147,7 +144,6 @@ class RuffierDicksonFragment: Fragment(){
             }else{
                 rl_loading_test.visibility = View.VISIBLE
                 if(totalSteps <= currentStep){
-                    showMsg("Ahora deberías ir a los resultados ${pulses[0]} ${pulses[1]} ${pulses[2]}")
                     val date = System.currentTimeMillis()
                     val result_rd = ((pulses[0]+pulses[1]+pulses[2]-200).toDouble())/10
                     val saveDataDB = SetTestData("Cardio","Ruffier Dickson",idP,date.toString())
@@ -191,7 +187,6 @@ class RuffierDicksonFragment: Fragment(){
                         }, 1000)
 
                     }
-                    //todo: guardar resultados del paciente y mostrarlos en la siguiente activity
 
                 }else{
                     dbTest.testSteps.get().addOnCompleteListener {

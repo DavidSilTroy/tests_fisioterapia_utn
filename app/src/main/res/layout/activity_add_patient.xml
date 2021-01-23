@@ -10,16 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_add_picture_patient"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/login_account_picture"
+            android:background="@drawable/login_account_picture"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            app:civ_border_width="0dp"
+            app:civ_border_color="#FF000000"/>
 
         <ImageButton
             android:id="@+id/btn_img_add_patient_picture"

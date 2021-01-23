@@ -49,19 +49,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/data_user_box_shape_background"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingHorizontal="5dp"
+                android:gravity="center"
                 android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/img_user"
-                    android:layout_width="50dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/img_description_user"
-                    android:src="@drawable/login_account_picture" />
+
+                <RelativeLayout
+                    android:layout_width="45dp"
+                    android:layout_height="65dp"
+                    android:layout_weight="1">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_user_photo"
+                        android:contentDescription="@string/img_description_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/login_account_picture"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        app:civ_border_width="5dp"
+                        app:civ_border_color="@color/background_index"
+                        />
+                    <ProgressBar
+                        android:id="@+id/pb_user_photo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        />
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/tv_user_name"
                     android:layout_width="wrap_content"
@@ -69,7 +93,7 @@
                     android:layout_gravity="center"
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:layout_weight="3"
+                    android:layout_weight="6"
                     android:textSize="35sp"
                     android:textColor="@color/white"
                     android:text="@string/name_user_example" />

@@ -15,15 +15,33 @@
         android:layout_marginHorizontal="2dp"
         android:layout_marginVertical="2dp"
         android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_gravity="center"
         >
-        <ImageView
-            android:id="@+id/img_patient"
+        <RelativeLayout
             android:layout_width="50dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:contentDescription="@string/img_description_patient"
-            android:src="@drawable/login_account_picture" />
+            android:layout_height="55dp"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_patient_photo_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:contentDescription="@string/img_description_patient"
+                android:background="@drawable/login_account_picture"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                />
+            <ProgressBar
+                android:id="@+id/pb_photo_patient_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

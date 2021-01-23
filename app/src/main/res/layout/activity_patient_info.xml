@@ -25,21 +25,51 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        <ImageView
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_patient_photo_info"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="15dp"
             android:src="@drawable/login_account_picture"
             app:layout_constraintStart_toStartOf="@+id/tv_name_patient_info"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name_patient_info" />
-        <ImageButton
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_patient_info"
+            app:civ_border_width="0dp"
+            app:civ_border_color="#FF000000"
+            />
+        <TextView
+            android:id="@+id/tv_no_photo_patient_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="btn_editPatient"
+            android:visibility="gone"
+            android:alpha="0.3"
+            android:text="Sin Foto"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:background="@color/background_index"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_patient_photo_info"
+            app:layout_constraintEnd_toEndOf="@+id/iv_patient_photo_info"
+            app:layout_constraintStart_toStartOf="@+id/iv_patient_photo_info"
+            app:layout_constraintTop_toTopOf="@+id/iv_patient_photo_info" />
+        <ProgressBar
+            android:id="@+id/pb_photo_patient_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_patient_photo_info"
+            app:layout_constraintEnd_toEndOf="@+id/iv_patient_photo_info"
+            app:layout_constraintStart_toStartOf="@+id/iv_patient_photo_info"
+            app:layout_constraintTop_toTopOf="@+id/iv_patient_photo_info" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/edit_patient_info_icon"
+            android:onClick="btn_editPatient"
             app:layout_constraintBottom_toBottomOf="@+id/iv_patient_photo_info"
             app:layout_constraintEnd_toEndOf="@+id/iv_patient_photo_info" />
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/user_activity_background"
@@ -28,15 +27,27 @@
                 app:layout_constraintEnd_toEndOf="@+id/iv_edit_picture_patient"
                 app:layout_constraintStart_toStartOf="@+id/iv_edit_picture_patient"
                 app:layout_constraintTop_toTopOf="parent" />
-            <ImageView
+
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_edit_picture_patient"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:src="@drawable/login_account_picture"
-                android:layout_marginTop="5dp"
+                android:background="@drawable/login_account_picture"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_delete_patient_edit"/>
+                app:layout_constraintTop_toBottomOf="@id/btn_delete_patient_edit"
+                android:layout_marginTop="5dp"
+                app:civ_border_width="0dp"
+                app:civ_border_color="#FF000000"/>
+
+            <ProgressBar
+                android:id="@+id/pb_edit_photo_patient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_edit_picture_patient"
+                app:layout_constraintEnd_toEndOf="@+id/iv_edit_picture_patient"
+                app:layout_constraintStart_toStartOf="@+id/iv_edit_picture_patient"
+                app:layout_constraintTop_toTopOf="@+id/iv_edit_picture_patient" />
 
             <ImageButton
                 android:id="@+id/btn_img_edit_patient_picture"

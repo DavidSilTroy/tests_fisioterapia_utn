@@ -1,11 +1,16 @@
 package com.example.tests_fisioterapia.UI.activities
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tests_fisioterapia.R
@@ -16,6 +21,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import de.hdodenhof.circleimageview.CircleImageView
+import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
@@ -50,6 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStart(){
+        setPhotoToIV()
         /** Obtenemos el usuario de la autenticación si es que no viene de la activity de login**/
         user = if(intent.hasExtra("userloged")){
             intent.getStringExtra("userloged")
@@ -61,15 +70,16 @@ class MainActivity : AppCompatActivity() {
         }
         /** Ubicando el nombre del usuario**/
         findViewById<TextView>(R.id.tv_user_name).text = user
-        /**Vaciamos la lista en caso de que hayan quedado datos guardados**/
-        patients= listOf()
+
         /** Desplegamos que está cargando**/
         findViewById<RelativeLayout>(R.id.layout_loading_patients).visibility = View.VISIBLE
-        /** Obtenemos las ids de los pacientes del usuario y los datos para mostrar**/
-        getPatientsId()
         super.onStart()
     }
     override fun onResume() {
+        /**inicializamos la lista**/
+        patients= listOf()
+        /** Obtenemos las ids de los pacientes del usuario y los datos para mostrar**/
+        getPatientsId()
 
         val email = auth.currentUser?.isEmailVerified!!
         if(email){
@@ -205,6 +215,33 @@ class MainActivity : AppCompatActivity() {
         }
         return  completeName
     }
+    fun setPhotoToIV(){
+        val storage = Firebase.storage
+        val storageRef = storage.reference
+        val patientImgRef = storageRef.child("images/$user")
+        val imageView = findViewById<CircleImageView>(R.id.iv_user_photo)
+        val MAX_BYTES: Long = 10485760 //10Mb
+        val progresbarPhoto = findViewById<ProgressBar>(R.id.pb_user_photo)
+
+        try {
+            patientImgRef.getBytes(MAX_BYTES).addOnSuccessListener {
+                // Data for "images/island.jpg" is returned, use this as needed
+                //showMsg("bien en getBytes ${it}")
+                val bitmap = BitmapFactory.decodeByteArray(it,0,it.size)
+                val BitmapDrawable = BitmapDrawable(bitmap)
+                imageView.setImageBitmap(BitmapDrawable.toBitmap())
+                progresbarPhoto.visibility = View.GONE
+            }.addOnFailureListener {
+                //showMsg("Algo falló en getBytes ${it.message}")
+                // Handle any errors
+                progresbarPhoto.visibility = View.GONE
+            }
+        } catch (e: Exception) {
+            progresbarPhoto.visibility = View.GONE
+        }
+
+
+    }
 
     /**###### FUNCIONES PARA BOTONES ######**/
     fun btn_OpenUserMenu(view: View){
@@ -217,6 +254,10 @@ class MainActivity : AppCompatActivity() {
     }
     fun userOptionsTouched(view: View){
         val txt_option = view.findViewById<TextView>(view.id)
+        view.alpha = 0.5f
+        Handler().postDelayed({
+            view.alpha = 1f
+        }, 800)
         when(txt_option.text.toString()){
             "Cerrar Sesión" -> {
                 Toast.makeText(applicationContext, "Cerrando sesión..", Toast.LENGTH_LONG).show()
@@ -242,12 +283,14 @@ class MainActivity : AppCompatActivity() {
     fun btn_addNewPatient(view: View){
         isAdding = true
         //this.finishAfterTransition()
-        view.visibility = View.INVISIBLE
+        view.alpha = 0.2f
+        Handler().postDelayed({
+            view.alpha = 1f
+        }, 800)
         val intent = Intent(this, AddPatientActivity::class.java).apply{
             putExtra("userloged", user)
         }
         startActivity(intent)
     }
-
 
 }

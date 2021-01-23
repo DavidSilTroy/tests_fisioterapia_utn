@@ -32,6 +32,7 @@ const val D_M = "main"
 
 const val PATTERN_DATE = "dd/MM/yyyy, h:mm a"
 
+private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
 
 class FirestoreService {
     val firebaseFirestore = FirebaseFirestore.getInstance()
@@ -43,94 +44,14 @@ class FirestoreService {
     //}
 }
 
-class  AddPatientDB(val user:String, val context: Context){
-    private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
-    private var date :Long = 0
-    var number = 1
-    var newPatient:Array<String> = arrayOf()
-    lateinit var btn : View
-    lateinit var pb : ProgressBar
-    fun goToMain(){
-        btn.visibility = View.VISIBLE
-        pb.visibility = View.GONE
-        val intent = Intent(context.applicationContext , MainActivity::class.java)
-        startActivity(context, intent, Bundle())
-    }
-    fun addviews( btn: View, pb : ProgressBar) {
-        this.btn = btn
-        this.pb = pb
-    }
-    fun getNumberToPatient(){
-        db.collection(M_C_UP).document(user).get()
-                .addOnSuccessListener {
-                    while(number<901){
-                        val data = it.get("paciente_$number" as String).toString()
-                        if(data=="null") break
-                        number++
-                    }
-                    //TODO:Imprimir mensaje de que ya se tiene más de 900 pacientes
-                }
-                .addOnFailureListener {
-                    Toast.makeText(context, "Algo salió mal" , Toast.LENGTH_LONG).show()
-                    goToMain()
-                }
-    }
-    fun addPatient(patientArray:Array<String>){
-        newPatient = patientArray
-        lookToDataBase()
-    }
-    fun lookToDataBase(){
-        date = System.currentTimeMillis() //tiempo actual en millisegundos
-        db.collection("usuarios_pacientes").document(user).get()
-                .addOnCompleteListener {
-                    if(it.result?.data.isNullOrEmpty()){
-                        db.collection(M_C_UP).document(user).set(hashMapOf(
-                                "paciente_$number" to "p${date}")).addOnCompleteListener{
-                            addDataBase()
-                        }
-                    }
-                    else{
-                        db.collection(M_C_UP).document(user).update(
-                                "paciente_$number", "p${date}").addOnCompleteListener{
-                            addDataBase()
-                        }
-                    }
-                }
-    }
-    @SuppressLint("SimpleDateFormat")
-    fun addDataBase(){
-        //TODO: saber que no hay internet para agregar los datos a la nube
-        val dateString: String = SimpleDateFormat(PATTERN_DATE).format(date)
-        Toast.makeText(context, "Agregado!" , Toast.LENGTH_LONG).show()
-        //Creando el documento con los valores en la base de datos
-        db.collection(M_C_P).document("p$date").set(hashMapOf(
-                "edited" to dateString,
-                "name" to newPatient[0],
-                "last_name" to newPatient[1],
-                "age" to newPatient[2],
-                "gender" to newPatient[3],
-                "weight" to newPatient[4],
-                "height" to newPatient[5],
-                "email" to newPatient[6],
-                "diagnosis" to "Sin Diagnostico",
-                "important_comments" to "Agrega un comentario"
-        )
-        ).addOnCompleteListener{
-            //Creando subcolección para registro de edición
-            db.collection(M_C_P).document("p$date").collection(S_C_R).document(D_M)
-                    .set(mapOf(
-                            "creation" to dateString,
-                            "created_by" to user
-                    )).addOnCompleteListener {
-                        goToMain()
-                    }
-        }
-    }
+class  AddPatientDB(val user:String, val context: Context, val date : Long){
 
+    var patientToUser = db.collection(M_C_UP).document(user)
+    var patienData = db.collection(M_C_P).document("p$date")
+    var patienRegister = db.collection(M_C_P).document("p$date").collection(S_C_R).document(D_M)
 
 }
 class EditPatientDB(val idP:String , val user:String, val context: Context){
-    private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
     private var date :Long = 0
 
     fun saveData(datalist:MutableMap<String,Any>){

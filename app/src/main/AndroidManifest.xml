@@ -4,6 +4,7 @@
 
     <!--storage permission-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -14,18 +15,30 @@
         android:theme="@style/Theme.Tests_fisioterapia">
 
 
-        <activity android:name=".UI.activities.MainActivity"/>
-        <activity android:name=".UI.activities.AddPatientActivity"/>
-        <activity android:name=".UI.activities.EditPatientActivity"/>
-        <activity android:name=".UI.activities.PatientInfoActivity"/>
-        <activity android:name=".UI.activities.AddTestActivity"/>
-        <activity android:name=".UI.activities.RegisterUserActivity"/>
-        <activity android:name=".UI.activities.ForgotPasswordActivity"/>
-        <activity android:name=".UI.activities.AddUserDataActivity"/>
-        <activity android:name=".UI.activities.TestIntroActivity"/>
-        <activity android:name=".UI.activities.TestResultActivity"/>
-        <activity android:name=".UI.activities.PoweredByActivity"/>
-        <activity android:name=".UI.activities.IndexActivity">
+        <activity android:name=".UI.activities.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UI.activities.AddPatientActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UI.activities.EditPatientActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UI.activities.PatientInfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UI.activities.AddTestActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UI.activities.RegisterUserActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UI.activities.ForgotPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UI.activities.AddUserDataActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UI.activities.TestIntroActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UI.activities.TestResultActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UI.activities.PoweredByActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UI.activities.IndexActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

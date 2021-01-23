@@ -57,6 +57,10 @@ class TestAdapter(val tests:List<testData>, val context: Context): RecyclerView.
             view.findViewById<TextView>(R.id.tv_test_name_item).text = tests.name
             if (tests.pass){
                 view.setOnClickListener {
+                    it.alpha = 0.5f
+                    Handler().postDelayed({
+                        it.alpha = 1f
+                    }, 800)
                     val intent = Intent(context.applicationContext , TestIntroActivity::class.java).apply{
                         putExtra("testName",tests.name)
                         putExtra("testType",tests.type)
@@ -66,6 +70,10 @@ class TestAdapter(val tests:List<testData>, val context: Context): RecyclerView.
                 }
             }else{
                 view.setOnClickListener {
+                    it.alpha = 0.5f
+                    Handler().postDelayed({
+                        it.alpha = 1f
+                    }, 800)
                     val intent = Intent(context.applicationContext , AddTestActivity::class.java).apply{
                         putExtra("testName",tests.name)
                         putExtra("testType",tests.name)
@@ -114,23 +122,24 @@ class TestInfoAdapter(val tests:List<testInfoData>, val context: Context): Recyc
                 it.visibility = View.GONE
             }
             view.findViewById<ImageButton>(R.id.btn_generar_pdf_test_info_item).setOnClickListener {
-
+                it.alpha = 0.5f
+                Handler().postDelayed({
+                    it.alpha = 1f
+                }, 800)
             }
 
             view.findViewById<ImageButton>(R.id.btn_eliminar_test_info_item).setOnClickListener{
+                it.alpha = 0.5f
+                Handler().postDelayed({
+                    it.alpha = 1f
+                }, 800)
                 val builder = AlertDialog.Builder(context)
                 builder.setTitle("Eliminar ${tests.name}")
                 builder.setMessage("Confirme que desea ELIMINAR el test de ${tests.name}")
                 builder.setPositiveButton("Confirmar"){ dialogInterface: DialogInterface, i: Int ->
                     val deleteTest = DeleteTestsPatientInfo(tests.idPatient,tests.testId,tests.testPosition)
                     deleteTest.deteTest()
-
-                    Handler().postDelayed({
-                        view.visibility = View.VISIBLE
-                        val intent = Intent(context.applicationContext , PatientInfoActivity::class.java)
-                        ContextCompat.startActivity(context, intent, Bundle())
-
-                    }, 2000)
+                    view.visibility = View.GONE
 
                 }
                 builder.setNeutralButton("Cancelar") { dialogInterface: DialogInterface, i: Int ->

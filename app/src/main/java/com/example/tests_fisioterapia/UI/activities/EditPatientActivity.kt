@@ -1,16 +1,20 @@
 package com.example.tests_fisioterapia.UI.activities
 
+import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.provider.MediaStore
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.RelativeLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
+import com.bumptech.glide.Glide
 import com.example.tests_fisioterapia.R
 import com.example.tests_fisioterapia.controllers.capitalizeFirstLetter
 import com.example.tests_fisioterapia.network.*
@@ -19,6 +23,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
+import de.hdodenhof.circleimageview.CircleImageView
+import java.lang.Exception
 import java.text.SimpleDateFormat
 
 class EditPatientActivity : AppCompatActivity() {
@@ -27,6 +35,7 @@ class EditPatientActivity : AppCompatActivity() {
     lateinit var databaseData : GetPatientDB
     var dbDataList : MutableMap<String,Any> = hashMapOf()
     var dataETList : MutableMap<String,Any> = hashMapOf()
+    var selectedPhtoUri: Uri? = null
 
     private lateinit var auth: FirebaseAuth             //para la autenticación de firebase
     private val db = FirebaseFirestore.getInstance()    //para la base de datos
@@ -52,8 +61,19 @@ class EditPatientActivity : AppCompatActivity() {
         databaseData = GetPatientDB(idP)
         getDBData()
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode ==0 && resultCode == Activity.RESULT_OK && data != null){
+            selectedPhtoUri = data.data
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhtoUri)
+            val BitmapDrawable = BitmapDrawable(bitmap)
+            val img_patient = findViewById<ImageView>(R.id.iv_edit_picture_patient)
+            img_patient.setImageBitmap(BitmapDrawable.toBitmap())
+        }
+    }
 
     fun getDBData(){
+        setPhotoToIV()
         databaseData.patientWithId.get()
                 .addOnCompleteListener{
                     val name = it.result?.data!!.get("name").toString()
@@ -85,6 +105,8 @@ class EditPatientActivity : AppCompatActivity() {
                             "algo salió mal"
                             , Toast.LENGTH_LONG).show()
                 }
+
+
     }//Obtener datos de la Base de datos
     fun showDataET(){
             val name                = dbDataList["name"].toString()
@@ -175,16 +197,19 @@ class EditPatientActivity : AppCompatActivity() {
                 }
                 databaseEdit.saveData(dataETList)
                 databaseEdit.saveRegister(registerList)
-                this.finish()
                 this.onBackPressed()
             }else{
-                Toast.makeText(this,
-                        "No se han hecho cambios"
-                        , Toast.LENGTH_LONG).show()
+                if (selectedPhtoUri != null){
+                    this.onBackPressed()
+                }else{
+                    Toast.makeText(this,
+                            "No se han hecho cambios"
+                            , Toast.LENGTH_LONG).show()
+                }
+
             }
         }
     }
-
     fun delet_patient(){
         findViewById<RelativeLayout>(R.id.layout_ereasing_patient_edit).visibility = View.VISIBLE
         val currentUser = auth.currentUser
@@ -256,32 +281,75 @@ class EditPatientActivity : AppCompatActivity() {
                     , Toast.LENGTH_LONG).show()
         }
     }
+    fun setPhotoToIV(){
+        val storage = Firebase.storage
+        val storageRef = storage.reference
+        val patientImgRef = storageRef.child("images/$idP")
+        val imageView = findViewById<CircleImageView>(R.id.iv_edit_picture_patient)
+        val MAX_BYTES: Long = 10485760 //10Mb
+        val progresbarPhoto = findViewById<ProgressBar>(R.id.pb_edit_photo_patient)
+
+        try {
+            patientImgRef.getBytes(MAX_BYTES).addOnSuccessListener {
+                // Data for "images/island.jpg" is returned, use this as needed
+                //showMsg("bien en getBytes ${it}")
+                val bitmap = BitmapFactory.decodeByteArray(it,0,it.size)
+                val BitmapDrawable = BitmapDrawable(bitmap)
+                imageView.setImageBitmap(BitmapDrawable.toBitmap())
+                progresbarPhoto.visibility = View.GONE
+            }.addOnFailureListener {
+                //showMsg("Algo falló en getBytes ${it.message}")
+                // Handle any errors
+                progresbarPhoto.visibility = View.GONE
+            }
+        } catch (e: Exception) {
+            progresbarPhoto.visibility = View.GONE
+        }
 
 
-
-
-
-
-
-
+    }
+    fun uploadPatienImage(){
+        Toast.makeText(applicationContext, "Revisando los datos.." , Toast.LENGTH_LONG).show()
+        val filename = idP
+        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+        ref.putFile(selectedPhtoUri!!).addOnCompleteListener{
+            saveData()
+        }
+    }
 
 
 
     fun btn_editPatientPhoto(view: View) {
-        Toast.makeText(applicationContext, "Esta opción estará lista en una próxima versión" , Toast.LENGTH_LONG).show()
+        view.alpha = 0.5f
+        Handler().postDelayed({
+            view.alpha = 1f
+        }, 800)
+
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, 0)
     }
     fun btn_save_editPatient(view: View) {
-        Toast.makeText(applicationContext, "Guardando" , Toast.LENGTH_LONG).show()
-        view.visibility = View.INVISIBLE
-        saveData()
+        view.alpha = 0.5f
         Handler().postDelayed({
-            view.visibility = View.VISIBLE
-        }, 1000)
+            view.alpha = 1f
+        }, 800)
+        Toast.makeText(applicationContext, "Guardando" , Toast.LENGTH_LONG).show()
+
+        if(selectedPhtoUri != null){
+            uploadPatienImage()
+        }
+        else{
+            saveData()
+        }
 
 
 }
     fun btn_delete_patient(view: View) {
-        view.visibility = View.INVISIBLE
+        view.alpha = 0.5f
+        Handler().postDelayed({
+            view.alpha = 1f
+        }, 800)
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Eliminar Paciente")
         builder.setMessage("Confirme que desea ELIMINAR a $patientName")
@@ -291,7 +359,6 @@ class EditPatientActivity : AppCompatActivity() {
         builder.setNeutralButton("Cancelar") { dialogInterface: DialogInterface, i: Int ->
         }
         builder.show()
-        view.visibility = View.VISIBLE
     }
 
 }

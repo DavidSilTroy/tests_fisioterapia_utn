@@ -3,6 +3,8 @@ package com.example.tests_fisioterapia.UI.activities
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -14,16 +16,26 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 import android.os.Environment
 import android.os.Handler
+import android.provider.MediaStore
 import android.widget.Toast
+import androidx.core.graphics.drawable.toBitmap
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.tests_fisioterapia.controllers.*
 import com.example.tests_fisioterapia.network.GetPatientDB
 import com.example.tests_fisioterapia.network.GetTestsPatientInfo
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.itextpdf.text.Document
 import com.itextpdf.text.Paragraph
 import com.itextpdf.text.pdf.PdfWriter
+import de.hdodenhof.circleimageview.CircleImageView
+import java.io.File
+import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.io.PrintWriter
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
@@ -64,6 +76,20 @@ class PatientInfoActivity : AppCompatActivity() {
             this.onBackPressed()
         }
         super.onResume()
+    }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            STORAGE_CODE -> {
+                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    //permission from popup was granted, call savePdf() method
+                    savePdf()
+                }
+                else{
+                    //permission from popup was denied, show error message
+                    Toast.makeText(this, "Permission denied...!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     fun showMsg(message:String){
@@ -117,6 +143,12 @@ class PatientInfoActivity : AppCompatActivity() {
                     "algo salió mal"
                     , Toast.LENGTH_LONG).show()
             }
+
+        setPhotoToIV()
+
+
+
+
     }
     fun createPatientReport(){
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
@@ -183,6 +215,37 @@ class PatientInfoActivity : AppCompatActivity() {
         }
     }
 
+    fun setPhotoToIV(){
+        val storage = Firebase.storage
+        val storageRef = storage.reference
+        val patientImgRef = storageRef.child("images/$idPatient")
+        val imageView = findViewById<CircleImageView>(R.id.iv_patient_photo_info)
+        val MAX_BYTES: Long = 10485760 //10Mb
+        val progresbarPhoto = findViewById<ProgressBar>(R.id.pb_photo_patient_info)
+        val noPhotoText = findViewById<TextView>(R.id.tv_no_photo_patient_info)
+
+        try {
+            patientImgRef.getBytes(MAX_BYTES).addOnSuccessListener {
+                // Data for "images/island.jpg" is returned, use this as needed
+                //showMsg("bien en getBytes ${it}")
+                val bitmap = BitmapFactory.decodeByteArray(it,0,it.size)
+                val BitmapDrawable = BitmapDrawable(bitmap)
+                imageView.setImageBitmap(BitmapDrawable.toBitmap())
+                progresbarPhoto.visibility = View.GONE
+            }.addOnFailureListener {
+                //showMsg("Algo falló en getBytes ${it.message}")
+                // Handle any errors
+                progresbarPhoto.visibility = View.GONE
+                noPhotoText.visibility = View.VISIBLE
+            }
+        } catch (e: Exception) {
+            progresbarPhoto.visibility = View.GONE
+            noPhotoText.visibility = View.VISIBLE
+        }
+
+
+    }
+
     fun GetTestDataDB(){
         databaseTests.testsCollection.get().addOnCompleteListener {
 
@@ -196,7 +259,6 @@ class PatientInfoActivity : AppCompatActivity() {
                 val listSize = it.result!!.data!!.size
                 val datakeyList = data.keys
                 var count = 1
-
                 for(i in datakeyList){
                     val testPosition = i
                     val testId = data.get(testPosition).toString()
@@ -240,20 +302,37 @@ class PatientInfoActivity : AppCompatActivity() {
         MainControl().showRecyclerTestsInfo(pbLoading, rvTestsInfo, adapter)
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when(requestCode){
-            STORAGE_CODE -> {
-                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    //permission from popup was granted, call savePdf() method
-                    savePdf()
-                }
-                else{
-                    //permission from popup was denied, show error message
-                    Toast.makeText(this, "Permission denied...!", Toast.LENGTH_SHORT).show()
+
+    fun CreateAppDirectory(){
+
+        /** Para guardar los datos de los pdfs***/
+
+        val sd_main = File(Environment.getExternalStorageDirectory(), "/FisioterapiaApp")
+        var success = true
+        if (!sd_main.exists())
+            success = sd_main.mkdir()
+
+        if (success) {
+            val sd = File("filename.txt")
+
+            if (!sd.exists())
+                success = sd.mkdir()
+
+            if (success) {
+                // directory exists or already created
+                val dest = File(sd, "filename.txt")
+                try {
+                    // response is the data written to file
+                    //PrintWriter(dest).use { out -> out.println("Hola mauricioo") }
+                } catch (e: Exception) {
+                    // handle the exception
                 }
             }
+        } else {
+            // directory creation is not successful
         }
     }
+
 
 
     fun btn_powered_action(view: View) {
@@ -261,23 +340,26 @@ class PatientInfoActivity : AppCompatActivity() {
         startActivity(intent)
     }
     fun btn_addNewTest(view: View) {
+        view.alpha = 0.5f
+        Handler().postDelayed({
+            view.alpha = 1f
+        }, 800)
         Toast.makeText(applicationContext, "Agregar un nuevo test", Toast.LENGTH_LONG).show()
-        view.visibility = View.INVISIBLE
         val intent = Intent(this, AddTestActivity::class.java).apply{
             putExtra("patientId", idPatient)
         }
         startActivity(intent)
-        view.visibility = View.VISIBLE
         testsInfolist = listOf()
     }
     fun btn_editPatient(view: View) {
-        view.visibility = View.INVISIBLE
-
+        view.alpha = 0.5f
+        Handler().postDelayed({
+            view.alpha = 1f
+        }, 800)
         val intent = Intent(this, EditPatientActivity::class.java).apply{
             putExtra("patientId", idPatient)
         }
         startActivity(intent)
-        view.visibility = View.VISIBLE
         this.finishAfterTransition()
 
     }
