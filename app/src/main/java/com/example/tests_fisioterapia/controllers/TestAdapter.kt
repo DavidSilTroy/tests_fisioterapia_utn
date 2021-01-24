@@ -8,11 +8,10 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat.startActivity
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tests_fisioterapia.R
@@ -126,7 +125,9 @@ class TestInfoAdapter(val tests:List<testInfoData>, val context: Context): Recyc
                 Handler().postDelayed({
                     it.alpha = 1f
                 }, 800)
+                
             }
+
 
             view.findViewById<ImageButton>(R.id.btn_eliminar_test_info_item).setOnClickListener{
                 it.alpha = 0.5f
@@ -149,5 +150,8 @@ class TestInfoAdapter(val tests:List<testInfoData>, val context: Context): Recyc
 
         }
     }
+
+
+
 
 }

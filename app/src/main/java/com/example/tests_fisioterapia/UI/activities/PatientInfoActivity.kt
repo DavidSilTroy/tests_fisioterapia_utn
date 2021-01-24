@@ -1,6 +1,7 @@
 package com.example.tests_fisioterapia.UI.activities
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -43,7 +44,6 @@ import java.util.*
 
 class PatientInfoActivity : AppCompatActivity() {
 
-    //private val db = FirebaseFirestore.getInstance()    //para la base de datos
     lateinit var databaseTests : GetTestsPatientInfo
     lateinit var databasePatient : GetPatientDB
     private var idPatient : String = ""
@@ -77,20 +77,14 @@ class PatientInfoActivity : AppCompatActivity() {
         }
         super.onResume()
     }
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when(requestCode){
-            STORAGE_CODE -> {
-                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    //permission from popup was granted, call savePdf() method
-                    savePdf()
-                }
-                else{
-                    //permission from popup was denied, show error message
-                    Toast.makeText(this, "Permission denied...!", Toast.LENGTH_SHORT).show()
-                }
-            }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode ==1 && resultCode == Activity.RESULT_OK && data != null){
+            showMsg("Holiwiiii")
         }
     }
+
 
     fun showMsg(message:String){
         Toast.makeText(applicationContext,
@@ -150,70 +144,7 @@ class PatientInfoActivity : AppCompatActivity() {
 
 
     }
-    fun createPatientReport(){
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-            //system OS >= Marshmallow(6.0), check permission is enabled or not
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_DENIED){
-                //permission was not granted, request it
-                val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                requestPermissions(permissions, STORAGE_CODE)
-            }
-            else{
-                //permission already granted, call savePdf() method
-                savePdf()
-            }
-        }
-        else{
-            //system OS < marshmallow, call savePdf() method
-            savePdf()
-        }
-    }
-    private fun savePdf() {
 
-        //get text from EditText i.e. textEt
-        val name = dataList["name"]
-        val age = dataList["age"]
-        val weight =dataList["weight"]
-        val height =dataList["height"]
-        val diagnosis =dataList["diagnosis"]
-        val importantComments = dataList["importantComments"]
-        //var gender = dataList["gender"]
-
-        //create object of Document class
-        val mDoc = Document()
-        //pdf file name
-        val mFileName = "Información Básica de $name"
-        //pdf file path
-        val mFilePath = Environment.getExternalStorageDirectory().toString() + "/" + mFileName +".pdf"
-        try {
-            //create instance of PdfWriter class
-            PdfWriter.getInstance(mDoc, FileOutputStream(mFilePath))
-
-            //open the document for writing
-            mDoc.open()
-
-            //add author of the document (metadata)
-            mDoc.addAuthor("Fisioterapia App")
-
-            //add paragraph to the document
-            mDoc.add(Paragraph("El nombre del paciente es: $name"))
-            mDoc.add(Paragraph("La edad es: $age años"))
-            mDoc.add(Paragraph("El peso es: $weight [kg]"))
-            mDoc.add(Paragraph("La altura es: $height [m]"))
-            mDoc.add(Paragraph("Diagnostico: $diagnosis"))
-            mDoc.add(Paragraph("Comentarios importantes: $importantComments"))
-
-            //close document
-            mDoc.close()
-            //show file saved message with file name and path
-            Toast.makeText(this, "$mFileName.pdf\n se ha guardado en \n tu dispositivo", Toast.LENGTH_LONG).show()
-        }
-        catch (e: Exception){
-            //if anything goes wrong causing exception, get and show exception message
-            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
-        }
-    }
 
     fun setPhotoToIV(){
         val storage = Firebase.storage
@@ -303,35 +234,7 @@ class PatientInfoActivity : AppCompatActivity() {
     }
 
 
-    fun CreateAppDirectory(){
 
-        /** Para guardar los datos de los pdfs***/
-
-        val sd_main = File(Environment.getExternalStorageDirectory(), "/FisioterapiaApp")
-        var success = true
-        if (!sd_main.exists())
-            success = sd_main.mkdir()
-
-        if (success) {
-            val sd = File("filename.txt")
-
-            if (!sd.exists())
-                success = sd.mkdir()
-
-            if (success) {
-                // directory exists or already created
-                val dest = File(sd, "filename.txt")
-                try {
-                    // response is the data written to file
-                    //PrintWriter(dest).use { out -> out.println("Hola mauricioo") }
-                } catch (e: Exception) {
-                    // handle the exception
-                }
-            }
-        } else {
-            // directory creation is not successful
-        }
-    }
 
 
 
@@ -362,6 +265,128 @@ class PatientInfoActivity : AppCompatActivity() {
         startActivity(intent)
         this.finishAfterTransition()
 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            STORAGE_CODE -> {
+                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    //permission from popup was granted, call savePdf() method
+                    savePdf()
+                }
+                else{
+                    //permission from popup was denied, show error message
+                    Toast.makeText(this, "Permiso denegado para crear informes..", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+    fun CreateAppDirectory(){
+
+        /** Para guardar los datos de los pdfs***/
+
+        val sd_main = File(Environment.getExternalStorageDirectory(), "/FisioterapiaApp")
+        var success = true
+        if (!sd_main.exists())
+            success = sd_main.mkdir()
+
+        if (success) {
+            val sd = File("filename.txt")
+
+            if (!sd.exists())
+                success = sd.mkdir()
+
+            if (success) {
+                // directory exists or already created
+                val dest = File(sd, "filename.txt")
+                try {
+                    // response is the data written to file
+                    //PrintWriter(dest).use { out -> out.println("Hola mauricioo") }
+                } catch (e: Exception) {
+                    // handle the exception
+                }
+            }
+        } else {
+            // directory creation is not successful
+        }
+    }
+    fun createPatientReport(){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            //system OS >= Marshmallow(6.0), check permission is enabled or not
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_DENIED){
+                //permission was not granted, request it
+                val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                requestPermissions(permissions, STORAGE_CODE)
+            }
+            else{
+                //permission already granted, call savePdf() method
+                savePdf()
+            }
+        }
+        else{
+            //system OS < marshmallow, call savePdf() method
+            savePdf()
+        }
+    }
+    private fun savePdf() {
+
+        //get text from EditText i.e. textEt
+        val name = dataList["name"]
+        val age = dataList["age"]
+        val weight =dataList["weight"]
+        val height =dataList["height"]
+        val diagnosis =dataList["diagnosis"]
+        val importantComments = dataList["importantComments"]
+        //var gender = dataList["gender"]
+
+        //create object of Document class
+        val mDoc = Document()
+        //pdf file name
+        val mFileName = "Información Básica de $name"
+        //pdf file path
+        val mFilePath = Environment.getExternalStorageDirectory().toString() + "/fisioterapiaApp/Informes/" + mFileName +".pdf"
+        try {
+            //create instance of PdfWriter class
+            PdfWriter.getInstance(mDoc, FileOutputStream(mFilePath))
+
+            //open the document for writing
+            mDoc.open()
+
+            //add author of the document (metadata)
+            mDoc.addAuthor("Fisioterapia App")
+
+            //add paragraph to the document
+            mDoc.add(Paragraph("El nombre del paciente es: $name"))
+            mDoc.add(Paragraph("La edad es: $age años"))
+            mDoc.add(Paragraph("El peso es: $weight [kg]"))
+            mDoc.add(Paragraph("La altura es: $height [m]"))
+            mDoc.add(Paragraph("Diagnostico: $diagnosis"))
+            mDoc.add(Paragraph("Comentarios importantes: $importantComments"))
+
+            //close document
+            mDoc.close()
+            //show file saved message with file name and path
+            Toast.makeText(this, "$mFileName.pdf\n se ha guardado en \n tu dispositivo", Toast.LENGTH_LONG).show()
+        }
+        catch (e: Exception){
+            //if anything goes wrong causing exception, get and show exception message
+            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

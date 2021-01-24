@@ -14,7 +14,6 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
-import com.bumptech.glide.Glide
 import com.example.tests_fisioterapia.R
 import com.example.tests_fisioterapia.controllers.capitalizeFirstLetter
 import com.example.tests_fisioterapia.network.*
@@ -27,7 +26,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import de.hdodenhof.circleimageview.CircleImageView
 import java.lang.Exception
-import java.text.SimpleDateFormat
 
 class EditPatientActivity : AppCompatActivity() {
 
