@@ -128,7 +128,13 @@ class IndexActivity : AppCompatActivity() {
                 if (email.contains("@utn.edu.ec")){//iniciando sesion con email
                     val end = email.indexOf("@")
                     user = email.substring(0,end)
-                    registeredUser(email,password,view)
+                    if(user == "invitado"){
+                        Toast.makeText(baseContext,
+                                "Ups, aún no implementamos esa opción.. espera la próxima versión",
+                                Toast.LENGTH_LONG).show()
+                    }else{
+                        registeredUser(email,password,view)
+                    }
                 }else{//diciendo que necesita ser de la UTN xd
                     Toast.makeText(baseContext,
                             "Necesitas usar tu correo institucional UTN",
