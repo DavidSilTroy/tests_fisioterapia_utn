@@ -153,7 +153,6 @@ class PatientInfoActivity : AppCompatActivity() {
 
 
     }
-
     fun GetTestDataDB(){
         databaseTests.testsCollection.get().addOnCompleteListener {
 
@@ -195,7 +194,6 @@ class PatientInfoActivity : AppCompatActivity() {
         }
 
     }
-
     fun initRecyclerTests(){
         /**Guardamos la id de los Views para ubicar los datos**/
         val rvTestsInfo = findViewById<RecyclerView>(R.id.rv_tests_patient_info)
@@ -234,6 +232,7 @@ class PatientInfoActivity : AppCompatActivity() {
         }, 800)
         val intent = Intent(this, EditPatientActivity::class.java).apply{
             putExtra("patientId", idPatient)
+            putExtra("userloged",user)
         }
         startActivity(intent)
         this.finishAfterTransition()

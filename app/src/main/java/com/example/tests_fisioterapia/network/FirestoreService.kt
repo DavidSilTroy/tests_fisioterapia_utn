@@ -41,32 +41,10 @@ class  AddPatientDB(val user:String, val context: Context, val date : Long){
     var patienRegister = db.collection(M_C_P).document("p$date").collection(S_C_R).document(D_M)
 
 }
-class EditPatientDB(val idP:String , val user:String, val context: Context){
-    private var date :Long = 0
-
-    fun saveData(datalist:MutableMap<String,Any>){
-        date = System.currentTimeMillis() //tiempo actual en millisegundos
-        val dateString: String = SimpleDateFormat(PATTERN_DATE).format(date)
-        datalist["edited"] = dateString
-        db.collection(M_C_P).document(idP).update(
-                datalist
-        )
-    }
-
-    fun saveRegister(datalist:MutableMap<String,Any>){
-
-        date = System.currentTimeMillis() //tiempo actual en millisegundos
-        val dateString: String = SimpleDateFormat(PATTERN_DATE).format(date)
-
-        datalist["edited"] = dateString
-        datalist["edited_by"] = user
-
-        db.collection(M_C_P).document(idP).collection(S_C_R).document("r$date").set(
-                datalist
-        )
-    }
-
-
+class EditPatientDB(val idP:String , val user:String){
+    val userPatient = db.collection(M_C_UP).document(user)
+    val patienData = db.collection(M_C_P).document(idP)
+    val register = db.collection(M_C_P).document(idP).collection(S_C_R)
 }
 class PatientDBData(val idP:String ){
     val patientData = db.collection(M_C_P).document(idP)

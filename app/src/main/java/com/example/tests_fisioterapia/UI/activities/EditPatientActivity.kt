@@ -1,5 +1,6 @@
 package com.example.tests_fisioterapia.UI.activities
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
@@ -15,6 +16,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import com.example.tests_fisioterapia.R
+import com.example.tests_fisioterapia.controllers.MainControl
+import com.example.tests_fisioterapia.controllers.ShowMessages
 import com.example.tests_fisioterapia.controllers.capitalizeFirstLetter
 import com.example.tests_fisioterapia.network.*
 import com.google.firebase.auth.FirebaseAuth
@@ -26,38 +29,37 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import de.hdodenhof.circleimageview.CircleImageView
 import java.lang.Exception
+import java.text.SimpleDateFormat
 
 class EditPatientActivity : AppCompatActivity() {
 
+    //VARIABLES GLOBALES
     lateinit var databaseEdit : EditPatientDB
     lateinit var databaseData : PatientDBData
+
+    lateinit var message: ShowMessages
+    lateinit var user : String
+    lateinit var idP : String
+
     var dbDataList : MutableMap<String,Any> = hashMapOf()
     var dataETList : MutableMap<String,Any> = hashMapOf()
     var selectedPhtoUri: Uri? = null
 
-    private lateinit var auth: FirebaseAuth             //para la autenticación de firebase
-    private val db = FirebaseFirestore.getInstance()    //para la base de datos
     var patientsId = listOf<String>()                   //para guardar todas las ids de los pacientes
-    lateinit var idP : String
     var patientName = ""
-    lateinit var user : String
     var position = 0
 
-
+    //FUNCIONES PROPIAS DE ANDROID
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_patient)
-        //Toast.makeText(applicationContext, patients.size.toString(), Toast.LENGTH_LONG).show()
-
-        //auth = Firebase.auth
-        auth = Firebase.auth
         idP =  intent.getStringExtra("patientId")
-        val currentUser = auth.currentUser
-        val end = currentUser!!.email!!.indexOf("@")
-        user = currentUser.email!!.substring(0,end)
-        databaseEdit = EditPatientDB(idP,user,applicationContext)
+        user = intent.getStringExtra("userloged")
+        databaseEdit = EditPatientDB(idP,user)
         databaseData = PatientDBData(idP)
+        message = ShowMessages(this)
         getDBData()
+        setPhotoToIV()
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -70,64 +72,73 @@ class EditPatientActivity : AppCompatActivity() {
         }
     }
 
+    //FUNCIONES PARA LA ACTIVITY
+    fun goToMain(){
+        val intent = Intent(this, MainActivity::class.java)
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        this.finishAfterTransition()
+        startActivity(intent)
+
+    }                               /**Ir a la actividad principal y borrar todas las pestañas abiertas antes**/
+    fun selectPicture(){
+        val intent  =   Intent(Intent.ACTION_PICK)
+        intent.type =   "image/*"
+
+        startActivityForResult(intent, 0)
+    }                          /**Le pedimos al usuario que seleccione una imagen**/
     fun getDBData(){
-        setPhotoToIV()
         databaseData.patientData.get()
                 .addOnCompleteListener{
-                    val name = it.result?.data!!.get("name").toString()
-                    val lastname = it.result?.data!!.get("last_name").toString()
-                    val age = it.result?.data!!.get("age").toString()
-                    val gender = it.result?.data!!.get("gender").toString()
-                    val weight = it.result?.data!!.get("weight").toString()
-                    val height = it.result?.data!!.get("height").toString()
-                    val email = it.result?.data!!.get("email").toString()
-                    val diagnosis = it.result?.data!!.get("diagnosis").toString()
-                    val importantComments = it.result?.data!!.get("important_comments").toString()
+                    val name                = it.result?.data!!.get("name").toString()
+                    val lastname            = it.result?.data!!.get("last_name").toString()
+                    val age                 = it.result?.data!!.get("age").toString()
+                    val gender              = it.result?.data!!.get("gender").toString()
+                    val weight              = it.result?.data!!.get("weight").toString()
+                    val height              = it.result?.data!!.get("height").toString()
+                    val email               = it.result?.data!!.get("email").toString()
+                    val diagnosis           = it.result?.data!!.get("diagnosis").toString()
+                    val importantComments   = it.result?.data!!.get("important_comments").toString()
 
                     dbDataList = hashMapOf(
-                            "name" to name.capitalizeFirstLetter(),
-                            "last_name" to lastname.capitalizeFirstLetter(),
-                            "age" to age,
-                            "gender" to gender,
-                            "weight" to weight,
-                            "height" to height,
-                            "email" to email,
-                            "diagnosis" to diagnosis,
-                            "important_comments" to importantComments
-                    )
-                    showDataET()
-
+                            "name"                  to name.capitalizeFirstLetter(),
+                            "last_name"             to lastname.capitalizeFirstLetter(),
+                            "age"                   to age,
+                            "gender"                to gender,
+                            "weight"                to weight,
+                            "height"                to height,
+                            "email"                 to email,
+                            "diagnosis"             to diagnosis,
+                            "important_comments"    to importantComments
+                    )/**Guardamos los datos en una lista con llave de tipo string**/
+                    showDataET()/**Mostramos los datos en pantalla**/
                 }
                 .addOnCanceledListener {
-                    Toast.makeText(this,
-                            "algo salió mal"
-                            , Toast.LENGTH_LONG).show()
+                    message.show("algo salió mal")
                 }
-
-
-    }//Obtener datos de la Base de datos
+    }                              /**Buscamos los datos en la base de datos para mostrarlos**/
     fun showDataET(){
-            val name                = dbDataList["name"].toString()
-            val lastname            = dbDataList["last_name"].toString()
-            val age                 = dbDataList["age"].toString()
-            val gender              = dbDataList["gender"].toString()
-            val weight              = dbDataList["weight"].toString()
-            val height              = dbDataList["height"].toString()
-            val email               = dbDataList["email"].toString()
-            val diagnosis           = dbDataList["diagnosis"].toString()
-            val importantComments   = dbDataList["important_comments"].toString()
+        val name                = dbDataList["name"].toString()
+        val lastname            = dbDataList["last_name"].toString()
+        val age                 = dbDataList["age"].toString()
+        val gender              = dbDataList["gender"].toString()
+        val weight              = dbDataList["weight"].toString()
+        val height              = dbDataList["height"].toString()
+        val email               = dbDataList["email"].toString()
+        val diagnosis           = dbDataList["diagnosis"].toString()
+        val importantComments   = dbDataList["important_comments"].toString()
 
-            findViewById<TextView>(R.id.et_edit_name).text                  = name
-            findViewById<TextView>(R.id.et_edit_last_name).text             = lastname
-            findViewById<TextView>(R.id.et_edit_age).text                   = age
-            findViewById<TextView>(R.id.et_edit_gender).text                = gender
-            findViewById<TextView>(R.id.et_edit_weight).text                = weight
-            findViewById<TextView>(R.id.et_edit_height).text                = height
-            findViewById<TextView>(R.id.et_edit_email).text                 = email
-            findViewById<TextView>(R.id.et_edit_diagnosis).text             = diagnosis
-            findViewById<TextView>(R.id.et_edit_important_comments).text    = importantComments
-            patientName = "$name $lastname"
-    }//Mostramos los datos que existen en la base de datos
+        findViewById<TextView>(R.id.et_edit_name).text                  = name
+        findViewById<TextView>(R.id.et_edit_last_name).text             = lastname
+        findViewById<TextView>(R.id.et_edit_age).text                   = age
+        findViewById<TextView>(R.id.et_edit_gender).text                = gender
+        findViewById<TextView>(R.id.et_edit_weight).text                = weight
+        findViewById<TextView>(R.id.et_edit_height).text                = height
+        findViewById<TextView>(R.id.et_edit_email).text                 = email
+        findViewById<TextView>(R.id.et_edit_diagnosis).text             = diagnosis
+        findViewById<TextView>(R.id.et_edit_important_comments).text    = importantComments
+
+        patientName = "$name $lastname" /**Nombre completo del paciente**/
+    }                             /**Mostramos los datos en la pantalla**/
     fun getETData():Boolean{
         val name                = findViewById<TextView>(R.id.et_edit_name).text.toString()
         val lastname            = findViewById<TextView>(R.id.et_edit_last_name).text.toString()
@@ -141,35 +152,35 @@ class EditPatientActivity : AppCompatActivity() {
 
         var msj = ""
         when{
-            name.isBlank()-> msj = "El nombre no puede quedar vacío"
-            lastname.isBlank()-> msj = "El apellido no puede quedar vacío"
-            age.isBlank()-> msj = "La edad no puede quedar vacío"
-            gender.isBlank()-> msj = "El sexo no puede quedar vacío"
-            weight.isBlank()-> msj = "El peso no puede quedar vacío"
-            height.isBlank()-> msj = "La altura no puede quedar vacío"
+            name.isBlank()      -> msj = "El nombre no puede quedar vacío"
+            lastname.isBlank()  -> msj = "El apellido no puede quedar vacío"
+            age.isBlank()       -> msj = "La edad no puede quedar vacío"
+            gender.isBlank()    -> msj = "El sexo no puede quedar vacío"
+            weight.isBlank()    -> msj = "El peso no puede quedar vacío"
+            height.isBlank()    -> msj = "La altura no puede quedar vacío"
             else ->{
                 dataETList= hashMapOf(
-                        "name" to name.capitalizeFirstLetter(),
-                        "last_name" to lastname.capitalizeFirstLetter(),
-                        "age" to age,
-                        "gender" to gender,
-                        "weight" to weight,
-                        "height" to height,
-                        "email" to email,
-                        "diagnosis" to diagnosis,
-                        "important_comments" to importantComments
-                )
+                        "name"                  to name.capitalizeFirstLetter(),
+                        "last_name"             to lastname.capitalizeFirstLetter(),
+                        "age"                   to age,
+                        "gender"                to gender,
+                        "weight"                to weight,
+                        "height"                to height,
+                        "email"                 to email,
+                        "diagnosis"             to diagnosis,
+                        "important_comments"    to importantComments
+                )/**Guardamos los datos en una lista con llave de tipo string**/
                 return true
             }
-        }
-        Toast.makeText(applicationContext, msj, Toast.LENGTH_LONG).show()
+        }           /**Nos aseguramos que los campos no queden vacíos**/
+        message.show(msj)   /**Mostramos un mensaje en caso de que un campo está vacío**/
         return false
 
-    }//obtener los datos escritos en un Map
+    }                      /**Verificamos que los datos no estén vacios y se guardan en una lista**/
     fun saveData(){
         val registerList : MutableMap<String,Any> = hashMapOf()
         if (getETData()){
-            val keys = listOf(
+            val keys        = listOf(
                     "name",
                     "last_name",
                     "age",
@@ -179,190 +190,174 @@ class EditPatientActivity : AppCompatActivity() {
                     "email",
                     "diagnosis",
                     "important_comments"
-            )
-            var haschanged = false
-            val changesList = listOf<String>().toMutableList()
+            ) /**llaves para las listas**/
+            var haschanged  = false      /**Para saber si los datos obtenidos son los mismos a los que se pusieron al inicio**/
+            val changesList = listOf<String>().toMutableList() /**Para poner el lista los datos que sí se cambiaron**/
 
             for(k in keys){
                 if(dbDataList[k]!! != dataETList[k]) {
-                    changesList.add(k)
+                    changesList.add(k)/**Se agrega la llave del datos que cambió**/
                     haschanged = true
-                }
+                } /**En caso de que los datos obtenidos con los datos mostrados sean distintos**/
             }
-            if(selectedPhtoUri != null){
-                haschanged = true
-                uploadPatienImage()
-            }
+
             if(haschanged){
                 for (i in changesList){
                     registerList[i]= dataETList[i] as Any
-                }
-                databaseEdit.saveData(dataETList)
-                databaseEdit.saveRegister(registerList)
+                }/**Se guardan en una lista los datos que se van a actualizar**/
 
-                Handler().postDelayed({
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    this.finishAfterTransition()
-                    startActivity(intent)
-                }, 1100)
+                val date                    = System.currentTimeMillis() //tiempo actual en millisegundos
+                val dateString: String      = SimpleDateFormat(PATTERN_DATE).format(date)
+                dataETList["edited"]        = dateString
+                registerList["edited"]      = dateString
+                registerList["edited_by"]   = user
 
-            }else{
-                if (selectedPhtoUri != null){
-                    Handler().postDelayed({
-                        val intent = Intent(this, MainActivity::class.java)
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        this.finishAfterTransition()
-                        startActivity(intent)
-                    }, 1100)
+                databaseEdit.patienData.update(dataETList)/**Grabamos los datos**/
+                        .addOnCompleteListener {
+                            databaseEdit.register.document("r$date").set(registerList )
+                                    .addOnCompleteListener {
+                                        goToMain()
+                                    }
+                                    .addOnFailureListener {
+                                        message.show("Algo salió mal al guardar el registro..")
+                                    }
+                        }
+                        .addOnFailureListener {
+                            message.show("Algo salió mal al guardar los datos..")
+                        }
+            }/**En caso de que se haya realizado un cambio en los textos*/
+            else{
+                if(selectedPhtoUri != null){
+                    message.show("Guardando foto")
+                    goToMain()
                 }else{
-                    Toast.makeText(this,
-                            "No se han hecho cambios"
-                            , Toast.LENGTH_LONG).show()
+                    message.show("No se han hecho cambios")
+                    this.onBackPressed()
                 }
-
             }
-        }
-    }
-    fun delet_patient(){
-        findViewById<RelativeLayout>(R.id.layout_ereasing_patient_edit).visibility = View.VISIBLE
-        val currentUser = auth.currentUser
-        val end = currentUser!!.email!!.indexOf("@")
-        val user = currentUser.email!!.substring(0,end)
-
-
-        db.collection(M_C_UP).document(user).get()
-                .addOnCompleteListener {
-                    if(it.result?.data.isNullOrEmpty()){
-                        Toast.makeText(applicationContext,
-                                "Eroor al encontrar el usuario a borrar.. no hay datos"
-                                , Toast.LENGTH_LONG).show()
-                    }else{
-                        val documents = it.result?.data
-                        val idPatientsList = documents?.keys?.toList()!!
-                        getTheIds(documents)
-                        position = getThePosition(documents)
-
-                        //eleminando el valor específico
-                        db.collection(M_C_UP).document(user)
-                                .update(hashMapOf(idPatientsList[position] to FieldValue.delete()) as Map<String, Any>)
-                                .addOnCompleteListener{
-                                    Toast.makeText(applicationContext,
-                                            "Borrando a $patientName"
-                                            , Toast.LENGTH_LONG).show()
-                                    Handler().postDelayed({
-                                        val intent = Intent(this, MainActivity::class.java)
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        this.finishAfterTransition()
-                                        startActivity(intent)
-                                    }, 2000)
-
-                                }
-                                .addOnCanceledListener {
-                                    Toast.makeText(applicationContext,
-                                            "no se pudo borrar el paciente"
-                                            , Toast.LENGTH_LONG).show()
-                                }
-                    }
-                }
-                .addOnFailureListener {
-                    Toast.makeText(applicationContext,
-                            "Algo salió mal, revisa tu internet y vuelve a intentarlo" ,
-                            Toast.LENGTH_LONG).show()
-                }
-        //findViewById<RelativeLayout>(R.id.layout_ereasing_patient_edit).visibility = View.GONE
-    }
-    fun getThePosition(documents: Map<String, Any>): Int {
-        //Comparo las ids de los usuarios hasta encontrar la del paciente
+        }/**Si los datos importantes no están vacios**/
+    }                               /**Guardamos los datos en caso de que se hayan realizado cambios**/
+    fun getThePosition(): Int {
         val end = patientsId.size-1
         for (i in 0..end){
-         if(patientsId[i]==idP) return i
+            if(patientsId[i]==idP) return i
         }
-        return -1
-    }
-    fun getTheIds(documents: Map<String, Any>) {
-        //obtengo todas las ids de pacientes que tiene el usuario
+        return -1 //esto creará un error xd hay que corregir o controlar
+    }                   /**Obtengo la posición del paciente en la lista de pacientes del usuario**/
+    fun getTheIds(documents: Map<String, Any>){
+
         val idPatientsList = documents.keys.toList()
+
         if(idPatientsList.size>0){
+
             patientsId = listOf()
             val pIdColector = patientsId.toMutableList()
+
             for(i in 0..idPatientsList.size-1){
                 val data = documents.get(idPatientsList[i])!!.toString()
                 pIdColector.add(data)
             }
-            patientsId = pIdColector.toList()
-        }else{
-            Toast.makeText(applicationContext,
-                    "No se encuentran pacientes..."
-                    , Toast.LENGTH_LONG).show()
+
+            patientsId = pIdColector.toList() /**Se guardan las ids**/
+            position = getThePosition() /**Obtenemos la posición en la lista de el paciente**/
+
+        }/**La lista debe tener al menos 1 item**/
+        else{
+            message.show("No se encuentra ningún paciente.. espera kha? xd") /**Este mensaje no debería verse jajaja**/
+            goToMain()
         }
-    }
+    }   /**Se obtienen todas las ids de los pacientes que tiene el usuario**/
+    fun delet_patient(){
+        val loadingEreasing         = findViewById<RelativeLayout>(R.id.layout_ereasing_patient_edit)
+        loadingEreasing.visibility  = View.VISIBLE /**Mostramos una pantalla de carga**/
+
+        databaseEdit.userPatient.get()
+                .addOnCompleteListener {
+
+                    if(it.result?.data.isNullOrEmpty()){
+                        message.show("Error al encontrar el usuario a borrar, no hay datos")
+                    }else{
+                        val documents       = it.result?.data
+                        val idPatientsList  = documents?.keys?.toList()!!
+
+                        getTheIds(documents)
+
+                        //eleminando el valor específico
+                        databaseEdit.userPatient
+                                .update(hashMapOf(idPatientsList[position] to FieldValue.delete()) as Map<String, Any>)
+                                .addOnCompleteListener{
+
+                                    message.show("Borrando a $patientName")
+
+                                    Handler().postDelayed({
+                                        goToMain()
+                                    }, 1500)
+                                }
+                                .addOnCanceledListener {
+                                    message.show("no se pudo borrar el paciente")
+                                    loadingEreasing.visibility = View.GONE
+                                }
+                    }
+                }
+                .addOnFailureListener {
+                    message.show("Algo salió mal, revisa tu internet y vuelve a intentarlo")
+                    loadingEreasing.visibility = View.GONE
+                }
+    }                          /**Borramos al paciente de la lista de pacientes del usuario**/
     fun setPhotoToIV(){
-        val storage = Firebase.storage
-        val storageRef = storage.reference
-        val patientImgRef = storageRef.child("images/$idP")
-        val imageView = findViewById<CircleImageView>(R.id.iv_edit_picture_patient)
+
+        val storage         = Firebase.storage
+        val storageRef      = storage.reference
+        val patientImgRef   = storageRef.child("images/$idP")
+        val imageView       = findViewById<CircleImageView>(R.id.iv_edit_picture_patient)
         val MAX_BYTES: Long = 10485760 //10Mb
         val progresbarPhoto = findViewById<ProgressBar>(R.id.pb_edit_photo_patient)
 
         try {
             patientImgRef.getBytes(MAX_BYTES).addOnSuccessListener {
-                // Data for "images/island.jpg" is returned, use this as needed
-                //showMsg("bien en getBytes ${it}")
-                val bitmap = BitmapFactory.decodeByteArray(it,0,it.size)
-                val BitmapDrawable = BitmapDrawable(bitmap)
+
+                val bitmap          = BitmapFactory.decodeByteArray(it,0,it.size)
+                val BitmapDrawable  = BitmapDrawable(bitmap)
+
                 imageView.setImageBitmap(BitmapDrawable.toBitmap())
                 progresbarPhoto.visibility = View.GONE
+
             }.addOnFailureListener {
-                //showMsg("Algo falló en getBytes ${it.message}")
-                // Handle any errors
                 progresbarPhoto.visibility = View.GONE
             }
+
         } catch (e: Exception) {
             progresbarPhoto.visibility = View.GONE
         }
-
-
-    }
+    }                           /**Se obtiene la foto del paciente si es que existe una en la base de datos**/
     fun uploadPatienImage(){
-        Toast.makeText(applicationContext, "Revisando los datos.." , Toast.LENGTH_LONG).show()
+        message.show("Revisando los datos..")
+
         val filename = idP
-        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+        val ref      = FirebaseStorage.getInstance().getReference("/images/$filename")
+
         ref.putFile(selectedPhtoUri!!).addOnCompleteListener{
             saveData()
         }
-    }
+    }                      /**Se guarda la foto del paciente**/
 
-
-
+    //BOTONES
     fun btn_editPatientPhoto(view: View) {
-        view.alpha = 0.5f
-        Handler().postDelayed({
-            view.alpha = 1f
-        }, 800)
-
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, 0)
-    }
+        MainControl().buttonEffect(view)
+        selectPicture()
+    }   /**Botón de agregar foto**/
     fun btn_save_editPatient(view: View) {
-        view.alpha = 0.5f
-        Handler().postDelayed({
-            view.alpha = 1f
-        }, 800)
-        Toast.makeText(applicationContext, "Guardando" , Toast.LENGTH_LONG).show()
-
-        saveData()
-
-
-
-
-}
+        MainControl().buttonEffect(view)
+        message.show("Guardando")
+        if(selectedPhtoUri!= null){
+            uploadPatienImage()
+        }/**En caso de haber agregado foto esta se subirá primero y después los datos**/
+        else{
+            saveData()
+        }
+    }   /**Botón de agregar datos editados**/
     fun btn_delete_patient(view: View) {
-        view.alpha = 0.5f
-        Handler().postDelayed({
-            view.alpha = 1f
-        }, 800)
+        MainControl().buttonEffect(view)
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Eliminar Paciente")
         builder.setMessage("Confirme que desea ELIMINAR a $patientName")
@@ -372,6 +367,6 @@ class EditPatientActivity : AppCompatActivity() {
         builder.setNeutralButton("Cancelar") { dialogInterface: DialogInterface, i: Int ->
         }
         builder.show()
-    }
+    }     /**Botón de eliminar el paciente de la lista del usuario**/
 
 }

@@ -1,5 +1,7 @@
 package com.example.tests_fisioterapia.controllers
 
+import android.content.Context
+import android.os.Handler
 import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
@@ -38,7 +40,20 @@ class MainControl(){
     fun showRecyclerTestsInfo(layoutLoading:ProgressBar,rvTestsInfo:RecyclerView,adapter: TestInfoAdapter){
         rvTestsInfo.adapter = adapter
         layoutLoading.visibility = View.GONE
+    }
+    fun buttonEffect(view:View){
+        view.alpha = 0.5f
+        Handler().postDelayed({
+            view.alpha = 1f
+        }, 800)
+    }
+}
 
+class  ShowMessages(val context:Context){
+    fun show(message:String){
+        Toast.makeText(context,
+                message
+                , Toast.LENGTH_LONG).show()
     }
 }
 
