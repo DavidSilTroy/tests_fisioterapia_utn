@@ -27,17 +27,22 @@ import com.google.firebase.storage.ktx.storage
 import java.text.SimpleDateFormat
 
 class AddPatientActivity : AppCompatActivity() {
-    var user = ""
-    var number = 1
-    var dateString = ""
-    lateinit var newPatient:Map<String,Any>
-    private val date = System.currentTimeMillis() //tiempo actual en millisegundos
-    lateinit var btn_add_view : View
-    lateinit var pb_add : ProgressBar
-    lateinit var databaseAdd : AddPatientDB
-    var selectedPhtoUri: Uri? = null
-    var fistPatient = true
 
+
+    lateinit private var databaseAdd  : AddPatientDB
+    lateinit private var btn_add_view : View
+    lateinit private var pb_add       : ProgressBar
+
+    lateinit var newPatient : Map<String,Any>
+
+    private var selectedPhtoUri: Uri? = null
+
+    private val date = System.currentTimeMillis() //tiempo actual en millisegundos
+
+    private var fistPatient = true
+    private var dateString  = ""
+    private var number      = 1
+    private var user        = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

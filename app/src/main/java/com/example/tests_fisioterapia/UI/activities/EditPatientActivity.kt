@@ -36,18 +36,18 @@ class EditPatientActivity : AppCompatActivity() {
     //VARIABLES GLOBALES
     lateinit var databaseEdit : EditPatientDB
     lateinit var databaseData : PatientDBData
-
-    lateinit var message: ShowMessages
-    lateinit var user : String
-    lateinit var idP : String
+    lateinit var message      : ShowMessages
+    lateinit var user         : String
+    lateinit var idP          : String
 
     var dbDataList : MutableMap<String,Any> = hashMapOf()
     var dataETList : MutableMap<String,Any> = hashMapOf()
-    var selectedPhtoUri: Uri? = null
 
-    var patientsId = listOf<String>()                   //para guardar todas las ids de los pacientes
+    var selectedPhtoUri: Uri?   = null
+
+    var patientsId  = listOf<String>()
     var patientName = ""
-    var position = 0
+    var position    = 0
 
     //FUNCIONES PROPIAS DE ANDROID
     override fun onCreate(savedInstanceState: Bundle?) {
