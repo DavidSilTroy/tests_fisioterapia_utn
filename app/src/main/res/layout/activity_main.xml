@@ -58,6 +58,7 @@
                 android:layout_gravity="center"
                 android:paddingHorizontal="5dp"
                 android:gravity="center"
+                android:paddingEnd="20dp"
                 android:orientation="horizontal">
 
                 <RelativeLayout

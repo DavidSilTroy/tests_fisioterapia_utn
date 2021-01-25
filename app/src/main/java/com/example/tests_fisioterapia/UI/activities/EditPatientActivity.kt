@@ -30,7 +30,7 @@ import java.lang.Exception
 class EditPatientActivity : AppCompatActivity() {
 
     lateinit var databaseEdit : EditPatientDB
-    lateinit var databaseData : GetPatientDB
+    lateinit var databaseData : PatientDBData
     var dbDataList : MutableMap<String,Any> = hashMapOf()
     var dataETList : MutableMap<String,Any> = hashMapOf()
     var selectedPhtoUri: Uri? = null
@@ -56,7 +56,7 @@ class EditPatientActivity : AppCompatActivity() {
         val end = currentUser!!.email!!.indexOf("@")
         user = currentUser.email!!.substring(0,end)
         databaseEdit = EditPatientDB(idP,user,applicationContext)
-        databaseData = GetPatientDB(idP)
+        databaseData = PatientDBData(idP)
         getDBData()
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -72,7 +72,7 @@ class EditPatientActivity : AppCompatActivity() {
 
     fun getDBData(){
         setPhotoToIV()
-        databaseData.patientWithId.get()
+        databaseData.patientData.get()
                 .addOnCompleteListener{
                     val name = it.result?.data!!.get("name").toString()
                     val lastname = it.result?.data!!.get("last_name").toString()
@@ -189,16 +189,32 @@ class EditPatientActivity : AppCompatActivity() {
                     haschanged = true
                 }
             }
+            if(selectedPhtoUri != null){
+                haschanged = true
+                uploadPatienImage()
+            }
             if(haschanged){
                 for (i in changesList){
                     registerList[i]= dataETList[i] as Any
                 }
                 databaseEdit.saveData(dataETList)
                 databaseEdit.saveRegister(registerList)
-                this.onBackPressed()
+
+                Handler().postDelayed({
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    this.finishAfterTransition()
+                    startActivity(intent)
+                }, 1100)
+
             }else{
                 if (selectedPhtoUri != null){
-                    this.onBackPressed()
+                    Handler().postDelayed({
+                        val intent = Intent(this, MainActivity::class.java)
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        this.finishAfterTransition()
+                        startActivity(intent)
+                    }, 1100)
                 }else{
                     Toast.makeText(this,
                             "No se han hecho cambios"
@@ -235,9 +251,11 @@ class EditPatientActivity : AppCompatActivity() {
                                             "Borrando a $patientName"
                                             , Toast.LENGTH_LONG).show()
                                     Handler().postDelayed({
-                                        this.onBackPressed()
-                                        findViewById<RelativeLayout>(R.id.layout_ereasing_patient_edit).visibility = View.GONE
-                                    }, 3000)
+                                        val intent = Intent(this, MainActivity::class.java)
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        this.finishAfterTransition()
+                                        startActivity(intent)
+                                    }, 2000)
 
                                 }
                                 .addOnCanceledListener {
@@ -334,12 +352,9 @@ class EditPatientActivity : AppCompatActivity() {
         }, 800)
         Toast.makeText(applicationContext, "Guardando" , Toast.LENGTH_LONG).show()
 
-        if(selectedPhtoUri != null){
-            uploadPatienImage()
-        }
-        else{
-            saveData()
-        }
+        saveData()
+
+
 
 
 }

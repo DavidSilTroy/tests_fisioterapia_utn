@@ -132,7 +132,7 @@ class AddUserDataActivity: AppCompatActivity() {
 
     }
     fun uploadPatienImage(){
-        Toast.makeText(applicationContext, "Revisando los datos.." , Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, "Guardando imagen.." , Toast.LENGTH_LONG).show()
         val filename = user
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
         ref.putFile(selectedPhtoUri!!).addOnCompleteListener{
@@ -144,9 +144,9 @@ class AddUserDataActivity: AppCompatActivity() {
 
     fun btn_save_user_data(view: View){
         view.visibility = View.INVISIBLE
+        if(selectedPhtoUri!=null) uploadPatienImage()
         if(getETdata()){
             saveData()
-            uploadPatienImage()
         }else{
             view.visibility = View.VISIBLE
         }

@@ -37,6 +37,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".UI.activities.PoweredByActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".UI.activities.MakingReportActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".UI.activities.IndexActivity"
             android:screenOrientation="portrait">
             <intent-filter>

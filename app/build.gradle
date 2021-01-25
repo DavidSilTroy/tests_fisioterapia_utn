@@ -60,5 +60,5 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     //write pdf library
-    implementation 'com.itextpdf:itextg:5.5.10'
+    implementation 'com.itextpdf:itext7-core:7.1.11'
 }

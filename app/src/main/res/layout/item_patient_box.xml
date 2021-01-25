@@ -135,7 +135,7 @@
                     android:id="@+id/txt_patient_age_tilte_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Edad:"
+                    android:text="Edad: "
                     android:textSize="20sp"
                     android:textColor="@color/white"
                     android:textAlignment="center"
@@ -160,7 +160,7 @@
                     android:id="@+id/txt_patient_gender_title_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sexo:"
+                    android:text="Sexo: "
                     android:textSize="20sp"
                     android:textColor="@color/white"
                     android:textAlignment="center"/>
@@ -168,32 +168,11 @@
                     android:id="@+id/txt_patient_gender_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hombre"
+                    android:text="Helicoptero"
                     android:textSize="20sp"
                     android:textColor="@color/white"
                     android:textAlignment="center"
                     android:layout_marginHorizontal="2dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SS:"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:textAlignment="center"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" ?"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:textAlignment="center"
-                android:layout_marginHorizontal="2dp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -212,7 +191,7 @@
                     android:id="@+id/txt_patient_weight_title_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Peso(kg):"
+                    android:text="Peso: "
                     android:textSize="20sp"
                     android:textColor="@color/white"
                     android:textAlignment="center"
@@ -221,7 +200,7 @@
                     android:id="@+id/txt_patient_weight_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="25"
+                    android:text="80"
                     android:textSize="20sp"
                     android:textColor="@color/white"
                     android:textAlignment="center"
@@ -237,7 +216,7 @@
                     android:id="@+id/txt_patient_height_title_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Estatura(m)"
+                    android:text="Estatura: "
                     android:textSize="20sp"
                     android:textColor="@color/white"
                     android:textAlignment="center"/>

@@ -131,8 +131,10 @@ class AddPatientActivity : AppCompatActivity() {
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
         ref.putFile(selectedPhtoUri!!).addOnCompleteListener{
             showMsg("Paciente en la lista!!")
-            this.onBackPressed()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             this.finishAfterTransition()
+            startActivity(intent)
         }
     }
 
@@ -203,8 +205,10 @@ class AddPatientActivity : AppCompatActivity() {
                     uploadPatienImage()
                 }else{
                     showMsg("Paciente en la lista!!")
-                    this.onBackPressed()
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     this.finishAfterTransition()
+                    startActivity(intent)
                 }
             }.addOnFailureListener {
                 showMsg("Error al guardar registros")
@@ -233,29 +237,5 @@ class AddPatientActivity : AppCompatActivity() {
         intent.type = "image/*"
         startActivityForResult(intent, 0)
     }
-
-
-    /*
-       Handler().postDelayed({
-           view.visibility = View.VISIBLE
-           findViewById<ProgressBar>(R.id.pb_adding_patient).visibility = View.GONE
-       }, 3000)*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

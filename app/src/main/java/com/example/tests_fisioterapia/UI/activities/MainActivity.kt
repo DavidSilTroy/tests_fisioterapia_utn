@@ -47,11 +47,8 @@ class MainActivity : AppCompatActivity() {
 
         /** Obteniendo datos del activity de login o de la autenticación si ya inició sesión antes **/
         auth = Firebase.auth
-
-    }
-
-    override fun onStart(){
-        setPhotoToIV()
+        /** Desplegamos que está cargando**/
+        findViewById<RelativeLayout>(R.id.layout_loading_patients).visibility = View.VISIBLE
         /** Obtenemos el usuario de la autenticación si es que no viene de la activity de login**/
         user = if(intent.hasExtra("userloged")){
             intent.getStringExtra("userloged")
@@ -61,18 +58,18 @@ class MainActivity : AppCompatActivity() {
             val end = currentUser!!.email!!.indexOf("@")
             currentUser.email!!.substring(0,end)
         }
+        /**Obtenemos foto del usuario si es que la tiene**/
+        setPhotoToIV()
         /** Ubicando el nombre del usuario**/
         findViewById<TextView>(R.id.tv_user_name).text = user
-
-        /** Desplegamos que está cargando**/
-        findViewById<RelativeLayout>(R.id.layout_loading_patients).visibility = View.VISIBLE
-        super.onStart()
-    }
-    override fun onResume() {
         /**inicializamos la lista**/
         patients= listOf()
         /** Obtenemos las ids de los pacientes del usuario y los datos para mostrar**/
         getPatientsId()
+
+    }
+
+    override fun onResume() {
 
         val email = auth.currentUser?.isEmailVerified!!
         if(email){
@@ -120,12 +117,13 @@ class MainActivity : AppCompatActivity() {
 
                         val name = it.result?.data!!.get("name").toString()
                         val lastname = it.result?.data!!.get("last_name").toString()
-                        val gender = it.result?.data!!.get("gender").toString().substring(0,1)
-                        val age = it.result?.data!!.get("age").toString()
-                        val height = it.result?.data!!.get("height").toString()
-                        val weight = it.result?.data!!.get("weight").toString()
+                        var gender = it.result?.data!!.get("gender").toString()
+                        val age = it.result?.data!!.get("age").toString()+" años"
+                        val height = it.result?.data!!.get("height").toString()+" m"
+                        val weight = it.result?.data!!.get("weight").toString()+" kg"
                         val diagnosis = it.result?.data!!.get("diagnosis").toString()
                         val edited = it.result?.data!!.get("edited").toString()
+                        if(gender.length>10)gender = gender.substring(0,9)+"..."
                         lista.add(
                                 PatientsData(
                                         nametoShow(name,lastname),
@@ -135,7 +133,8 @@ class MainActivity : AppCompatActivity() {
                                         weight,
                                         diagnosis,
                                         edited,
-                                        patientsId[startId]
+                                        patientsId[startId],
+                                        user
                                 )
                         )
                         patients = lista.toList()

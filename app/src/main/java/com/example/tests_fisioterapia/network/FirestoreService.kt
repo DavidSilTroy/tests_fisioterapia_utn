@@ -34,16 +34,6 @@ const val PATTERN_DATE = "dd/MM/yyyy, h:mm a"
 
 private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
 
-class FirestoreService {
-    val firebaseFirestore = FirebaseFirestore.getInstance()
-    val settings = FirebaseFirestoreSettings.Builder().setPersistenceEnabled(true).build() //tener datos en offline
-    init { //inicializador que es como un constructor de kotlin
-        firebaseFirestore.firestoreSettings = settings
-    }
-    //fun getData(callback: Callback<List>){
-    //}
-}
-
 class  AddPatientDB(val user:String, val context: Context, val date : Long){
 
     var patientToUser = db.collection(M_C_UP).document(user)
@@ -78,12 +68,10 @@ class EditPatientDB(val idP:String , val user:String, val context: Context){
 
 
 }
-class GetPatientDB(val idP:String ){
-    private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
-    val patientWithId = db.collection(M_C_P).document(idP)
+class PatientDBData(val idP:String ){
+    val patientData = db.collection(M_C_P).document(idP)
 }
 class UserDBData(val user:String ){
-    private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
     val userData = db.collection(M_C_U).document(user)
     fun saveUserAndEmail(user:String,email:String){
         userData.set(hashMapOf(
@@ -162,7 +150,9 @@ class  AddUserDB(val user:String, val context: Context){
 
 
 }
-
+class TestDBData(val testId : String){
+    val testData =  db.collection(M_C_T).document(testId)
+}
 class GetTestData(val testType:String,val testName:String){
     private val db = FirebaseFirestore.getInstance() //conexión directa a nuestra base de datos
     val testSteps = db.collection(M_C_TT).document(testType).collection(S_C_I).document(testName).collection(S_C_S)

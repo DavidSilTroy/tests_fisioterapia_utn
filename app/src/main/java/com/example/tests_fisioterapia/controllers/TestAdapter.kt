@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tests_fisioterapia.R
 import com.example.tests_fisioterapia.UI.activities.AddTestActivity
+import com.example.tests_fisioterapia.UI.activities.MakingReportActivity
 import com.example.tests_fisioterapia.UI.activities.PatientInfoActivity
 import com.example.tests_fisioterapia.UI.activities.TestIntroActivity
 import com.example.tests_fisioterapia.network.DeleteTestsPatientInfo
@@ -33,7 +34,8 @@ class testInfoData(
     val created:String,
     val testId:String,
     val testPosition:String,
-    val idPatient: String
+    val idPatient: String,
+    val user: String
 )
 
 class TestAdapter(val tests:List<testData>, val context: Context): RecyclerView.Adapter<TestAdapter.TestHolder>(){
@@ -125,7 +127,13 @@ class TestInfoAdapter(val tests:List<testInfoData>, val context: Context): Recyc
                 Handler().postDelayed({
                     it.alpha = 1f
                 }, 800)
-                
+                val intent = Intent(context.applicationContext , MakingReportActivity::class.java).apply{
+                    putExtra("patientId", tests.idPatient)
+                    putExtra("testId", tests.testId)
+                    putExtra("userloged", tests.user)
+                    putExtra("testName", tests.name)
+                }
+                startActivity(context,intent, Bundle())
             }
 
 
@@ -140,7 +148,8 @@ class TestInfoAdapter(val tests:List<testInfoData>, val context: Context): Recyc
                 builder.setPositiveButton("Confirmar"){ dialogInterface: DialogInterface, i: Int ->
                     val deleteTest = DeleteTestsPatientInfo(tests.idPatient,tests.testId,tests.testPosition)
                     deleteTest.deteTest()
-                    view.visibility = View.GONE
+                    view.alpha = 0.3f
+                    view.isEnabled = false
 
                 }
                 builder.setNeutralButton("Cancelar") { dialogInterface: DialogInterface, i: Int ->

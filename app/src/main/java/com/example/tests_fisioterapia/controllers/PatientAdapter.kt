@@ -36,7 +36,8 @@ class PatientsData(
         val weight:String,
         val diagnosis:String,
         val edited:String,
-        val id:String
+        val id:String,
+        val user:String
 )
 
 class PatientAdapter(val patient:List<PatientsData>, val context: Context): RecyclerView.Adapter<PatientAdapter.PatientHolder>(){
@@ -68,25 +69,27 @@ class PatientAdapter(val patient:List<PatientsData>, val context: Context): Recy
             view.findViewById<TextView>(R.id.txt_patient_diagnosis_item).text = patient.diagnosis
             view.findViewById<TextView>(R.id.txt_patient_edited_item).text = patient.edited
 
+            fun gotoPatientInfoActivity(){
+                val intent = Intent(context.applicationContext , PatientInfoActivity::class.java).apply{
+                    putExtra("patientId", patient.id)
+                    putExtra("userloged", patient.user)
+                }
+                startActivity(context,intent, Bundle())
+            }
+
             txtPatientName.setOnClickListener {
                 view.alpha = 0.5f
                 Handler().postDelayed({
                     view.alpha = 1f
                 }, 800)
-                val intent = Intent(context.applicationContext , PatientInfoActivity::class.java).apply{
-                    putExtra("patientId", patient.id)
-                }
-                startActivity(context,intent, Bundle())
+                gotoPatientInfoActivity()
             }
             imgPatient.setOnClickListener{
                 view.alpha = 0.5f
                 Handler().postDelayed({
                     view.alpha = 1f
                 }, 800)
-                val intent = Intent(context.applicationContext , PatientInfoActivity::class.java).apply{
-                    putExtra("patientId", patient.id)
-                }
-                startActivity(context,intent, Bundle())
+                gotoPatientInfoActivity()
             }
 
             view.findViewById<ImageView>(R.id.iv_arrow_down).setOnClickListener{
@@ -114,10 +117,7 @@ class PatientAdapter(val patient:List<PatientsData>, val context: Context): Recy
                 Handler().postDelayed({
                     it.alpha = 1f
                 }, 800)
-                val intent = Intent(context.applicationContext , PatientInfoActivity::class.java).apply{
-                    putExtra("patientId", patient.id)
-                }
-                startActivity(context,intent, Bundle())
+                gotoPatientInfoActivity()
                 //Toast.makeText(view.context, "Viendo toda la info..", Toast.LENGTH_LONG).show()
             }
             ShowDetailsPatients().setPhotoToIV(view,patient.id)
